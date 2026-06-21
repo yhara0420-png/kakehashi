@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<!-- OGP画像の元HTML。1200×630でスクリーンショットして assets/ogp.png を生成する。
+     文言・デザインを変えたい場合はここを編集して再撮影する。 -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --paper:#F2EEE5; --paper-2:#E9E3D6; --ink:#14141B; --ink-soft:#3A3A45;
+  --muted:#6E6A60; --line:#15151c1a; --accent:#E5442A;
+  --serif:"Zen Old Mincho",serif; --sans:"Zen Kaku Gothic New",sans-serif; --mono:"DM Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#fff}
+.ogp{
+  width:1200px;height:630px;position:relative;overflow:hidden;
+  background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-feature-settings:"palt" 1;
+  padding:74px 84px;display:flex;flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+/* blueprint grid */
+.ogp::before{
+  content:"";position:absolute;inset:0;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:80px 80px;
+  -webkit-mask-image:radial-gradient(ellipse 120% 90% at 85% 0%,#000 25%,transparent 75%);
+  opacity:.6;
+}
+/* giant watermark */
+.ogp::after{
+  content:"架";position:absolute;right:-60px;bottom:-160px;
+  font-family:var(--serif);font-weight:900;font-size:520px;line-height:1;
+  color:rgba(20,20,27,.045);pointer-events:none;
+}
+.row{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:16px}
+.seal{
+  width:60px;height:60px;border-radius:50%;background:var(--ink);color:var(--paper);
+  display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:1.9rem;
+}
+.brand .name{font-family:var(--serif);font-weight:700;font-size:1.7rem;line-height:1.15}
+.brand .name small{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--muted);margin-top:4px}
+.est{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;color:var(--muted)}
+
+.main{position:relative;z-index:1;margin-top:auto;margin-bottom:auto}
+.eyebrow{font-family:var(--mono);font-size:.86rem;letter-spacing:.26em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.eyebrow::before{content:"";width:46px;height:2px;background:var(--accent)}
+h1{font-family:var(--serif);font-weight:900;font-size:6.1rem;line-height:1.08;letter-spacing:.01em}
+h1 .em{color:var(--accent);position:relative}
+.lead{margin-top:26px;font-size:1.42rem;color:var(--ink-soft);font-weight:500;letter-spacing:.01em}
+
+.foot{position:relative;z-index:1;border-top:1px solid var(--line);padding-top:22px;display:flex;align-items:center;gap:0;flex-wrap:wrap}
+.foot .tag{font-family:var(--mono);font-size:.92rem;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:18px}
+.foot .tag b{color:var(--accent);font-weight:500}
+</style>
+</head>
+<body>
+<div class="ogp">
+  <div class="row">
+    <div class="brand">
+      <div class="seal">架</div>
+      <div class="name">架け橋 Kakehashi<small>KAKEHASHI ・ AI DEV</small></div>
+    </div>
+    <div class="est">EST. 2025</div>
+  </div>
+
+  <div class="main">
+    <div class="eyebrow">AI Introduction &amp; Development</div>
+    <h1>AIを<span class="em">“使える”</span>に変える</h1>
+    <div class="lead">伝える力 × AI で、企業のAI活用をゼロから伴走する</div>
+  </div>
+
+  <div class="foot">
+    <div class="tag">AIアプリ開発 <b>◆</b> AI導入サポート <b>◆</b> AI漫画プロデュース <b>◆</b> 電子書籍出版 <b>◆</b> AI集客支援</div>
+  </div>
+</div>
+</body>
+</html>

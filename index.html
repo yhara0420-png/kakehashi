@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>架け橋 Kakehashi｜伝える力 × AIで、企業のAI活用を伴走する</title>
+<meta name="description" content="AI漫画プロデュース・電子書籍出版・AI集客の実績を土台に、AIアプリ開発とAI導入サポートで企業のAI活用をゼロから伴走します。" />
+<!-- 限定公開中：検索エンジンにインデックスさせない。本公開時にこの1行を削除する -->
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- ============================================================
+     SEO / SNS メタ
+     ※ 公開ドメインが決まったら、以下の https://kakehashi.example.com を実ドメインに一括置換する
+        （canonical / og:url / og:image / twitter:image の4箇所）
+     ※ og:image / twitter:image が指す assets/ogp.png は別途用意する（1200×630推奨）
+     ============================================================ -->
+<link rel="canonical" href="https://kakehashi.example.com/" />
+<meta name="author" content="架け橋 Kakehashi" />
+<meta name="theme-color" content="#F2EEE5" />
+
+<!-- OGP（Facebook / LINE など） -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="架け橋 Kakehashi" />
+<meta property="og:locale" content="ja_JP" />
+<meta property="og:title" content="架け橋 Kakehashi｜伝える力 × AIで、企業のAI活用を伴走する" />
+<meta property="og:description" content="AI漫画プロデュース・電子書籍出版・AI集客の実績を土台に、AIアプリ開発とAI導入サポートで企業のAI活用をゼロから伴走します。" />
+<meta property="og:url" content="https://kakehashi.example.com/" />
+<meta property="og:image" content="https://kakehashi.example.com/assets/ogp.png" />
+<meta property="og:image:width" content="2400" />
+<meta property="og:image:height" content="1260" />
+
+<!-- Twitter / X カード -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="架け橋 Kakehashi｜伝える力 × AIで、企業のAI活用を伴走する" />
+<meta name="twitter:description" content="AIアプリ開発とAI導入サポートで、企業のAI活用をゼロから伴走します。" />
+<meta name="twitter:image" content="https://kakehashi.example.com/assets/ogp.png" />
+
+<!-- Favicon（SVGデータURI・外部ファイル不要。ブランドの「架」マーク） -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2314141B'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23F2EEE5'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%2314141B'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23F2EEE5'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
+
+<!-- ===== Fonts ===== -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --paper:   #F2EEE5;   /* warm off-white (publishing roots) */
+  --paper-2: #E9E3D6;   /* deeper paper */
+  --ink:     #14141B;   /* near-black navy */
+  --ink-soft:#3A3A45;
+  --muted:   #6E6A60;
+  --line:    #15151c1a; /* hairline */
+  --accent:  #E5442A;   /* vermilion 朱 — warmth + energy */
+  --cobalt:  #2438D6;   /* electric cobalt — tech */
+  --paper-rgb: 242,238,229;
+
+  --serif: "Zen Old Mincho", serif;
+  --sans:  "Zen Kaku Gothic New", sans-serif;
+  --mono:  "DM Mono", monospace;
+
+  --maxw: 1280px;
+  --ease: cubic-bezier(.16,1,.3,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.75;
+  overflow-x:hidden;
+  font-feature-settings:"palt" 1;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--accent);color:var(--paper)}
+
+/* ============================================================
+   ATMOSPHERE — blueprint grid + grain
+   ============================================================ */
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(var(--line) 1px,transparent 1px),
+    linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:88px 88px;
+  -webkit-mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);
+          mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);
+  opacity:.55;
+}
+.grain{
+  position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px);position:relative;z-index:1}
+section{position:relative;z-index:1}
+
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);
+  display:inline-flex;align-items:center;gap:.7em;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);display:inline-block}
+
+.sec-num{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--muted);
+}
+
+h2.title{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(1.7rem,5.2vw,4rem);
+  line-height:1.18;letter-spacing:.01em;
+  margin:.5em 0 .2em;
+  white-space:nowrap;     /* <br> でだけ改行し、各行の自動折り返しを防ぐ */
+}
+.lead{font-size:clamp(1rem,1.4vw,1.18rem);color:var(--ink-soft);max-width:46ch}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+header.nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(20px,5vw,64px);
+  transition:background .4s var(--ease),padding .4s var(--ease),border-color .4s;
+  border-bottom:1px solid transparent;
+}
+header.nav.scrolled{
+  background:rgba(var(--paper-rgb),.82);
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid var(--line);
+  padding:12px clamp(20px,5vw,64px);
+}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:1.18rem;letter-spacing:.02em}
+.brand .seal{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--ink);color:var(--paper);
+  display:grid;place-items:center;
+  font-family:var(--mono);font-size:.66rem;font-weight:500;letter-spacing:.02em;
+}
+.brand small{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;color:var(--muted);display:block;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:.84rem;letter-spacing:.04em;color:var(--ink-soft);position:relative;transition:color .25s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--accent);transition:width .3s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;
+  padding:9px 18px;border:1px solid var(--ink);border-radius:40px;
+  transition:all .3s var(--ease);
+}
+.nav-cta:hover{background:var(--ink);color:var(--paper)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
+.burger span{width:26px;height:2px;background:var(--ink);transition:.3s}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:60px}
+.hero .wrap{width:100%}
+.hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+
+.hero-eyebrow{margin-bottom:30px}
+.hero h1{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(2.7rem,8.5vw,7rem);
+  line-height:1.04;letter-spacing:.005em;
+  white-space:nowrap;
+}
+.hero h1 .em{color:var(--accent);font-style:normal;position:relative;white-space:nowrap}
+.hero h1 .em::after{
+  content:"";position:absolute;left:0;right:0;bottom:.08em;height:.5em;
+  background:linear-gradient(transparent 60%,rgba(229,68,42,.16) 0);z-index:-1;
+}
+.hero-sub{
+  margin-top:34px;max-width:44ch;font-size:clamp(1rem,1.5vw,1.22rem);
+  color:var(--ink-soft);line-height:1.95;
+}
+.hero-actions{margin-top:42px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:.7em;
+  font-size:.95rem;font-weight:500;letter-spacing:.02em;
+  padding:15px 30px;border-radius:46px;
+  transition:all .3s var(--ease);
+}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+.btn-primary .arw{transition:transform .3s var(--ease)}
+.btn-primary:hover .arw{transform:translate(4px,-4px)}
+.btn-ghost{border:1px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+/* rotating seal */
+.hero-side{display:flex;flex-direction:column;align-items:flex-end;gap:26px}
+.spin-seal{width:128px;height:128px;position:relative;animation:none}
+.spin-seal svg{width:100%;height:100%;animation:spin 22s linear infinite}
+.spin-seal .core{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--ink);text-align:center;line-height:1.4;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vert-label{
+  writing-mode:vertical-rl;font-family:var(--mono);font-size:.7rem;
+  letter-spacing:.32em;color:var(--muted);text-transform:uppercase;
+}
+
+/* hero reveal animation */
+.reveal-up{opacity:0;transform:translateY(28px);animation:revealUp .9s var(--ease) forwards}
+@keyframes revealUp{to{opacity:1;transform:none}}
+.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.32s}
+.d4{animation-delay:.46s}.d5{animation-delay:.6s}.d6{animation-delay:.74s}
+
+.hero-marquee{
+  margin-top:72px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:14px 0;overflow:hidden;white-space:nowrap;
+}
+.hero-marquee .track{display:inline-flex;gap:54px;animation:slide 30s linear infinite;font-family:var(--mono);font-size:.82rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.hero-marquee .track span{display:inline-flex;align-items:center;gap:54px}
+.hero-marquee .track b{color:var(--accent);font-weight:500}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ============================================================
+   GENERIC SECTION HEAD
+   ============================================================ */
+.sec{padding:clamp(90px,12vw,150px) 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:64px}
+.sec-head .left{max-width:60ch}
+
+/* reveal on scroll */
+.io{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.io.in{opacity:1;transform:none}
+.io.s2{transition-delay:.12s}.io.s3{transition-delay:.24s}.io.s4{transition-delay:.36s}
+
+/* ============================================================
+   OVERVIEW / BRIDGE
+   ============================================================ */
+.bridge{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(24px,4vw,56px);align-items:stretch;margin-top:20px}
+.bridge-col h3{font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px}
+.bridge-col.now h3{color:var(--accent)}
+.bcard{
+  background:var(--paper);border:1px solid var(--line);border-radius:14px;
+  padding:22px 24px;margin-bottom:14px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
+}
+.bcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(20,20,27,.4);border-color:var(--ink)}
+.bcard .k{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.1em}
+.bcard h4{font-family:var(--serif);font-size:1.22rem;font-weight:700;margin:6px 0 6px}
+.bcard p{font-size:.9rem;color:var(--ink-soft)}
+.now .bcard{border-color:rgba(229,68,42,.32);background:linear-gradient(180deg,rgba(229,68,42,.05),transparent)}
+.now .bcard:hover{border-color:var(--accent)}
+.bridge-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--accent)}
+.bridge-arrow .line{width:1px;flex:1;background:linear-gradient(var(--muted),var(--accent))}
+.bridge-arrow .ic{font-size:1.6rem;transform:rotate(0)}
+.bridge-arrow small{font-family:var(--mono);font-size:.62rem;writing-mode:vertical-rl;letter-spacing:.2em;color:var(--muted)}
+
+/* ============================================================
+   TRACK RECORD
+   ============================================================ */
+.rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.rec{background:var(--paper);padding:clamp(28px,3vw,40px);transition:background .4s var(--ease)}
+.rec:hover{background:var(--paper-2)}
+.rec .no{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.16em}
+.rec h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin:14px 0 12px;line-height:1.4}
+.rec p{font-size:.92rem;color:var(--ink-soft)}
+.rec .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.rec .tags span{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:30px}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:60px}
+.stat{text-align:center;padding:24px 10px;border-top:2px solid var(--ink)}
+.stat .n{font-family:var(--serif);font-weight:900;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1;color:var(--ink)}
+.stat .n em{font-style:normal;font-size:.5em;color:var(--accent)}
+.stat .l{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--muted);margin-top:12px;text-transform:uppercase}
+
+/* ============================================================
+   NEW SERVICES
+   ============================================================ */
+.svc-wrap.dark{background:var(--ink);color:var(--paper);border-radius:32px;padding:clamp(40px,6vw,84px);position:relative;overflow:hidden}
+.svc-wrap.dark::before{
+  content:"";position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:64px 64px;-webkit-mask-image:radial-gradient(circle at 80% 0,#000,transparent 70%);mask-image:radial-gradient(circle at 80% 0,#000,transparent 70%);
+}
+.svc-wrap.dark .eyebrow{color:#FF7A5C}
+.svc-wrap.dark .eyebrow::before{background:#FF7A5C}
+.svc-head h2{color:var(--paper)}
+.svc-head .lead{color:rgba(242,238,229,.72)}
+.svc-list{margin-top:60px;display:grid;gap:1px;position:relative;z-index:1}
+.svc{
+  display:grid;grid-template-columns:auto 1fr auto;gap:clamp(20px,4vw,56px);align-items:center;
+  padding:clamp(28px,4vw,46px) 4px;border-top:1px solid rgba(242,238,229,.16);
+  transition:padding .4s var(--ease);
+}
+.svc:last-child{border-bottom:1px solid rgba(242,238,229,.16)}
+.svc:hover{padding-left:18px}
+.svc .idx{font-family:var(--mono);font-size:.86rem;color:#FF7A5C;letter-spacing:.1em}
+.svc .body h3{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;line-height:1.3;margin-bottom:14px}
+.svc .body p{color:rgba(242,238,229,.74);max-width:54ch;font-size:.98rem}
+.svc .body .chips{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.svc .body .chips span{font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;color:rgba(242,238,229,.66);border:1px solid rgba(242,238,229,.22);padding:5px 12px;border-radius:30px}
+.svc .go{width:52px;height:52px;border-radius:50%;border:1px solid rgba(242,238,229,.3);display:grid;place-items:center;font-size:1.2rem;transition:all .3s var(--ease);flex-shrink:0}
+.svc:hover .go{background:var(--accent);border-color:var(--accent);transform:rotate(-45deg)}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:step;margin-top:20px}
+.step{position:relative;padding-top:30px;border-top:2px solid var(--line);transition:border-color .4s}
+.step:hover{border-color:var(--accent)}
+.step .num{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;color:var(--accent)}
+.step h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin:16px 0 12px}
+.step p{font-size:.9rem;color:var(--ink-soft)}
+.step .big{position:absolute;top:18px;right:0;font-family:var(--serif);font-weight:900;font-size:3.4rem;color:var(--paper-2);line-height:1;z-index:-1}
+
+/* ============================================================
+   WHY US
+   ============================================================ */
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.why{background:var(--paper);padding:clamp(30px,3.4vw,46px);display:flex;gap:24px;align-items:flex-start;transition:background .4s}
+.why:hover{background:var(--paper-2)}
+.why .mk{font-family:var(--serif);font-weight:900;font-size:2rem;color:var(--accent);line-height:1;flex-shrink:0}
+.why h3{font-family:var(--serif);font-size:1.4rem;font-weight:700;margin-bottom:10px}
+.why p{font-size:.94rem;color:var(--ink-soft)}
+
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta{padding:clamp(90px,12vw,160px) 0}
+.cta-box{
+  text-align:center;border:1px solid var(--ink);border-radius:30px;
+  padding:clamp(48px,8vw,110px) clamp(24px,5vw,60px);
+  background:
+    radial-gradient(120% 140% at 50% -20%,rgba(229,68,42,.08),transparent 60%);
+  position:relative;overflow:hidden;
+}
+.cta-box .eyebrow{justify-content:center}
+.cta-box h2{font-family:var(--serif);font-weight:900;font-size:clamp(1.8rem,5.6vw,4.4rem);line-height:1.16;margin:22px 0 18px;white-space:nowrap}
+.cta-box h2 .em{color:var(--accent)}
+.cta-box p{max-width:50ch;margin:0 auto 40px;color:var(--ink-soft);font-size:1.05rem}
+.cta-actions{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+.cta-mail{font-family:var(--mono);font-size:.9rem;letter-spacing:.04em;margin-top:30px;color:var(--muted)}
+.cta-mail b{color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:2px}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-index:1}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px}
+.foot-brand .brand{margin-bottom:18px}
+.foot-brand p{font-size:.9rem;color:var(--muted);max-width:38ch}
+.foot-col h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.foot-col a{display:block;font-size:.92rem;color:var(--ink-soft);margin-bottom:10px;transition:color .25s,padding .25s}
+.foot-col a:hover{color:var(--accent);padding-left:5px}
+.foot-bottom{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--muted)}
+
+/* note banner (replaceable placeholders) */
+.note{
+  position:fixed;left:14px;bottom:14px;z-index:2000;max-width:300px;
+  background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.66rem;line-height:1.7;
+  padding:14px 16px;border-radius:12px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);
+  letter-spacing:.02em;
+}
+.note b{color:#FF7A5C}
+.note button{position:absolute;top:8px;right:10px;background:none;border:0;color:var(--paper);cursor:pointer;font-size:.9rem;opacity:.7}
+.note button:hover{opacity:1}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:20px}
+.plan{background:var(--paper);padding:clamp(30px,3.2vw,44px);display:flex;flex-direction:column;transition:background .4s var(--ease)}
+.plan:hover{background:var(--paper-2)}
+.plan.feat{background:linear-gradient(180deg,rgba(229,68,42,.06),transparent);position:relative}
+.plan.feat::before{content:"おすすめ";position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--paper);background:var(--accent);padding:4px 11px;border-radius:30px}
+.plan .pk{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--accent)}
+.plan h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin:14px 0 8px;line-height:1.35}
+.plan .desc{font-size:.9rem;color:var(--ink-soft);min-height:3.4em}
+.plan .price{font-family:var(--serif);font-weight:900;font-size:2.2rem;line-height:1;margin:22px 0 4px}
+.plan .price small{font-family:var(--mono);font-size:.78rem;font-weight:400;color:var(--muted);letter-spacing:.04em}
+.plan .note-s{font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.04em;margin-bottom:22px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0 0 28px}
+.plan li{font-size:.9rem;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start}
+.plan li::before{content:"+";font-family:var(--mono);color:var(--accent);flex-shrink:0;font-weight:500}
+.plan .btn{margin-top:auto;justify-content:center;width:100%;font-size:.9rem;padding:13px 20px}
+.price-foot{margin-top:28px;font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted);text-align:center}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:20px;max-width:920px}
+.faq-item{background:var(--paper);transition:background .4s var(--ease)}
+.faq-item:hover{background:var(--paper-2)}
+.faq-q{
+  width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  display:flex;align-items:center;gap:20px;
+  padding:clamp(22px,2.6vw,30px) clamp(22px,3vw,38px);
+  font-family:var(--serif);font-weight:700;font-size:clamp(1.04rem,1.6vw,1.22rem);color:var(--ink);line-height:1.5;
+}
+.faq-q .qn{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.06em;flex-shrink:0}
+.faq-q .pm{margin-left:auto;flex-shrink:0;width:22px;height:22px;position:relative;transition:transform .4s var(--ease)}
+.faq-q .pm::before,.faq-q .pm::after{content:"";position:absolute;background:var(--accent);transition:opacity .3s}
+.faq-q .pm::before{top:50%;left:0;right:0;height:2px;transform:translateY(-50%)}
+.faq-q .pm::after{left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%)}
+.faq-item.open .faq-q .pm{transform:rotate(180deg)}
+.faq-item.open .faq-q .pm::after{opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.faq-a-inner{padding:0 clamp(22px,3vw,38px) clamp(24px,2.8vw,30px) calc(clamp(22px,3vw,38px) + 38px);color:var(--ink-soft);font-size:.96rem;line-height:1.85;max-width:62ch}
+
+/* ============================================================
+   COMPANY
+   ============================================================ */
+.company{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(30px,5vw,72px);align-items:start;margin-top:20px}
+.company-card{
+  background:var(--ink);color:var(--paper);border-radius:24px;
+  padding:clamp(34px,4vw,52px);position:relative;overflow:hidden;
+}
+.company-card::before{
+  content:"架";position:absolute;right:-.1em;bottom:-.22em;
+  font-family:var(--serif);font-weight:900;font-size:13rem;line-height:1;
+  color:rgba(242,238,229,.05);pointer-events:none;
+}
+.company-card .seal{
+  width:54px;height:54px;border-radius:50%;background:var(--paper);color:var(--ink);
+  display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:1.5rem;margin-bottom:24px;
+}
+.company-card .cname{font-family:var(--serif);font-weight:700;font-size:1.7rem;line-height:1.3}
+.company-card .cname small{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;color:rgba(242,238,229,.6);text-transform:uppercase;margin-top:8px}
+.company-card p{color:rgba(242,238,229,.74);font-size:.94rem;margin-top:22px;max-width:38ch;position:relative}
+.company-table{display:flex;flex-direction:column}
+.company-table dl{display:grid;grid-template-columns:140px 1fr;gap:8px 24px;padding:20px 0;border-bottom:1px solid var(--line);margin:0}
+.company-table dl:first-child{padding-top:0}
+.company-table dt{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.company-table dd{margin:0;font-size:.96rem;color:var(--ink);line-height:1.7}
+.company-table dd a{border-bottom:1px solid var(--accent);padding-bottom:1px}
+.company-table dd a:hover{color:var(--accent)}
+
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+.contact-form{max-width:640px;margin:38px auto 0;text-align:left;display:grid;gap:20px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase}
+.field label .req{color:var(--accent);margin-left:4px}
+.field input,.field textarea,.field select{
+  font-family:var(--sans);font-size:.98rem;color:var(--ink);
+  background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px;transition:border-color .3s,background .3s;width:100%;
+}
+.field textarea{resize:vertical;min-height:130px;line-height:1.7}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--accent);background:#fff}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.form-actions{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:6px}
+.form-actions .btn{border:0;cursor:pointer;font-family:var(--sans)}
+.form-note{font-family:var(--mono);font-size:.7rem;letter-spacing:.03em;color:var(--muted);text-align:center;line-height:1.7}
+.form-actions .btn:disabled{opacity:.55;cursor:default}
+.form-status{
+  max-width:640px;margin:18px auto 0;text-align:center;
+  font-size:.92rem;line-height:1.75;border-radius:12px;padding:16px 20px;
+  display:none;
+}
+.form-status.show{display:block}
+.form-status.ok{background:rgba(36,56,214,.07);border:1px solid rgba(36,56,214,.3);color:var(--ink)}
+.form-status.ng{background:rgba(229,68,42,.07);border:1px solid rgba(229,68,42,.35);color:var(--ink)}
+.form-status a{border-bottom:1px solid var(--accent);padding-bottom:1px}
+.cta-divider{margin:48px auto 0;max-width:640px;border-top:1px solid var(--line);padding-top:30px}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1000px){
+  .rec-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .price-grid{grid-template-columns:1fr}
+  .plan.feat::before{top:auto;bottom:18px;right:18px}
+  .company{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .nav-links{
+    position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;
+    background:var(--paper);flex-direction:column;align-items:flex-start;justify-content:center;
+    padding:40px;gap:26px;transform:translateX(100%);transition:transform .45s var(--ease);
+    box-shadow:-30px 0 60px -30px rgba(0,0,0,.4);
+  }
+  .nav-links.open{transform:none}
+  .burger{display:flex}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-side{flex-direction:row;align-items:center;justify-content:space-between;margin-top:40px}
+  .vert-label{writing-mode:horizontal-tb}
+  .bridge{grid-template-columns:1fr}
+  .bridge-arrow{flex-direction:row;height:50px}
+  .bridge-arrow .line{height:1px;width:auto;flex:1}
+  .bridge-arrow .ic{transform:rotate(90deg)}
+  .bridge-arrow small{writing-mode:horizontal-tb}
+  .stats{grid-template-columns:1fr}
+  .svc{grid-template-columns:auto 1fr;gap:18px}
+  .svc .go{display:none}
+  .steps{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .note{display:none}
+  .form-row{grid-template-columns:1fr}
+  .company-table dl{grid-template-columns:1fr;gap:4px}
+  .faq-q{gap:14px}
+  .faq-a-inner{padding-left:clamp(22px,3vw,38px)}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .io{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="grain"></div>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top">
+    <span class="seal">架</span>
+    <span>架け橋<small>Kakehashi ・ AI dev</small></span>
+  </a>
+  <nav class="nav-links" id="menu">
+    <a href="#about">事業の全体像</a>
+    <a href="#services">サービス</a>
+    <a href="#pricing">料金</a>
+    <a href="#process">導入の流れ</a>
+    <a href="#faq">FAQ</a>
+    <a class="nav-cta" href="#contact">無料相談 →</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div class="eyebrow hero-eyebrow reveal-up d1">AI Introduction &amp; Development</div>
+        <h1>
+          <span class="reveal-up d2" style="display:block">AIを</span>
+          <span class="reveal-up d3" style="display:block"><span class="em">“使える”</span>に</span>
+          <span class="reveal-up d4" style="display:block">変える</span>
+        </h1>
+        <p class="hero-sub reveal-up d5">
+          これまで、漫画とAIで「伝え方」そのものを設計してきました。<br>
+          これからは、AIアプリの開発から導入の伴走まで——<br>
+          企業のAI活用を、ゼロから一緒につくります。
+        </p>
+        <div class="hero-actions reveal-up d6">
+          <a class="btn btn-primary" href="#contact">無料で相談する <span class="arw">↗</span></a>
+          <a class="btn btn-ghost" href="#services">サービスを見る</a>
+        </div>
+      </div>
+
+      <div class="hero-side reveal-up d5">
+        <div class="spin-seal">
+          <svg viewBox="0 0 120 120">
+            <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+            <text font-family="DM Mono, monospace" font-size="8.4" letter-spacing="3.1" fill="#14141B">
+              <textPath href="#circ" startOffset="0">MANGA × AI ・ DEVELOP ・ SUPPORT ・ GROWTH ・ </textPath>
+            </text>
+          </svg>
+          <div class="core">EST.<br>2025</div>
+        </div>
+        <div class="vert-label">scroll ↓</div>
+      </div>
+    </div>
+
+    <div class="hero-marquee reveal-up d6">
+      <div class="track">
+        <span>AI漫画プロデュース <b>◆</b> 電子書籍出版 <b>◆</b> AI集客支援 <b>◆</b> AIアプリ開発 <b>◆</b> AI導入サポート <b>◆</b> 内製化支援 <b>◆</b></span>
+        <span aria-hidden="true">AI漫画プロデュース <b>◆</b> 電子書籍出版 <b>◆</b> AI集客支援 <b>◆</b> AIアプリ開発 <b>◆</b> AI導入サポート <b>◆</b> 内製化支援 <b>◆</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== OVERVIEW / BRIDGE ===== -->
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">What we do</span>
+        <h2 class="title io s2">“伝える”から<br>“動かす”へ</h2>
+        <p class="lead io s3">私たちの強みは、コンテンツで人を動かしてきた経験そのもの。その力を、AIの開発・導入という次のステージへ接続します。</p>
+      </div>
+      <span class="sec-num io s3">( 01 / 全体像 )</span>
+    </div>
+
+    <div class="bridge">
+      <div class="bridge-col io">
+        <h3>● これまで — 伝える力</h3>
+        <div class="bcard"><div class="k">CONTENT</div><h4>AI漫画プロデュース</h4><p>難しい商材も、漫画で“伝わる”形に。読まれて、動かすコンテンツを制作。</p></div>
+        <div class="bcard"><div class="k">PUBLISHING</div><h4>電子書籍出版</h4><p>専門知識やノウハウを一冊に。ブランディングと信頼を積み上げる。</p></div>
+        <div class="bcard"><div class="k">MARKETING</div><h4>AI集客支援</h4><p>AIを使ったコンテンツ量産と運用で、見込み客との接点を増やす。</p></div>
+      </div>
+
+      <div class="bridge-arrow io s2">
+        <div class="line"></div>
+        <div class="ic">→</div>
+        <small>BRIDGE</small>
+        <div class="line"></div>
+      </div>
+
+      <div class="bridge-col now io s3">
+        <h3>● これから — 動かす力</h3>
+        <div class="bcard"><div class="k">DEVELOPMENT</div><h4>AIアプリ開発・提供</h4><p>業務に効くAIアプリを企画・開発。自社プロダクトの導入もサポート。</p></div>
+        <div class="bcard"><div class="k">CONSULTING</div><h4>AI導入サポート</h4><p>AIをまだ使っていない企業へ。何から始めるかの設計から運用まで伴走。</p></div>
+        <div class="bcard"><div class="k">ENABLEMENT</div><h4>社内活用・内製化</h4><p>“外注して終わり”にしない。社内で使いこなせる状態まで引き上げる。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRACK RECORD ===== -->
+<section class="sec" id="record">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">Track record</span>
+        <h2 class="title io s2">実績が<br>信頼の土台</h2>
+      </div>
+      <p class="lead io s3" style="margin-bottom:6px">新しい挑戦は、ゼロからではありません。これまで積み上げてきた制作と運用の実績が、AI導入支援の確かな裏付けになります。</p>
+    </div>
+
+    <div class="rec-grid io">
+      <div class="rec">
+        <div class="no">A — 01</div>
+        <h3>AI漫画を活用した<br>プロデュース</h3>
+        <p>商品・サービスの魅力を漫画で翻訳し、伝わるコンテンツへ。AIを使い、スピードと量を両立させた制作を実現してきました。</p>
+        <div class="tags"><span>企画</span><span>作画</span><span>シナリオ</span><span>AI活用</span></div>
+      </div>
+      <div class="rec">
+        <div class="no">A — 02</div>
+        <h3>電子書籍の<br>出版サポート</h3>
+        <p>著者の知見を一冊の本に。企画・構成・原稿チェックまで、出版を一気通貫で支援。ブランド資産としての書籍を生み出します。</p>
+        <div class="tags"><span>企画</span><span>編集</span><span>原稿チェック</span><span>出版</span></div>
+      </div>
+      <div class="rec">
+        <div class="no">A — 03</div>
+        <h3>AIを活用した<br>集客サポート</h3>
+        <p>AIでコンテンツ制作を効率化し、SNS・記事・広告まで一貫運用。継続的に見込み客と出会う仕組みづくりを支援します。</p>
+        <div class="tags"><span>SNS運用</span><span>コンテンツ</span><span>広告</span><span>自動化</span></div>
+      </div>
+    </div>
+
+    <!-- 実績数値スタッツ：立ち上げ期のため非表示。実データが貯まったら下記を有効化する
+    <div class="stats">
+      <div class="stat io"><div class="n">XX<em>件+</em></div><div class="l">制作・支援実績</div></div>
+      <div class="stat io s2"><div class="n">XX<em>社</em></div><div class="l">サポート企業数</div></div>
+      <div class="stat io s3"><div class="n">XX<em>年</em></div><div class="l">コンテンツ制作歴</div></div>
+    </div>
+    -->
+  </div>
+</section>
+
+<!-- ===== NEW SERVICES ===== -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="svc-wrap dark io">
+      <div class="svc-head">
+        <span class="eyebrow">New services</span>
+        <h2 class="title">これからの<br>2つの柱</h2>
+        <p class="lead">「つくる」と「使えるようにする」。AIを事業の力に変えるための、2つのアプローチをご用意しています。</p>
+      </div>
+
+      <div class="svc-list">
+        <div class="svc">
+          <div class="idx">( 01 )</div>
+          <div class="body">
+            <h3>AIアプリ開発・提供</h3>
+            <p>「こんな業務をAIで自動化したい」を、実際に動くアプリへ。ヒアリングから企画・開発・提供まで対応。自社で開発したAIプロダクトの導入もサポートします。</p>
+            <div class="chips"><span>業務自動化</span><span>生成AI実装</span><span>受託開発</span><span>SaaS提供</span></div>
+          </div>
+          <div class="go">↗</div>
+        </div>
+
+        <div class="svc">
+          <div class="idx">( 02 )</div>
+          <div class="body">
+            <h3>AI導入サポート（未導入企業向け）</h3>
+            <p>「AIを使ってみたいが、何から始めればいいか分からない」企業へ。現状の課題整理から、活用領域の設計、ツール選定、運用・社内定着までを伴走します。</p>
+            <div class="chips"><span>課題整理</span><span>活用設計</span><span>ツール選定</span><span>社内研修</span><span>内製化支援</span></div>
+          </div>
+          <div class="go">↗</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">Pricing</span>
+        <h2 class="title io s2">ご予算に合わせて<br>無理なく始める</h2>
+        <p class="lead io s3">「まず試したい」から「本格的に開発したい」まで。事業フェーズに合わせた3つの入り口をご用意しています。料金は内容に応じた個別見積もりです。</p>
+      </div>
+      <span class="sec-num io s3">( 04 / 料金 )</span>
+    </div>
+
+    <div class="price-grid io">
+      <div class="plan">
+        <div class="pk">PLAN 01</div>
+        <h3>AI活用<br>スタート相談</h3>
+        <p class="desc">「何ができるか」を一緒に整理する、はじめの一歩。</p>
+        <div class="price">無料<small> 〜</small></div>
+        <div class="note-s">初回ヒアリング・方向性のご提案</div>
+        <ul>
+          <li>現状・課題のヒアリング</li>
+          <li>AI活用領域の洗い出し</li>
+          <li>進め方とおおよその費用感のご提示</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">まず相談する</a>
+      </div>
+
+      <div class="plan feat">
+        <div class="pk">PLAN 02</div>
+        <h3>AI導入<br>サポート</h3>
+        <p class="desc">活用設計から運用・社内定着まで、伴走して支援。</p>
+        <div class="price">個別見積もり<small></small></div>
+        <div class="note-s">月額／プロジェクト単位でご相談</div>
+        <ul>
+          <li>課題整理・活用設計</li>
+          <li>ツール選定・初期セットアップ</li>
+          <li>社内研修・運用サポート</li>
+          <li>内製化に向けた伴走</li>
+        </ul>
+        <a class="btn btn-primary" href="#contact">プランを相談する <span class="arw">↗</span></a>
+      </div>
+
+      <div class="plan">
+        <div class="pk">PLAN 03</div>
+        <h3>AIアプリ<br>開発</h3>
+        <p class="desc">業務に効くAIアプリを、企画から開発・提供まで。</p>
+        <div class="price">個別見積もり<small></small></div>
+        <div class="note-s">要件・規模に応じてお見積もり</div>
+        <ul>
+          <li>要件ヒアリング・企画</li>
+          <li>AIアプリの設計・開発</li>
+          <li>導入・運用サポート</li>
+          <li>改善・追加開発の継続対応</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">開発を相談する</a>
+      </div>
+    </div>
+
+    <p class="price-foot io">※ 表示は目安です。ご要望をうかがったうえで、最適なプランと費用を個別にご提案します。</p>
+  </div>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="sec" id="process">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">How it works</span>
+        <h2 class="title io s2">導入は4ステップ</h2>
+        <p class="lead io s3">専門知識がなくても大丈夫。現状をうかがうところから、運用が回るところまで、一つずつ進めます。</p>
+      </div>
+      <span class="sec-num io s3">( 05 / 流れ )</span>
+    </div>
+
+    <div class="steps">
+      <div class="step io"><span class="big">01</span><div class="num">STEP 01</div><h3>ヒアリング</h3><p>事業内容・課題・「やってみたいこと」をお聞きします。AI未経験でも問題ありません。</p></div>
+      <div class="step io s2"><span class="big">02</span><div class="num">STEP 02</div><h3>課題設計・ご提案</h3><p>どこにAIを効かせるかを整理し、最適な進め方とプランをご提案します。</p></div>
+      <div class="step io s3"><span class="big">03</span><div class="num">STEP 03</div><h3>開発・導入</h3><p>アプリ開発やツール導入を実行。小さく試し、効果を確かめながら進めます。</p></div>
+      <div class="step io s4"><span class="big">04</span><div class="num">STEP 04</div><h3>運用・内製化</h3><p>使いこなせる状態へ。社内で回せるよう、定着までしっかり伴走します。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY US ===== -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">Why us</span>
+        <h2 class="title io s2">選ばれる<br>4つの理由</h2>
+      </div>
+      <span class="sec-num io s3">( 06 / 強み )</span>
+    </div>
+
+    <div class="why-grid io">
+      <div class="why"><div class="mk">01</div><div><h3>“伝える力” × AI技術</h3><p>漫画・出版で培った「人を動かす表現力」と、AIの実装力。両方を持つからこそ、現場で本当に使われるものを作れます。</p></div></div>
+      <div class="why"><div class="mk">02</div><div><h3>現場目線の提案</h3><p>流行りで終わらせない。御社の業務とゴールに合わせて、本当に効くAI活用だけをご提案します。</p></div></div>
+      <div class="why"><div class="mk">03</div><div><h3>ゼロからの伴走</h3><p>「何から始めればいいか分からない」が出発点でOK。専門用語を噛み砕き、最初の一歩から並走します。</p></div></div>
+      <div class="why"><div class="mk">04</div><div><h3>内製化まで見据える</h3><p>外注に頼り続ける状態は作りません。御社のチームが自走できる状態をゴールに設計します。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">FAQ</span>
+        <h2 class="title io s2">よくある<br>ご質問</h2>
+      </div>
+      <span class="sec-num io s3">( 07 / 疑問 )</span>
+    </div>
+
+    <div class="faq-list io">
+      <div class="faq-item">
+        <button class="faq-q"><span class="qn">Q1</span><span>AIを全く使ったことがなくても相談できますか？</span><span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">もちろんです。むしろ「何から始めればいいか分からない」という段階のご相談こそ得意としています。専門用語をできるだけ使わず、御社の業務に沿って「どこにAIが効くか」を一緒に整理するところからスタートします。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qn">Q2</span><span>費用はどのくらいかかりますか？</span><span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">ご依頼内容や規模によって異なるため、初回のヒアリングをふまえた個別見積もりとしています。初回のご相談は無料です。ご予算に上限がある場合は、その範囲でできることをご提案しますので、お気軽にお知らせください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qn">Q3</span><span>どんな業務がAIで自動化・効率化できますか？</span><span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">文章作成・要約、問い合わせ対応、資料・コンテンツ制作、データ整理、社内ナレッジの検索など、幅広い業務が対象になります。「この作業、AIでなんとかならない？」という素朴な疑問からで大丈夫です。実現できるか含めてご提案します。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qn">Q4</span><span>開発や導入にはどのくらい期間がかかりますか？</span><span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">内容によりますが、小さく試せるものは数週間から、本格的なアプリ開発は規模に応じてご相談となります。いきなり大きく作らず、まず小さく試して効果を確かめながら進める方針で、リスクを抑えたスタートを大切にしています。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qn">Q5</span><span>遠方ですが、オンラインでも対応できますか？</span><span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">はい、オンラインでの打ち合わせ・サポートに対応しています。全国どこからでもご相談いただけます。メールやチャットでのやりとりも可能ですので、お忙しい場合もご安心ください。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span class="qn">Q6</span><span>AI漫画や電子書籍だけの依頼もできますか？</span><span class="pm"></span></button>
+        <div class="faq-a"><div class="faq-a-inner">はい、これまで取り組んできたAI漫画プロデュースや電子書籍出版、AI集客支援など、コンテンツ制作単体でのご依頼も承っています。「伝える」部分だけのご相談も歓迎です。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT / 事業者情報 ===== -->
+<section class="sec" id="company">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">Profile</span>
+        <h2 class="title io s2">事業者情報</h2>
+        <p class="lead io s3">「架け橋 Kakehashi」は、伝える力とAI技術で企業のAI活用を伴走する個人事業です。</p>
+      </div>
+      <span class="sec-num io s3">( 08 / 概要 )</span>
+    </div>
+
+    <div class="company io">
+      <div class="company-card">
+        <div class="seal">架</div>
+        <div class="cname">架け橋 Kakehashi<small>Kakehashi ・ AI dev</small></div>
+        <p>漫画・出版で培った「人を動かす表現力」と、AIの実装力。両方を持って、企業のAI活用をゼロから伴走します。</p>
+      </div>
+
+      <div class="company-table">
+        <dl><dt>屋号</dt><dd>架け橋（Kakehashi）</dd></dl>
+        <dl><dt>事業形態</dt><dd>個人事業</dd></dl>
+        <dl><dt>事業内容</dt><dd>AIアプリ開発・提供／AI導入サポート／AI漫画プロデュース／電子書籍出版／AI集客支援</dd></dl>
+        <dl><dt>対応エリア</dt><dd>全国（オンライン対応）</dd></dl>
+        <dl><dt>お問い合わせ</dt><dd><a href="mailto:aibara202501@gmail.com">aibara202501@gmail.com</a></dd></dl>
+      </div>
+    </div>
+    <!-- 開業年・代表者名・所在地などを公開する場合は、下記のように company-table に dl を追加してください
+    <dl><dt>代表</dt><dd>（氏名）</dd></dl>
+    <dl><dt>開業</dt><dd>2025年</dd></dl>
+    -->
+  </div>
+</section>
+
+<!-- ===== CTA / CONTACT ===== -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-box io">
+      <span class="eyebrow">Contact</span>
+      <h2>AIで何ができるか<br>まず<span class="em">話して</span>みませんか</h2>
+      <p>「うちの業務でAIは使えるの？」という段階のご相談も歓迎です。初回のご相談は無料。下記フォームからお気軽にお問い合わせください。</p>
+
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="【架け橋 Kakehashi】サイトからのお問い合わせ" />
+        <div class="form-row">
+          <div class="field">
+            <label for="cf-name">お名前<span class="req">*</span></label>
+            <input type="text" id="cf-name" name="name" placeholder="例：架橋 太郎" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="cf-company">会社名・屋号</label>
+            <input type="text" id="cf-company" name="company" placeholder="例：架け橋（任意）" autocomplete="organization" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="cf-email">メールアドレス<span class="req">*</span></label>
+          <input type="email" id="cf-email" name="email" placeholder="例：you@example.com" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="cf-topic">ご相談の種類</label>
+          <select id="cf-topic" name="topic">
+            <option value="AI導入サポート">AI導入サポート（未導入・これから）</option>
+            <option value="AIアプリ開発">AIアプリ開発・提供</option>
+            <option value="AI漫画・出版・集客">AI漫画／電子書籍／集客支援</option>
+            <option value="その他・まだ決まっていない">その他・まだ決まっていない</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cf-message">ご相談内容<span class="req">*</span></label>
+          <textarea id="cf-message" name="message" placeholder="現状の課題や「やってみたいこと」を、わかる範囲で教えてください。" required></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">この内容で送信する <span class="arw">↗</span></button>
+          <p class="form-note">※ いただいた内容は、ご相談対応のためにのみ利用します。<br>2〜3営業日以内にご返信します。</p>
+        </div>
+      </form>
+
+      <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+      <div class="cta-divider">
+        <p class="cta-mail">直接のお問い合わせ：<b>aibara202501@gmail.com</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top"><span class="seal">架</span><span>架け橋<small>Kakehashi ・ AI dev</small></span></a>
+        <p>伝える力とAI技術で、企業のAI活用をゼロから伴走するクリエイティブ＆テックスタジオ。</p>
+      </div>
+      <div class="foot-col">
+        <h4>Services</h4>
+        <a href="#services">AIアプリ開発・提供</a>
+        <a href="#services">AI導入サポート</a>
+        <a href="#record">AI漫画プロデュース</a>
+        <a href="#record">電子書籍出版</a>
+        <a href="#pricing">料金・プラン</a>
+      </div>
+      <div class="foot-col">
+        <h4>About</h4>
+        <a href="#about">事業の全体像</a>
+        <a href="#why">選ばれる理由</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#company">事業者情報</a>
+        <a href="#contact">お問い合わせ</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 架け橋 Kakehashi. All rights reserved.</span>
+      <span>※ 実績数値は差し替え予定です</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* mobile menu */
+const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+burger.addEventListener('click',()=>menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+
+/* scroll reveal */
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.io').forEach(el=>io.observe(el));
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const q=item.querySelector('.faq-q'),a=item.querySelector('.faq-a');
+  q.addEventListener('click',()=>{
+    const open=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>{
+      o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null;
+    });
+    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+  });
+});
+
+/* contact form -> Formspree (非同期送信)
+   ▼ 利用開始の手順
+   1. https://formspree.io/ で無料登録し、フォームを1つ作成
+   2. 発行される送信先 https://formspree.io/f/xxxxxxxx の「xxxxxxxx」を取得
+   3. 上の <form ... action="https://formspree.io/f/YOUR_FORM_ID"> の YOUR_FORM_ID を差し替え
+   ※ 送信先メールアドレスは Formspree の管理画面側で設定します
+   ※ 別サービス（Getform等）に変える場合も action を差し替えるだけでOK */
+const form=document.getElementById('contactForm');
+const MAIL='aibara202501@gmail.com';
+if(form){
+  const statusEl=document.getElementById('formStatus'),
+        btn=form.querySelector('button[type="submit"]'),
+        btnHTML=btn.innerHTML;
+  const show=(type,html)=>{statusEl.className='form-status show '+type;statusEl.innerHTML=html;};
+  form.addEventListener('submit',async(e)=>{
+    e.preventDefault();
+    if(!form.reportValidity())return;
+    const endpoint=form.getAttribute('action');
+    if(!endpoint||endpoint.includes('YOUR_FORM_ID')){
+      show('ng',`フォームの送信先が未設定です。お手数ですが <a href="mailto:${MAIL}">${MAIL}</a> 宛に直接お送りください。`);
+      return;
+    }
+    btn.disabled=true;btn.textContent='送信中…';
+    try{
+      const res=await fetch(endpoint,{
+        method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}
+      });
+      if(res.ok){
+        form.reset();
+        show('ok','お問い合わせありがとうございます。<br>内容を受け付けました。2〜3営業日以内にご返信します。');
+      }else{
+        const data=await res.json().catch(()=>({}));
+        const msg=(data.errors&&data.errors.map(x=>x.message).join('、'))||'送信に失敗しました。';
+        show('ng',`${msg}<br>お手数ですが <a href="mailto:${MAIL}">${MAIL}</a> 宛に直接お送りください。`);
+      }
+    }catch(err){
+      show('ng',`通信エラーが発生しました。お手数ですが <a href="mailto:${MAIL}">${MAIL}</a> 宛に直接お送りください。`);
+    }finally{
+      btn.disabled=false;btn.innerHTML=btnHTML;
+    }
+  });
+}
+</script>
+</body>
+</html>
