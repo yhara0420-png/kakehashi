@@ -204,7 +204,6 @@ header.nav.scrolled{
 .btn-ghost:hover{background:var(--ink);color:var(--paper)}
 
 /* rotating seal */
-.hero-side{display:flex;flex-direction:column;align-items:flex-end;gap:26px}
 .spin-seal{width:128px;height:128px;position:relative;animation:none}
 .spin-seal svg{width:100%;height:100%;animation:spin 22s linear infinite}
 .spin-seal .core{
@@ -212,10 +211,6 @@ header.nav.scrolled{
   font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--ink);text-align:center;line-height:1.4;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.vert-label{
-  writing-mode:vertical-rl;font-family:var(--mono);font-size:.7rem;
-  letter-spacing:.32em;color:var(--muted);text-transform:uppercase;
-}
 
 /* hero reveal animation */
 .reveal-up{opacity:0;transform:translateY(28px);animation:revealUp .9s var(--ease) forwards}
@@ -477,6 +472,145 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .cta-divider{margin:48px auto 0;max-width:640px;border-top:1px solid var(--line);padding-top:30px}
 
 /* ============================================================
+   ICONS & VISUALS
+   ============================================================ */
+.svg-ic{display:block;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* bridge / about card icons */
+.bcard-top{display:flex;align-items:center;gap:13px;margin-bottom:8px}
+.bcard-top .k{margin:0}
+.ic-chip{
+  width:42px;height:42px;border-radius:11px;flex-shrink:0;
+  display:grid;place-items:center;color:var(--ink);
+  border:1px solid var(--line);background:rgba(255,255,255,.4);
+  transition:color .35s var(--ease),border-color .35s var(--ease),background .35s var(--ease);
+}
+.ic-chip .svg-ic{width:21px;height:21px}
+.bcard:hover .ic-chip{color:var(--accent);border-color:rgba(229,68,42,.4)}
+.now .ic-chip{color:var(--accent);border-color:rgba(229,68,42,.3);background:rgba(229,68,42,.05)}
+
+/* record card visual */
+.rec-ic{
+  width:54px;height:54px;border-radius:13px;margin-bottom:20px;
+  display:grid;place-items:center;color:var(--accent);
+  border:1px solid rgba(229,68,42,.28);background:rgba(229,68,42,.05);
+}
+.rec-ic .svg-ic{width:27px;height:27px}
+
+/* services (dark) icon */
+.svc-lead{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.svc .svc-ic{
+  width:60px;height:60px;border-radius:14px;flex-shrink:0;
+  display:grid;place-items:center;color:#FF7A5C;
+  border:1px solid rgba(242,238,229,.22);background:rgba(255,122,92,.08);
+  transition:transform .4s var(--ease);
+}
+.svc:hover .svc-ic{transform:scale(1.06)}
+.svc .svc-ic .svg-ic{width:30px;height:30px}
+@media(max-width:760px){.svc .svc-ic{width:48px;height:48px}.svc .svc-ic .svg-ic{width:24px;height:24px}}
+
+/* process step icon */
+.step-ic{
+  width:46px;height:46px;border-radius:50%;margin-bottom:18px;
+  display:grid;place-items:center;color:var(--ink);
+  border:1px solid var(--line);background:rgba(255,255,255,.4);
+  transition:color .4s,border-color .4s;
+}
+.step:hover .step-ic{color:var(--accent);border-color:var(--accent)}
+.step-ic .svg-ic{width:23px;height:23px}
+
+/* why us icon */
+.why-head{display:flex;flex-direction:column;align-items:center;gap:12px;flex-shrink:0}
+.why-head .mk{margin:0}
+.why .why-ic{
+  width:48px;height:48px;border-radius:12px;flex-shrink:0;
+  display:grid;place-items:center;color:var(--accent);
+  border:1px solid rgba(229,68,42,.26);background:rgba(229,68,42,.05);
+}
+.why .why-ic .svg-ic{width:24px;height:24px}
+
+
+/* ============================================================
+   PHOTOS (full color)
+   ============================================================ */
+
+/* hero — 全面にうっすら透ける背景写真 */
+.hero{position:relative;overflow:hidden}
+.hero-grid{grid-template-columns:1fr;gap:0}
+.hero-cover{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  -webkit-mask-image:linear-gradient(to bottom,#000 68%,transparent);
+          mask-image:linear-gradient(to bottom,#000 68%,transparent);
+}
+.hero-slide{
+  position:absolute;inset:0;
+  background:center/cover no-repeat;
+  opacity:0;filter:brightness(1.08) saturate(.82);
+  animation:heroFade 21s infinite;
+}
+.hero-slide:nth-child(2){animation-delay:7s}
+.hero-slide:nth-child(3){animation-delay:14s}
+@keyframes heroFade{
+  0%{opacity:0}
+  4%{opacity:.2}
+  29%{opacity:.2}
+  33%{opacity:0}
+  100%{opacity:0}
+}
+/* 回転シール（右下に復活） */
+.hero-seal{
+  position:absolute;z-index:2;pointer-events:none;
+  right:clamp(20px,5vw,64px);bottom:clamp(78px,12vh,130px);
+  width:118px;height:118px;
+}
+.hero-seal .spin-seal{width:100%;height:100%}
+
+/* services（ダーク）背景の回路写真 */
+.svc-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url("assets/services-bg.jpg") center/cover no-repeat;
+  opacity:.42;
+  -webkit-mask-image:linear-gradient(125deg,#000,transparent 72%);
+          mask-image:linear-gradient(125deg,#000,transparent 72%);
+}
+.svc-wrap.dark .svc-head{position:relative;z-index:1}
+
+/* record カードの写真バナー（フルカラー） */
+.rec{display:flex;flex-direction:column}
+.rec-photo{
+  height:172px;flex-shrink:0;
+  margin:calc(-1*clamp(28px,3vw,40px)) calc(-1*clamp(28px,3vw,40px)) 24px;
+  background:var(--paper-2) center/cover no-repeat;
+}
+
+/* why us — 横長写真バンド */
+.why-band{
+  height:clamp(200px,26vw,330px);border-radius:18px;
+  background:var(--paper-2) center 32%/cover no-repeat;
+  margin-bottom:22px;box-shadow:0 34px 70px -44px rgba(20,20,27,.45);
+}
+
+/* company — 墨カード背景写真 */
+.company-card{overflow:hidden}
+.company-card-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url("assets/company-bg.jpg") center/cover no-repeat;opacity:.26;
+  -webkit-mask-image:linear-gradient(160deg,transparent 30%,#000);
+          mask-image:linear-gradient(160deg,transparent 30%,#000);
+}
+.company-card>*:not(.company-card-bg){position:relative;z-index:1}
+
+/* CTA 背景写真（淡く） */
+.cta-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url("assets/cta-bg.jpg") center/cover no-repeat;
+  opacity:.14;
+  -webkit-mask-image:radial-gradient(110% 110% at 50% 0,#000,transparent 70%);
+          mask-image:radial-gradient(110% 110% at 50% 0,#000,transparent 70%);
+}
+.cta-box>*:not(.cta-bg){position:relative;z-index:1}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 @media(max-width:1000px){
@@ -498,8 +632,6 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
   .nav-links.open{transform:none}
   .burger{display:flex}
   .hero-grid{grid-template-columns:1fr}
-  .hero-side{flex-direction:row;align-items:center;justify-content:space-between;margin-top:40px}
-  .vert-label{writing-mode:horizontal-tb}
   .bridge{grid-template-columns:1fr}
   .bridge-arrow{flex-direction:row;height:50px}
   .bridge-arrow .line{height:1px;width:auto;flex:1}
@@ -546,6 +678,22 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
+  <div class="hero-cover" aria-hidden="true">
+    <div class="hero-slide" style="background-image:url('assets/hero-main.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero2.jpg')"></div>
+    <div class="hero-slide" style="background-image:url('assets/hero3.jpg')"></div>
+  </div>
+  <div class="hero-seal" aria-hidden="true">
+    <div class="spin-seal">
+      <svg viewBox="0 0 120 120">
+        <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+        <text font-family="DM Mono, monospace" font-size="8.4" letter-spacing="3.1" fill="#14141B">
+          <textPath href="#circ" startOffset="0">MANGA × AI ・ DEVELOP ・ SUPPORT ・ GROWTH ・ </textPath>
+        </text>
+      </svg>
+      <div class="core">EST.<br>2026</div>
+    </div>
+  </div>
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-main">
@@ -564,19 +712,6 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
           <a class="btn btn-primary" href="#contact">無料で相談する <span class="arw">↗</span></a>
           <a class="btn btn-ghost" href="#services">サービスを見る</a>
         </div>
-      </div>
-
-      <div class="hero-side reveal-up d5">
-        <div class="spin-seal">
-          <svg viewBox="0 0 120 120">
-            <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
-            <text font-family="DM Mono, monospace" font-size="8.4" letter-spacing="3.1" fill="#14141B">
-              <textPath href="#circ" startOffset="0">MANGA × AI ・ DEVELOP ・ SUPPORT ・ GROWTH ・ </textPath>
-            </text>
-          </svg>
-          <div class="core">EST.<br>2025</div>
-        </div>
-        <div class="vert-label">scroll ↓</div>
       </div>
     </div>
 
@@ -604,9 +739,9 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
     <div class="bridge">
       <div class="bridge-col io">
         <h3>● これまで — 伝える力</h3>
-        <div class="bcard"><div class="k">CONTENT</div><h4>AI漫画プロデュース</h4><p>難しい商材も、漫画で“伝わる”形に。読まれて、動かすコンテンツを制作。</p></div>
-        <div class="bcard"><div class="k">PUBLISHING</div><h4>電子書籍出版</h4><p>専門知識やノウハウを一冊に。ブランディングと信頼を積み上げる。</p></div>
-        <div class="bcard"><div class="k">MARKETING</div><h4>AI集客支援</h4><p>AIを使ったコンテンツ量産と運用で、見込み客との接点を増やす。</p></div>
+        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5v9A1.5 1.5 0 0 1 19.5 16H9l-4 4v-4H4.5A1.5 1.5 0 0 1 3 14.5z"/><path d="M7.5 8.5h9M7.5 11.5h5"/></svg></span><div class="k">CONTENT</div></div><h4>AI漫画プロデュース</h4><p>難しい商材も、漫画で“伝わる”形に。読まれて、動かすコンテンツを制作。</p></div>
+        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v18H5.5A1.5 1.5 0 0 1 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H13v18h5.5a1.5 1.5 0 0 0 1.5-1.5z"/><path d="M11 3v18"/></svg></span><div class="k">PUBLISHING</div></div><h4>電子書籍出版</h4><p>専門知識やノウハウを一冊に。ブランディングと信頼を積み上げる。</p></div>
+        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h3l5 4V5.5l-5 4H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a4 4 0 0 1 0 7M18.5 6a7 7 0 0 1 0 11"/></svg></span><div class="k">MARKETING</div></div><h4>AI集客支援</h4><p>AIを使ったコンテンツ量産と運用で、見込み客との接点を増やす。</p></div>
       </div>
 
       <div class="bridge-arrow io s2">
@@ -618,9 +753,9 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 
       <div class="bridge-col now io s3">
         <h3>● これから — 動かす力</h3>
-        <div class="bcard"><div class="k">DEVELOPMENT</div><h4>AIアプリ開発・提供</h4><p>業務に効くAIアプリを企画・開発。自社プロダクトの導入もサポート。</p></div>
-        <div class="bcard"><div class="k">CONSULTING</div><h4>AI導入サポート</h4><p>AIをまだ使っていない企業へ。何から始めるかの設計から運用まで伴走。</p></div>
-        <div class="bcard"><div class="k">ENABLEMENT</div><h4>社内活用・内製化</h4><p>“外注して終わり”にしない。社内で使いこなせる状態まで引き上げる。</p></div>
+        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6l-2 12"/></svg></span><div class="k">DEVELOPMENT</div></div><h4>AIアプリ開発・提供</h4><p>業務に効くAIアプリを企画・開発。自社プロダクトの導入もサポート。</p></div>
+        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 3.5 10.9c-.5.4-.7.8-.7 1.3v.3H9.2v-.3c0-.5-.2-.9-.7-1.3A6 6 0 0 1 12 3Z"/><path d="M9.5 19h5M10.5 21.5h3"/></svg></span><div class="k">CONSULTING</div></div><h4>AI導入サポート</h4><p>AIをまだ使っていない企業へ。何から始めるかの設計から運用まで伴走。</p></div>
+        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6.5 19a5.5 5.5 0 0 1 11 0"/><path d="M19.5 9.2l.9.4M19.5 6.8l.9-.4M22 8h-1M19 5.5l.5.9M19 10.5l.5-.9"/></svg></span><div class="k">ENABLEMENT</div></div><h4>社内活用・内製化</h4><p>“外注して終わり”にしない。社内で使いこなせる状態まで引き上げる。</p></div>
       </div>
     </div>
   </div>
@@ -639,18 +774,21 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 
     <div class="rec-grid io">
       <div class="rec">
+        <div class="rec-photo" style="background-image:url('assets/rec-manga.jpg')"></div>
         <div class="no">A — 01</div>
         <h3>AI漫画を活用した<br>プロデュース</h3>
         <p>商品・サービスの魅力を漫画で翻訳し、伝わるコンテンツへ。AIを使い、スピードと量を両立させた制作を実現してきました。</p>
         <div class="tags"><span>企画</span><span>作画</span><span>シナリオ</span><span>AI活用</span></div>
       </div>
       <div class="rec">
+        <div class="rec-photo" style="background-image:url('assets/rec-book.jpg')"></div>
         <div class="no">A — 02</div>
         <h3>電子書籍の<br>出版サポート</h3>
         <p>著者の知見を一冊の本に。企画・構成・原稿チェックまで、出版を一気通貫で支援。ブランド資産としての書籍を生み出します。</p>
         <div class="tags"><span>企画</span><span>編集</span><span>原稿チェック</span><span>出版</span></div>
       </div>
       <div class="rec">
+        <div class="rec-photo" style="background-image:url('assets/rec-growth.jpg')"></div>
         <div class="no">A — 03</div>
         <h3>AIを活用した<br>集客サポート</h3>
         <p>AIでコンテンツ制作を効率化し、SNS・記事・広告まで一貫運用。継続的に見込み客と出会う仕組みづくりを支援します。</p>
@@ -672,6 +810,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 <section class="sec" id="services">
   <div class="wrap">
     <div class="svc-wrap dark io">
+      <div class="svc-bg"></div>
       <div class="svc-head">
         <span class="eyebrow">New services</span>
         <h2 class="title">これからの<br>2つの柱</h2>
@@ -680,7 +819,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 
       <div class="svc-list">
         <div class="svc">
-          <div class="idx">( 01 )</div>
+          <div class="svc-lead">
+            <div class="idx">( 01 )</div>
+            <span class="svc-ic"><svg class="svg-ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 8h18"/><circle cx="6" cy="6" r=".6" fill="currentColor"/><circle cx="8.2" cy="6" r=".6" fill="currentColor"/><path d="M9 13l-2 1.5L9 16M15 13l2 1.5L15 16M12.6 11.5l-1.2 6"/></svg></span>
+          </div>
           <div class="body">
             <h3>AIアプリ開発・提供</h3>
             <p>「こんな業務をAIで自動化したい」を、実際に動くアプリへ。ヒアリングから企画・開発・提供まで対応。自社で開発したAIプロダクトの導入もサポートします。</p>
@@ -690,7 +832,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         </div>
 
         <div class="svc">
-          <div class="idx">( 02 )</div>
+          <div class="svc-lead">
+            <div class="idx">( 02 )</div>
+            <span class="svc-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 3.5 10.9c-.5.4-.7.8-.7 1.3v.3H9.2v-.3c0-.5-.2-.9-.7-1.3A6 6 0 0 1 12 3Z"/><path d="M9.5 19h5M10.5 21.5h3M12 7.5v4M10 9.5h4"/></svg></span>
+          </div>
           <div class="body">
             <h3>AI導入サポート（未導入企業向け）</h3>
             <p>「AIを使ってみたいが、何から始めればいいか分からない」企業へ。現状の課題整理から、活用領域の設計、ツール選定、運用・社内定着までを伴走します。</p>
@@ -778,10 +923,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
     </div>
 
     <div class="steps">
-      <div class="step io"><span class="big">01</span><div class="num">STEP 01</div><h3>ヒアリング</h3><p>事業内容・課題・「やってみたいこと」をお聞きします。AI未経験でも問題ありません。</p></div>
-      <div class="step io s2"><span class="big">02</span><div class="num">STEP 02</div><h3>課題設計・ご提案</h3><p>どこにAIを効かせるかを整理し、最適な進め方とプランをご提案します。</p></div>
-      <div class="step io s3"><span class="big">03</span><div class="num">STEP 03</div><h3>開発・導入</h3><p>アプリ開発やツール導入を実行。小さく試し、効果を確かめながら進めます。</p></div>
-      <div class="step io s4"><span class="big">04</span><div class="num">STEP 04</div><h3>運用・内製化</h3><p>使いこなせる状態へ。社内で回せるよう、定着までしっかり伴走します。</p></div>
+      <div class="step io"><span class="big">01</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v8a1.5 1.5 0 0 1-1.5 1.5H10l-4 3.5V15H5.5A1.5 1.5 0 0 1 4 13.5z"/><path d="M8 8.5h8M8 11h5"/></svg></span><div class="num">STEP 01</div><h3>ヒアリング</h3><p>事業内容・課題・「やってみたいこと」をお聞きします。AI未経験でも問題ありません。</p></div>
+      <div class="step io s2"><span class="big">02</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M8 4h8a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M10 3.5h4a1 1 0 0 1 1 1V6H9V4.5a1 1 0 0 1 1-1z"/><path d="M9.5 11l1.5 1.5L14 9.5"/></svg></span><div class="num">STEP 02</div><h3>課題設計・ご提案</h3><p>どこにAIを効かせるかを整理し、最適な進め方とプランをご提案します。</p></div>
+      <div class="step io s3"><span class="big">03</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6.5l-2 11"/></svg></span><div class="num">STEP 03</div><h3>開発・導入</h3><p>アプリ開発やツール導入を実行。小さく試し、効果を確かめながら進めます。</p></div>
+      <div class="step io s4"><span class="big">04</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4.5L4 8M4 13a8 8 0 0 0 14 4.5L20 16"/><path d="M4 4v4h4M20 20v-4h-4"/></svg></span><div class="num">STEP 04</div><h3>運用・内製化</h3><p>使いこなせる状態へ。社内で回せるよう、定着までしっかり伴走します。</p></div>
     </div>
   </div>
 </section>
@@ -797,11 +942,13 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
       <span class="sec-num io s3">( 06 / 強み )</span>
     </div>
 
+    <div class="why-band io" style="background-image:url('assets/why-band.jpg')" role="img" aria-label="明るいオフィスでAI活用を支援する様子"></div>
+
     <div class="why-grid io">
-      <div class="why"><div class="mk">01</div><div><h3>“伝える力” × AI技術</h3><p>漫画・出版で培った「人を動かす表現力」と、AIの実装力。両方を持つからこそ、現場で本当に使われるものを作れます。</p></div></div>
-      <div class="why"><div class="mk">02</div><div><h3>現場目線の提案</h3><p>流行りで終わらせない。御社の業務とゴールに合わせて、本当に効くAI活用だけをご提案します。</p></div></div>
-      <div class="why"><div class="mk">03</div><div><h3>ゼロからの伴走</h3><p>「何から始めればいいか分からない」が出発点でOK。専門用語を噛み砕き、最初の一歩から並走します。</p></div></div>
-      <div class="why"><div class="mk">04</div><div><h3>内製化まで見据える</h3><p>外注に頼り続ける状態は作りません。御社のチームが自走できる状態をゴールに設計します。</p></div></div>
+      <div class="why"><div class="why-head"><span class="why-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8z"/></svg></span><div class="mk">01</div></div><div><h3>“伝える力” × AI技術</h3><p>漫画・出版で培った「人を動かす表現力」と、AIの実装力。両方を持つからこそ、現場で本当に使われるものを作れます。</p></div></div>
+      <div class="why"><div class="why-head"><span class="why-ic"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".8" fill="currentColor"/></svg></span><div class="mk">02</div></div><div><h3>現場目線の提案</h3><p>流行りで終わらせない。御社の業務とゴールに合わせて、本当に効くAI活用だけをご提案します。</p></div></div>
+      <div class="why"><div class="why-head"><span class="why-ic"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="8" cy="7" r="2.5"/><circle cx="16" cy="7" r="2.5"/><path d="M3.5 19a4.5 4.5 0 0 1 9 0M11.5 19a4.5 4.5 0 0 1 9 0"/></svg></span><div class="mk">03</div></div><div><h3>ゼロからの伴走</h3><p>「何から始めればいいか分からない」が出発点でOK。専門用語を噛み砕き、最初の一歩から並走します。</p></div></div>
+      <div class="why"><div class="why-head"><span class="why-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M5 19l5.5-5.5 3 3L20 9"/><path d="M15 9h5v5"/></svg></span><div class="mk">04</div></div><div><h3>内製化まで見据える</h3><p>外注に頼り続ける状態は作りません。御社のチームが自走できる状態をゴールに設計します。</p></div></div>
     </div>
   </div>
 </section>
@@ -860,6 +1007,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 
     <div class="company io">
       <div class="company-card">
+        <div class="company-card-bg" style="background-image:url('assets/company-bg.jpg')"></div>
         <div class="seal">架</div>
         <div class="cname">架け橋 Kakehashi<small>Kakehashi ・ AI dev</small></div>
         <p>漫画・出版で培った「人を動かす表現力」と、AIの実装力。両方を持って、企業のAI活用をゼロから伴走します。</p>
@@ -884,6 +1032,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 <section class="cta" id="contact">
   <div class="wrap">
     <div class="cta-box io">
+      <div class="cta-bg"></div>
       <span class="eyebrow">Contact</span>
       <h2>AIで何ができるか<br>まず<span class="em">話して</span>みませんか</h2>
       <p>「うちの業務でAIは使えるの？」という段階のご相談も歓迎です。初回のご相談は無料。下記フォームからお気軽にお問い合わせください。</p>
@@ -958,7 +1107,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2025 架け橋 Kakehashi. All rights reserved.</span>
+      <span>© 2026 架け橋 Kakehashi. All rights reserved.</span>
       <span>※ 実績数値は差し替え予定です</span>
     </div>
   </div>
