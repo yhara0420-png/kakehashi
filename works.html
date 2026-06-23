@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>実績・制作事例｜架け橋 Kakehashi</title>
+<meta name="description" content="架け橋 Kakehashi の制作事例。AI漫画プロデュース・電子書籍出版・AI集客支援・AIアプリ開発の取り組みをご紹介します。" />
+<!-- 限定公開中：本公開時にこの1行を削除する -->
+<meta name="robots" content="noindex, nofollow" />
+<link rel="canonical" href="https://kakehashi.example.com/works.html" />
+<meta name="theme-color" content="#F2EEE5" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2314141B'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23F2EEE5'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --paper:#F2EEE5;--paper-2:#E9E3D6;--ink:#14141B;--ink-soft:#3A3A45;
+  --muted:#6E6A60;--line:#15151c1a;--accent:#E5442A;--paper-rgb:242,238,229;
+  --serif:"Zen Old Mincho",serif;--sans:"Zen Kaku Gothic New",sans-serif;--mono:"DM Mono",monospace;
+  --maxw:1200px;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.8;
+  overflow-x:hidden;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--accent);color:var(--paper)}
+
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:88px 88px;
+  -webkit-mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);
+          mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);opacity:.5}
+
+/* NAV */
+header.nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(20px,5vw,64px);background:rgba(var(--paper-rgb),.82);
+  backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:1.16rem;letter-spacing:.02em}
+.brand .seal{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);
+  display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:.95rem}
+.brand small{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;color:var(--muted);display:block;text-transform:uppercase}
+.nav-back{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;padding:9px 18px;
+  border:1px solid var(--ink);border-radius:40px;transition:all .3s var(--ease)}
+.nav-back:hover{background:var(--ink);color:var(--paper)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px);position:relative;z-index:1}
+
+/* HEAD */
+.doc-head{padding:clamp(58px,8vw,104px) 0 clamp(40px,5vw,60px);max-width:760px}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);display:inline-flex;align-items:center;gap:.7em}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);display:inline-block}
+.doc-head h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.1rem,6.4vw,3.8rem);
+  line-height:1.18;margin:.5em 0 .35em}
+.doc-head h1 .em{color:var(--accent)}
+.doc-head p{color:var(--ink-soft);font-size:1.04rem;max-width:58ch}
+
+/* FILTER (visual only) */
+.cats{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.cats span{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;color:var(--muted);
+  border:1px solid var(--line);padding:7px 15px;border-radius:30px;background:rgba(255,255,255,.4)}
+.cats span.on{color:var(--paper);background:var(--ink);border-color:var(--ink)}
+
+/* GRID */
+.works-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(20px,2.4vw,32px);
+  padding-bottom:clamp(56px,7vw,90px)}
+.work{background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s;
+  opacity:0;transform:translateY(30px)}
+.work.in{opacity:1;transform:none}
+.work:hover{transform:translateY(-6px);box-shadow:0 30px 60px -38px rgba(20,20,27,.5);border-color:var(--ink)}
+.work-photo{height:clamp(180px,22vw,250px);background:var(--paper-2) center/cover no-repeat;position:relative}
+.work-photo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(160deg,transparent 50%,rgba(20,20,27,.18))}
+.work-cat{position:absolute;top:16px;left:16px;z-index:1;font-family:var(--mono);font-size:.64rem;
+  letter-spacing:.1em;color:var(--paper);background:rgba(20,20,27,.72);
+  backdrop-filter:blur(4px);padding:6px 12px;border-radius:30px}
+.work-body{padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;flex:1}
+.work-no{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.14em}
+.work-body h3{font-family:var(--serif);font-size:clamp(1.3rem,2.2vw,1.65rem);font-weight:700;
+  line-height:1.4;margin:12px 0 12px}
+.work-body p{font-size:.94rem;color:var(--ink-soft);flex:1}
+.work-tags{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.work-tags span{font-family:var(--mono);font-size:.64rem;letter-spacing:.05em;color:var(--muted);
+  border:1px solid var(--line);padding:4px 10px;border-radius:30px}
+.work-more{margin-top:20px;display:inline-flex;align-items:center;gap:.5em;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--accent)}
+.work-more .arw{transition:transform .3s var(--ease)}
+.work:hover .work-more .arw{transform:translateX(4px)}
+
+/* NOTE */
+.works-note{border:1px dashed rgba(229,68,42,.4);border-radius:16px;background:rgba(229,68,42,.04);
+  padding:clamp(24px,3vw,36px);text-align:center;margin-bottom:clamp(60px,8vw,100px)}
+.works-note h3{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:10px}
+.works-note p{color:var(--ink-soft);font-size:.98rem;max-width:54ch;margin:0 auto 22px}
+.btn{display:inline-flex;align-items:center;gap:.6em;font-size:.95rem;font-weight:500;
+  padding:14px 28px;border-radius:46px;background:var(--ink);color:var(--paper);transition:all .3s var(--ease)}
+.btn:hover{background:var(--accent);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:46px 0 40px;position:relative;z-index:1}
+.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+.foot-row .brand{font-size:1rem}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap;font-size:.88rem;color:var(--ink-soft)}
+.foot-links a:hover{color:var(--accent)}
+.foot-copy{margin-top:30px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--muted)}
+
+@media(max-width:760px){
+  .works-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.work{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<header class="nav">
+  <a class="brand" href="index.html#top">
+    <span class="seal">架</span>
+    <span>架け橋<small>Kakehashi ・ AI dev</small></span>
+  </a>
+  <a class="nav-back" href="index.html">← トップへ戻る</a>
+</header>
+
+<div class="wrap">
+  <div class="doc-head">
+    <span class="eyebrow">Works</span>
+    <h1>実績・<span class="em">制作事例</span></h1>
+    <p>「伝える力」で積み上げてきたコンテンツ制作から、これからの主軸となるAIアプリ開発・導入支援まで。架け橋 Kakehashi が手がけてきた取り組みをご紹介します。</p>
+    <div class="cats">
+      <span class="on">ALL</span>
+      <span>AI漫画</span>
+      <span>電子書籍</span>
+      <span>AI集客</span>
+      <span>AI開発・導入</span>
+    </div>
+  </div>
+
+  <div class="works-grid">
+
+    <a class="work" href="work-manga.html">
+      <div class="work-photo" style="background-image:url('assets/rec-manga.jpg')">
+        <span class="work-cat">AI漫画プロデュース</span>
+      </div>
+      <div class="work-body">
+        <div class="work-no">WORK — 01</div>
+        <h3>商材を“伝わる”漫画へ翻訳</h3>
+        <p>言葉だけでは伝わりにくい商品・サービスの魅力を、ストーリー漫画に再構成。企画・シナリオ・作画までを一貫して制作し、AIを活用してスピードと量を両立させました。</p>
+        <div class="work-tags"><span>企画</span><span>シナリオ</span><span>作画</span><span>AI活用</span></div>
+        <span class="work-more">詳しく見る <span class="arw">→</span></span>
+      </div>
+    </a>
+
+    <a class="work" href="work-book.html">
+      <div class="work-photo" style="background-image:url('assets/rec-book.jpg')">
+        <span class="work-cat">電子書籍出版</span>
+      </div>
+      <div class="work-body">
+        <div class="work-no">WORK — 02</div>
+        <h3>専門知識を一冊の本に</h3>
+        <p>著者が持つ知見やノウハウを、読み手に届く一冊へ。企画・構成・原稿チェックから出版までを一気通貫で支援し、ブランド資産となる書籍を生み出しました。</p>
+        <div class="work-tags"><span>企画</span><span>編集</span><span>原稿チェック</span><span>出版</span></div>
+        <span class="work-more">詳しく見る <span class="arw">→</span></span>
+      </div>
+    </a>
+
+    <a class="work" href="work-growth.html">
+      <div class="work-photo" style="background-image:url('assets/rec-growth.jpg')">
+        <span class="work-cat">AI集客支援</span>
+      </div>
+      <div class="work-body">
+        <div class="work-no">WORK — 03</div>
+        <h3>AIで回すコンテンツ運用</h3>
+        <p>AIを使ってコンテンツ制作を効率化し、SNS・記事・広告までを一貫運用。見込み客と継続的に出会うための仕組みづくりを設計・実行しました。</p>
+        <div class="work-tags"><span>SNS運用</span><span>コンテンツ</span><span>広告</span><span>自動化</span></div>
+        <span class="work-more">詳しく見る <span class="arw">→</span></span>
+      </div>
+    </a>
+
+    <a class="work" href="work-aidev.html">
+      <div class="work-photo" style="background-image:url('assets/services-bg.jpg')">
+        <span class="work-cat">AIアプリ開発</span>
+      </div>
+      <div class="work-body">
+        <div class="work-no">WORK — 04</div>
+        <h3>業務を自動化するAIアプリ</h3>
+        <p>「この作業をAIで楽にしたい」という現場の声を、実際に動くアプリへ。ヒアリングから企画・開発・提供までを担い、業務に直接効くツールを形にします。</p>
+        <div class="work-tags"><span>業務自動化</span><span>生成AI実装</span><span>受託開発</span></div>
+        <span class="work-more">詳しく見る <span class="arw">→</span></span>
+      </div>
+    </a>
+
+    <a class="work" href="work-aisupport.html">
+      <div class="work-photo" style="background-image:url('assets/hero3.jpg')">
+        <span class="work-cat">AI導入サポート</span>
+      </div>
+      <div class="work-body">
+        <div class="work-no">WORK — 05</div>
+        <h3>ゼロからのAI導入伴走</h3>
+        <p>「何から始めればいいか分からない」企業に対し、現状の課題整理から活用領域の設計、ツール選定、社内定着までを伴走。専門用語を噛み砕きながら一歩ずつ進めます。</p>
+        <div class="work-tags"><span>課題整理</span><span>活用設計</span><span>ツール選定</span><span>社内研修</span></div>
+        <span class="work-more">詳しく見る <span class="arw">→</span></span>
+      </div>
+    </a>
+
+    <a class="work" href="work-enablement.html">
+      <div class="work-photo" style="background-image:url('assets/why-band.jpg')">
+        <span class="work-cat">内製化支援</span>
+      </div>
+      <div class="work-body">
+        <div class="work-no">WORK — 06</div>
+        <h3>社内で自走できる状態へ</h3>
+        <p>「外注して終わり」にしないために、社内チームがAIを使いこなせる状態をゴールに設計。運用ルールづくりや勉強会を通じて、内製化までを見据えた支援を行います。</p>
+        <div class="work-tags"><span>内製化</span><span>運用設計</span><span>勉強会</span><span>定着支援</span></div>
+        <span class="work-more">詳しく見る <span class="arw">→</span></span>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="works-note">
+    <h3>より詳しい事例をお求めの方へ</h3>
+    <p>守秘義務の関係で、ここに掲載していない事例も多数あります。御社の業種・課題に近い事例は、ご相談の際に個別にご紹介します。</p>
+    <a class="btn" href="index.html#contact">事例について相談する ↗</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <a class="brand" href="index.html#top"><span class="seal">架</span><span>架け橋<small>Kakehashi ・ AI dev</small></span></a>
+      <nav class="foot-links">
+        <a href="index.html#services">サービス</a>
+        <a href="index.html#pricing">料金</a>
+        <a href="works.html">実績</a>
+        <a href="index.html#contact">お問い合わせ</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </nav>
+    </div>
+    <p class="foot-copy">© 2026 架け橋 Kakehashi. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.work').forEach((el,i)=>{el.style.transitionDelay=(i%2*.1)+'s';io.observe(el);});
+</script>
+</body>
+</html>

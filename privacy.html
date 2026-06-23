@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>プライバシーポリシー｜架け橋 Kakehashi</title>
+<meta name="description" content="架け橋 Kakehashi の個人情報の取り扱いについて。お問い合わせフォームで取得する情報の利用目的・管理・お問い合わせ窓口を記載しています。" />
+<!-- 限定公開中：本公開時にこの1行を削除する -->
+<meta name="robots" content="noindex, nofollow" />
+<link rel="canonical" href="https://kakehashi.example.com/privacy.html" />
+<meta name="theme-color" content="#F2EEE5" />
+
+<!-- Favicon（index.html と共通） -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2314141B'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23F2EEE5'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+  --paper:#F2EEE5;--paper-2:#E9E3D6;--ink:#14141B;--ink-soft:#3A3A45;
+  --muted:#6E6A60;--line:#15151c1a;--accent:#E5442A;--paper-rgb:242,238,229;
+  --serif:"Zen Old Mincho",serif;--sans:"Zen Kaku Gothic New",sans-serif;--mono:"DM Mono",monospace;
+  --maxw:880px;--ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.9;
+  overflow-x:hidden;font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:var(--paper)}
+
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:88px 88px;
+  -webkit-mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);
+          mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);opacity:.5}
+
+/* NAV */
+header.nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;
+  padding:14px clamp(20px,5vw,64px);background:rgba(var(--paper-rgb),.82);
+  backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:1.16rem;letter-spacing:.02em}
+.brand .seal{width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);
+  display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:.95rem}
+.brand small{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;color:var(--muted);display:block;text-transform:uppercase}
+.nav-back{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;padding:9px 18px;
+  border:1px solid var(--ink);border-radius:40px;transition:all .3s var(--ease)}
+.nav-back:hover{background:var(--ink);color:var(--paper)}
+
+/* DOC */
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,40px);position:relative;z-index:1}
+.doc-head{padding:clamp(60px,9vw,110px) 0 clamp(34px,4vw,52px)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);display:inline-flex;align-items:center;gap:.7em}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);display:inline-block}
+.doc-head h1{font-family:var(--serif);font-weight:900;font-size:clamp(2rem,6vw,3.4rem);
+  line-height:1.2;margin:.5em 0 .35em}
+.doc-head .intro{color:var(--ink-soft);max-width:60ch;font-size:1.02rem}
+.doc-head .meta{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted);margin-top:24px}
+
+.doc-body{padding-bottom:clamp(70px,10vw,120px)}
+.doc-body section{margin-top:clamp(36px,4.4vw,54px)}
+.doc-body h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.25rem,2.6vw,1.6rem);
+  line-height:1.45;margin-bottom:14px;display:flex;gap:14px;align-items:baseline}
+.doc-body h2 .n{font-family:var(--mono);font-size:.82rem;color:var(--accent);letter-spacing:.06em;flex-shrink:0}
+.doc-body p{color:var(--ink-soft);font-size:1rem;margin-bottom:12px}
+.doc-body ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:14px 0 4px}
+.doc-body li{font-size:1rem;color:var(--ink-soft);display:flex;gap:12px;align-items:flex-start}
+.doc-body li::before{content:"+";font-family:var(--mono);color:var(--accent);flex-shrink:0;font-weight:500}
+.doc-body a.link{border-bottom:1px solid var(--accent);padding-bottom:1px;color:var(--ink)}
+.doc-body a.link:hover{color:var(--accent)}
+.doc-body .table{margin:16px 0 4px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.doc-body .table dl{display:grid;grid-template-columns:200px 1fr;gap:6px 22px;margin:0;
+  padding:18px 22px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.4)}
+.doc-body .table dl:last-child{border-bottom:0}
+.doc-body .table dt{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.doc-body .table dd{margin:0;font-size:.98rem;color:var(--ink)}
+.callout{background:rgba(229,68,42,.05);border:1px solid rgba(229,68,42,.26);border-radius:14px;
+  padding:20px 24px;margin-top:18px}
+.callout p{margin:0;color:var(--ink-soft);font-size:.96rem}
+.callout b{color:var(--ink)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:46px 0 40px;position:relative;z-index:1}
+.foot-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+.foot-row .brand{font-size:1rem}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap;font-size:.88rem;color:var(--ink-soft)}
+.foot-links a:hover{color:var(--accent)}
+.foot-copy{margin-top:30px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--muted)}
+
+@media(max-width:640px){
+  .doc-body .table dl{grid-template-columns:1fr;gap:4px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<header class="nav">
+  <a class="brand" href="index.html#top">
+    <span class="seal">架</span>
+    <span>架け橋<small>Kakehashi ・ AI dev</small></span>
+  </a>
+  <a class="nav-back" href="index.html">← トップへ戻る</a>
+</header>
+
+<div class="wrap">
+  <div class="doc-head">
+    <span class="eyebrow">Privacy Policy</span>
+    <h1>プライバシーポリシー</h1>
+    <p class="intro">架け橋 Kakehashi（以下「当事業」といいます）は、お客様の個人情報を適切に取り扱うことを社会的責務と考え、以下の方針に基づき個人情報を保護します。</p>
+    <p class="meta">制定日：2026年6月23日</p>
+  </div>
+
+  <div class="doc-body">
+
+    <section>
+      <h2><span class="n">01</span>取得する個人情報</h2>
+      <p>当事業は、お問い合わせフォームのご利用にあたり、次の情報を取得します。</p>
+      <ul>
+        <li>お名前</li>
+        <li>会社名・屋号（任意）</li>
+        <li>メールアドレス</li>
+        <li>ご相談の種類・ご相談内容</li>
+      </ul>
+      <p>これらは、お客様ご自身がフォームに入力された情報に限られます。当事業が、お客様の同意なく第三者から個人情報を取得することはありません。</p>
+    </section>
+
+    <section>
+      <h2><span class="n">02</span>利用目的</h2>
+      <p>取得した個人情報は、次の目的の範囲内でのみ利用します。</p>
+      <ul>
+        <li>お問い合わせ・ご相談への回答およびご連絡のため</li>
+        <li>サービスのご提案・ご案内、お見積もりの作成のため</li>
+        <li>ご契約後のサービス提供・連絡・サポートのため</li>
+      </ul>
+      <p>上記の目的の範囲を超えて利用する場合は、あらかじめお客様の同意をいただきます。</p>
+    </section>
+
+    <section>
+      <h2><span class="n">03</span>第三者への提供</h2>
+      <p>当事業は、次のいずれかに該当する場合を除き、お客様の同意なく個人情報を第三者に提供しません。</p>
+      <ul>
+        <li>法令に基づく場合</li>
+        <li>人の生命・身体・財産の保護のために必要であり、ご本人の同意を得ることが困難な場合</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2><span class="n">04</span>外部サービスの利用</h2>
+      <p>当事業のウェブサイトでは、お問い合わせフォームの送信やフォントの配信のために、次の外部サービスを利用しています。これらのサービスにおける情報の取り扱いは、各サービスの定めるプライバシーポリシーに従います。</p>
+      <div class="table">
+        <dl>
+          <dt>フォーム送信</dt>
+          <dd>お問い合わせ内容の送受信のため、フォーム送信サービス（Formspree 等）を利用する場合があります。送信された内容は、当事業への連絡・対応のためにのみ利用します。</dd>
+        </dl>
+        <dl>
+          <dt>Webフォント</dt>
+          <dd>Google Fonts を利用しており、フォント配信の際にお客様のIPアドレス等が Google に送信されることがあります。</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">05</span>Cookie・アクセス解析</h2>
+      <p>現在、当ウェブサイトでは、個人を特定するためのCookieやアクセス解析ツールは使用していません。今後、サイト改善を目的としてアクセス解析を導入する場合は、本ポリシーを改定したうえでお知らせします。</p>
+    </section>
+
+    <section>
+      <h2><span class="n">06</span>個人情報の管理</h2>
+      <p>当事業は、取得した個人情報について、漏えい・滅失・毀損の防止その他安全管理のために必要かつ適切な措置を講じます。また、利用目的の達成に必要な範囲内で、個人情報を正確かつ最新の状態に保つよう努めます。</p>
+    </section>
+
+    <section>
+      <h2><span class="n">07</span>開示・訂正・削除のご請求</h2>
+      <p>お客様は、ご自身の個人情報について、開示・訂正・利用停止・削除をご請求いただけます。ご請求の際は、下記のお問い合わせ窓口までご連絡ください。ご本人であることを確認のうえ、合理的な範囲で速やかに対応します。</p>
+    </section>
+
+    <section>
+      <h2><span class="n">08</span>お問い合わせ窓口</h2>
+      <p>本ポリシーに関するお問い合わせ、および個人情報の取り扱いに関するご請求は、下記までお願いいたします。</p>
+      <div class="callout">
+        <p><b>架け橋 Kakehashi</b><br>
+        メール：<a class="link" href="mailto:kakehashi007@gmail.com">kakehashi007@gmail.com</a></p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="n">09</span>本ポリシーの改定</h2>
+      <p>当事業は、法令の改正やサービス内容の変更に応じて、本ポリシーを改定することがあります。改定後の内容は、当ウェブサイトに掲載した時点から効力を生じるものとします。</p>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <a class="brand" href="index.html#top"><span class="seal">架</span><span>架け橋<small>Kakehashi ・ AI dev</small></span></a>
+      <nav class="foot-links">
+        <a href="index.html#services">サービス</a>
+        <a href="index.html#pricing">料金</a>
+        <a href="works.html">実績</a>
+        <a href="index.html#contact">お問い合わせ</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </nav>
+    </div>
+    <p class="foot-copy">© 2026 架け橋 Kakehashi. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

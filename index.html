@@ -246,10 +246,13 @@ header.nav.scrolled{
 .bridge-col h3{font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px}
 .bridge-col.now h3{color:var(--accent)}
 .bcard{
+  display:block;
   background:var(--paper);border:1px solid var(--line);border-radius:14px;
   padding:22px 24px;margin-bottom:14px;transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s;
 }
 .bcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px -24px rgba(20,20,27,.4);border-color:var(--ink)}
+.bcard-arw{margin-left:auto;color:var(--accent);font-size:.95rem;transition:transform .3s var(--ease)}
+.bcard:hover .bcard-arw{transform:translate(3px,-3px)}
 .bcard .k{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.1em}
 .bcard h4{font-family:var(--serif);font-size:1.22rem;font-weight:700;margin:6px 0 6px}
 .bcard p{font-size:.9rem;color:var(--ink-soft)}
@@ -271,6 +274,14 @@ header.nav.scrolled{
 .rec p{font-size:.92rem;color:var(--ink-soft)}
 .rec .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
 .rec .tags span{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:30px}
+
+/* 実績一覧へ誘導するボタン */
+.rec-cta{display:flex;justify-content:center;margin-top:clamp(36px,4vw,52px)}
+.rec-cta a{display:inline-flex;align-items:center;gap:.7em;font-size:.95rem;font-weight:500;
+  padding:15px 32px;border-radius:46px;background:var(--ink);color:var(--paper);transition:all .3s var(--ease)}
+.rec-cta a:hover{background:var(--accent);transform:translateY(-2px)}
+.rec-cta a .arw{transition:transform .3s var(--ease)}
+.rec-cta a:hover .arw{transform:translate(4px,-4px)}
 
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:60px}
 .stat{text-align:center;padding:24px 10px;border-top:2px solid var(--ink)}
@@ -668,6 +679,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
   <nav class="nav-links" id="menu">
     <a href="#about">事業の全体像</a>
     <a href="#services">サービス</a>
+    <a href="works.html">実績</a>
     <a href="#pricing">料金</a>
     <a href="#process">導入の流れ</a>
     <a href="#faq">FAQ</a>
@@ -739,9 +751,9 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
     <div class="bridge">
       <div class="bridge-col io">
         <h3>● これまで — 伝える力</h3>
-        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5v9A1.5 1.5 0 0 1 19.5 16H9l-4 4v-4H4.5A1.5 1.5 0 0 1 3 14.5z"/><path d="M7.5 8.5h9M7.5 11.5h5"/></svg></span><div class="k">CONTENT</div></div><h4>AI漫画プロデュース</h4><p>難しい商材も、漫画で“伝わる”形に。読まれて、動かすコンテンツを制作。</p></div>
-        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v18H5.5A1.5 1.5 0 0 1 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H13v18h5.5a1.5 1.5 0 0 0 1.5-1.5z"/><path d="M11 3v18"/></svg></span><div class="k">PUBLISHING</div></div><h4>電子書籍出版</h4><p>専門知識やノウハウを一冊に。ブランディングと信頼を積み上げる。</p></div>
-        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h3l5 4V5.5l-5 4H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a4 4 0 0 1 0 7M18.5 6a7 7 0 0 1 0 11"/></svg></span><div class="k">MARKETING</div></div><h4>AI集客支援</h4><p>AIを使ったコンテンツ量産と運用で、見込み客との接点を増やす。</p></div>
+        <a class="bcard" href="work-manga.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5v9A1.5 1.5 0 0 1 19.5 16H9l-4 4v-4H4.5A1.5 1.5 0 0 1 3 14.5z"/><path d="M7.5 8.5h9M7.5 11.5h5"/></svg></span><div class="k">CONTENT</div><span class="bcard-arw">↗</span></div><h4>AI漫画プロデュース</h4><p>難しいことを、伝わる物語に。人を動かす表現の出発点。</p></a>
+        <a class="bcard" href="work-book.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v18H5.5A1.5 1.5 0 0 1 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H13v18h5.5a1.5 1.5 0 0 0 1.5-1.5z"/><path d="M11 3v18"/></svg></span><div class="k">PUBLISHING</div><span class="bcard-arw">↗</span></div><h4>電子書籍出版</h4><p>知識を一冊に束ね、信頼を積み上げてきた編集の力。</p></a>
+        <a class="bcard" href="work-growth.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h3l5 4V5.5l-5 4H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a4 4 0 0 1 0 7M18.5 6a7 7 0 0 1 0 11"/></svg></span><div class="k">MARKETING</div><span class="bcard-arw">↗</span></div><h4>AI集客支援</h4><p>AIで発信を回し、人と出会い続ける運用の力。</p></a>
       </div>
 
       <div class="bridge-arrow io s2">
@@ -753,9 +765,9 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 
       <div class="bridge-col now io s3">
         <h3>● これから — 動かす力</h3>
-        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6l-2 12"/></svg></span><div class="k">DEVELOPMENT</div></div><h4>AIアプリ開発・提供</h4><p>業務に効くAIアプリを企画・開発。自社プロダクトの導入もサポート。</p></div>
-        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 3.5 10.9c-.5.4-.7.8-.7 1.3v.3H9.2v-.3c0-.5-.2-.9-.7-1.3A6 6 0 0 1 12 3Z"/><path d="M9.5 19h5M10.5 21.5h3"/></svg></span><div class="k">CONSULTING</div></div><h4>AI導入サポート</h4><p>AIをまだ使っていない企業へ。何から始めるかの設計から運用まで伴走。</p></div>
-        <div class="bcard"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6.5 19a5.5 5.5 0 0 1 11 0"/><path d="M19.5 9.2l.9.4M19.5 6.8l.9-.4M22 8h-1M19 5.5l.5.9M19 10.5l.5-.9"/></svg></span><div class="k">ENABLEMENT</div></div><h4>社内活用・内製化</h4><p>“外注して終わり”にしない。社内で使いこなせる状態まで引き上げる。</p></div>
+        <a class="bcard" href="work-aidev.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6l-2 12"/></svg></span><div class="k">DEVELOPMENT</div><span class="bcard-arw">↗</span></div><h4>AIアプリ開発・提供</h4><p>その力を、業務そのものを動かすAIアプリへ。</p></a>
+        <a class="bcard" href="work-aisupport.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 3.5 10.9c-.5.4-.7.8-.7 1.3v.3H9.2v-.3c0-.5-.2-.9-.7-1.3A6 6 0 0 1 12 3Z"/><path d="M9.5 19h5M10.5 21.5h3"/></svg></span><div class="k">CONSULTING</div><span class="bcard-arw">↗</span></div><h4>AI導入サポート</h4><p>AIが初めての企業に、最初の一歩から並走する。</p></a>
+        <a class="bcard" href="work-enablement.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6.5 19a5.5 5.5 0 0 1 11 0"/><path d="M19.5 9.2l.9.4M19.5 6.8l.9-.4M22 8h-1M19 5.5l.5.9M19 10.5l.5-.9"/></svg></span><div class="k">ENABLEMENT</div><span class="bcard-arw">↗</span></div><h4>社内活用・内製化</h4><p>外注で終わらせず、自走できる組織まで導く。</p></a>
       </div>
     </div>
   </div>
@@ -794,6 +806,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <p>AIでコンテンツ制作を効率化し、SNS・記事・広告まで一貫運用。継続的に見込み客と出会う仕組みづくりを支援します。</p>
         <div class="tags"><span>SNS運用</span><span>コンテンツ</span><span>広告</span><span>自動化</span></div>
       </div>
+    </div>
+
+    <div class="rec-cta io">
+      <a href="works.html">実績・制作事例をもっと見る <span class="arw">↗</span></a>
     </div>
 
     <!-- 実績数値スタッツ：立ち上げ期のため非表示。実データが貯まったら下記を有効化する
@@ -1010,7 +1026,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <div class="company-card-bg" style="background-image:url('assets/company-bg.jpg')"></div>
         <div class="seal">架</div>
         <div class="cname">架け橋 Kakehashi<small>Kakehashi ・ AI dev</small></div>
-        <p>漫画・出版で培った「人を動かす表現力」と、AIの実装力。両方を持って、企業のAI活用をゼロから伴走します。</p>
+        <p>コンテンツ制作からAI開発までを一気通貫で。小回りの利く個人事業だからこそ、御社に深く伴走します。</p>
       </div>
 
       <div class="company-table">
@@ -1093,8 +1109,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <h4>Services</h4>
         <a href="#services">AIアプリ開発・提供</a>
         <a href="#services">AI導入サポート</a>
-        <a href="#record">AI漫画プロデュース</a>
-        <a href="#record">電子書籍出版</a>
+        <a href="works.html">実績・制作事例</a>
+        <a href="#record">AI漫画／電子書籍</a>
         <a href="#pricing">料金・プラン</a>
       </div>
       <div class="foot-col">
@@ -1103,6 +1119,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <a href="#why">選ばれる理由</a>
         <a href="#faq">よくある質問</a>
         <a href="#company">事業者情報</a>
+        <a href="privacy.html">プライバシーポリシー</a>
         <a href="#contact">お問い合わせ</a>
       </div>
     </div>
