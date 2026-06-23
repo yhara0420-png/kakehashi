@@ -1053,8 +1053,12 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
       <h2>AIで何ができるか<br>まず<span class="em">話して</span>みませんか</h2>
       <p>「うちの業務でAIは使えるの？」という段階のご相談も歓迎です。初回のご相談は無料。下記フォームからお気軽にお問い合わせください。</p>
 
-      <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
-        <input type="hidden" name="_subject" value="【架け橋 Kakehashi】サイトからのお問い合わせ" />
+      <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <input type="hidden" name="access_key" value="a2710a68-8d14-4c20-a35c-8a47bbdf03a5" />
+        <input type="hidden" name="subject" value="【架け橋 Kakehashi】サイトからのお問い合わせ" />
+        <input type="hidden" name="from_name" value="架け橋 Kakehashi 公式サイト" />
+        <!-- スパム対策（人間には見えないハニーポット） -->
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
         <div class="form-row">
           <div class="field">
             <label for="cf-name">お名前<span class="req">*</span></label>
@@ -1158,25 +1162,25 @@ document.querySelectorAll('.faq-item').forEach(item=>{
   });
 });
 
-/* contact form -> Formspree (非同期送信)
-   ▼ 利用開始の手順
-   1. https://formspree.io/ で無料登録し、フォームを1つ作成
-   2. 発行される送信先 https://formspree.io/f/xxxxxxxx の「xxxxxxxx」を取得
-   3. 上の <form ... action="https://formspree.io/f/YOUR_FORM_ID"> の YOUR_FORM_ID を差し替え
-   ※ 送信先メールアドレスは Formspree の管理画面側で設定します
-   ※ 別サービス（Getform等）に変える場合も action を差し替えるだけでOK */
+/* contact form -> Web3Forms (非同期送信)
+   送信先メール（kakehashi007@gmail.com）は Web3Forms の登録アカウント宛に届きます。
+   ▼ 設定箇所
+   - 上の <form ... action="https://api.web3forms.com/submit">
+   - <input name="access_key" value="..."> に Web3Forms のアクセスキー
+   ※ 送信先メールを変える/別サービスに変える場合は、access_key（または action）を差し替えるだけ */
 const form=document.getElementById('contactForm');
 const MAIL='kakehashi007@gmail.com';
 if(form){
   const statusEl=document.getElementById('formStatus'),
         btn=form.querySelector('button[type="submit"]'),
         btnHTML=btn.innerHTML;
+  const keyInput=form.querySelector('[name="access_key"]');
   const show=(type,html)=>{statusEl.className='form-status show '+type;statusEl.innerHTML=html;};
   form.addEventListener('submit',async(e)=>{
     e.preventDefault();
     if(!form.reportValidity())return;
     const endpoint=form.getAttribute('action');
-    if(!endpoint||endpoint.includes('YOUR_FORM_ID')){
+    if(!endpoint||!keyInput||!keyInput.value||keyInput.value.includes('YOUR_ACCESS_KEY')){
       show('ng',`フォームの送信先が未設定です。お手数ですが <a href="mailto:${MAIL}">${MAIL}</a> 宛に直接お送りください。`);
       return;
     }
@@ -1185,12 +1189,12 @@ if(form){
       const res=await fetch(endpoint,{
         method:'POST',body:new FormData(form),headers:{'Accept':'application/json'}
       });
-      if(res.ok){
+      const data=await res.json().catch(()=>({}));
+      if(res.ok&&data.success){
         form.reset();
         show('ok','お問い合わせありがとうございます。<br>内容を受け付けました。2〜3営業日以内にご返信します。');
       }else{
-        const data=await res.json().catch(()=>({}));
-        const msg=(data.errors&&data.errors.map(x=>x.message).join('、'))||'送信に失敗しました。';
+        const msg=data.message||'送信に失敗しました。';
         show('ng',`${msg}<br>お手数ですが <a href="mailto:${MAIL}">${MAIL}</a> 宛に直接お送りください。`);
       }
     }catch(err){
