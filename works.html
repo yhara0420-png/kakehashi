@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
@@ -6,9 +6,9 @@
 <title>実績・制作事例｜架け橋 Kakehashi</title>
 <meta name="description" content="架け橋 Kakehashi の制作事例。AI漫画プロデュース・電子書籍出版・AI集客支援・AIアプリ開発の取り組みをご紹介します。" />
 <link rel="canonical" href="https://yhara0420-png.github.io/kakehashi/works.html" />
-<meta name="theme-color" content="#F2EEE5" />
+<meta name="theme-color" content="#EFECF8" />
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2314141B'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23F2EEE5'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%231A1A2E'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23EFECF8'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,8 +16,8 @@
 
 <style>
 :root{
-  --paper:#F2EEE5;--paper-2:#E9E3D6;--ink:#14141B;--ink-soft:#3A3A45;
-  --muted:#6E6A60;--line:#15151c1a;--accent:#E5442A;--paper-rgb:242,238,229;
+  --paper:#EFECF8;--paper-2:#DFD9F0;--ink:#1A1A2E;--ink-soft:#44445E;
+  --muted:#8A86A8;--line:#1a1a2e18;--accent:#7B6CE0;--paper-rgb:239,236,248;
   --serif:"Zen Old Mincho",serif;--sans:"Zen Kaku Gothic New",sans-serif;--mono:"DM Mono",monospace;
   --maxw:1200px;--ease:cubic-bezier(.16,1,.3,1);
 }
@@ -73,12 +73,12 @@ header.nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;ju
   display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s;
   opacity:0;transform:translateY(30px)}
 .work.in{opacity:1;transform:none}
-.work:hover{transform:translateY(-6px);box-shadow:0 30px 60px -38px rgba(20,20,27,.5);border-color:var(--ink)}
+.work:hover{transform:translateY(-6px);box-shadow:0 30px 60px -38px rgba(26,26,46,.5);border-color:var(--ink)}
 .work-photo{height:clamp(180px,22vw,250px);background:var(--paper-2) center/cover no-repeat;position:relative}
 .work-photo::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(160deg,transparent 50%,rgba(20,20,27,.18))}
+  background:linear-gradient(160deg,transparent 50%,rgba(26,26,46,.18))}
 .work-cat{position:absolute;top:16px;left:16px;z-index:1;font-family:var(--mono);font-size:.64rem;
-  letter-spacing:.1em;color:var(--paper);background:rgba(20,20,27,.72);
+  letter-spacing:.1em;color:var(--paper);background:rgba(26,26,46,.72);
   backdrop-filter:blur(4px);padding:6px 12px;border-radius:30px}
 .work-body{padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;flex:1}
 .work-no{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.14em}
@@ -94,7 +94,7 @@ header.nav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;ju
 .work:hover .work-more .arw{transform:translateX(4px)}
 
 /* NOTE */
-.works-note{border:1px dashed rgba(229,68,42,.4);border-radius:16px;background:rgba(229,68,42,.04);
+.works-note{border:1px dashed rgba(123,108,224,.4);border-radius:16px;background:rgba(123,108,224,.04);
   padding:clamp(24px,3vw,36px);text-align:center;margin-bottom:clamp(60px,8vw,100px)}
 .works-note h3{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:10px}
 .works-note p{color:var(--ink-soft);font-size:.98rem;max-width:54ch;margin:0 auto 22px}
@@ -114,7 +114,32 @@ footer{border-top:1px solid var(--line);padding:46px 0 40px;position:relative;z-
   .works-grid{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.work{opacity:1;transform:none}}
+
+/* 写真は自然な色のまま少しだけ明るく（紫へ回すと人物が青白く見えるため色はいじらない） */
+.work-photo,.hero-photo{filter:saturate(1.05) brightness(1.08) contrast(1.02)}
 </style>
+
+<!-- 構造化データ（パンくず）。URL変更時は "item" のドメイン部分を置換 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "ホーム",
+      "item": "https://yhara0420-png.github.io/kakehashi/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "実績・制作事例",
+      "item": "https://yhara0420-png.github.io/kakehashi/works.html"
+    }
+  ]
+}
+</script>
 </head>
 <body>
 

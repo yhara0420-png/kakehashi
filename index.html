@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
@@ -14,7 +14,7 @@
      ============================================================ -->
 <link rel="canonical" href="https://yhara0420-png.github.io/kakehashi/" />
 <meta name="author" content="架け橋 Kakehashi" />
-<meta name="theme-color" content="#F2EEE5" />
+<meta name="theme-color" content="#EFECF8" />
 
 <!-- OGP（Facebook / LINE など） -->
 <meta property="og:type" content="website" />
@@ -34,8 +34,8 @@
 <meta name="twitter:image" content="https://yhara0420-png.github.io/kakehashi/assets/ogp.png" />
 
 <!-- Favicon（SVGデータURI・外部ファイル不要。ブランドの「架」マーク） -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%2314141B'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23F2EEE5'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%2314141B'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23F2EEE5'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%231A1A2E'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23EFECF8'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%231A1A2E'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23EFECF8'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
 
 <!-- ===== Fonts ===== -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -47,15 +47,31 @@
    TOKENS
    ============================================================ */
 :root{
-  --paper:   #F2EEE5;   /* warm off-white (publishing roots) */
-  --paper-2: #E9E3D6;   /* deeper paper */
-  --ink:     #14141B;   /* near-black navy */
-  --ink-soft:#3A3A45;
-  --muted:   #6E6A60;
-  --line:    #15151c1a; /* hairline */
-  --accent:  #E5442A;   /* vermilion 朱 — warmth + energy */
-  --cobalt:  #2438D6;   /* electric cobalt — tech */
-  --paper-rgb: 242,238,229;
+  --paper:   #EFECF8;   /* 淡い青みの白 — 空の色 */
+  --paper-2: #DFD9F0;   /* 一段深い青白 */
+  --ink:     #1A1A2E;   /* 濃紺 — near-black navy */
+  --ink-soft:#44445E;
+  --muted:   #67638A;   /* 注記・ラベル用。旧#8A86A8は淡い地で2.98:1＝AA不合格だった（2026-09-10実測） */
+  --line:    #1a1a2e18; /* hairline */
+  --accent:  #7B6CE0;   /* コバルト — 差し色（旧・朱の位置） */
+  --cobalt:  #6A5CC9;   /* 深い青 — 締め */
+  --sky:     #A492FF;   /* スカイ — ダーク面のハイライト */
+  --label:   #6A5CC9;
+  --sheen:   rgba(106,92,201,.13);   /* カードの光沢。淡い面では白が見えないので紫寄りに */   /* 小さい英字ラベル用の紫。--accent(#7B6CE0)は0.7rem級で3.56:1＝AA不合格のため分離 */
+  --paper-rgb: 239,236,248;
+
+  /* 朱 — 暖色アクセント（2026-09-07 決定）。
+     紫のほぼ補色。CTA・数字・強調だけに使い、面積は全体の約10%に抑える。
+     --shu     : 面（ボタン背景）用。白文字とのコントラスト 4.6:1
+     --shu-deep: 淡い地の上に置く文字・hover 用。5.5:1
+     --shu-lt  : 濃紺の面の上に置く文字用。6.1:1 */
+  --shu:      #D93A1E;
+  --shu-deep: #B32D14;
+  --shu-lt:   #FF6B4A;
+  --shu-rgb:  217,58,30;
+
+  /* ヒーロー／面のグラデーション */
+  --grad-hero: linear-gradient(158deg, #9583FF 0%, #7B6CE0 48%, #6A5CC9 100%);
 
   --serif: "Zen Old Mincho", serif;
   --sans:  "Zen Kaku Gothic New", sans-serif;
@@ -78,7 +94,7 @@ body{
 }
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-::selection{background:var(--accent);color:var(--paper)}
+::selection{background:var(--shu);color:#fff}
 
 /* ============================================================
    ATMOSPHERE — blueprint grid + grain
@@ -92,6 +108,13 @@ img{max-width:100%;display:block}
   -webkit-mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);
           mask-image:radial-gradient(ellipse 120% 80% at 50% 0%,#000 30%,transparent 78%);
   opacity:.55;
+}
+/* 読み進み具合を示す上端のバー */
+.progress{
+  position:fixed;left:0;top:0;z-index:200;width:100%;height:3px;
+  background:linear-gradient(90deg,var(--sky),var(--accent));
+  transform:scaleX(0);transform-origin:0 50%;
+  will-change:transform;pointer-events:none;
 }
 .grain{
   position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;
@@ -107,7 +130,7 @@ section{position:relative;z-index:1}
 .eyebrow{
   font-family:var(--mono);
   font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--accent);
+  color:var(--label);
   display:inline-flex;align-items:center;gap:.7em;
 }
 .eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);display:inline-block}
@@ -157,34 +180,75 @@ header.nav.scrolled{
 .nav-links a:hover::after{width:100%}
 .nav-cta{
   font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;
-  padding:9px 18px;border:1px solid var(--ink);border-radius:40px;
+  padding:9px 18px;border:1px solid var(--shu);border-radius:40px;
+  background:var(--shu);color:#fff;
   transition:all .3s var(--ease);
 }
-.nav-cta:hover{background:var(--ink);color:var(--paper)}
+.nav-cta:hover{background:var(--shu-deep);border-color:var(--shu-deep);color:#fff}
+/* 無料相談ボタンは、ヒーローの上でもスクロール後でも常に朱の塗り＋白文字で固定する。
+   .nav-cta は .nav-links の中の <a> なので `.nav-links a` の色指定のほうが詳細度で勝つ。
+   そのため実測で スクロール後=2.05:1（濃い文字が朱に乗る）、
+   ヒーロー上のhover=白地に白文字 という状態になっていた（2026-09-10 実測）。
+   ここは .nav-links a.nav-cta まで書いて、色が状態で変わらないようにする。 */
+header.nav .nav-links a.nav-cta,
+header.nav:not(.scrolled) .nav-links a.nav-cta{
+  background:var(--shu);border-color:var(--shu);color:#fff;
+}
+header.nav .nav-links a.nav-cta:hover,
+header.nav:not(.scrolled) .nav-links a.nav-cta:hover{
+  background:var(--shu-deep);border-color:var(--shu-deep);color:#fff;
+}
+/* 塗りのボタンに下線は要らない */
+header.nav .nav-links a.nav-cta::after{display:none}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0}
 .burger span{width:26px;height:2px;background:var(--ink);transition:.3s}
 
 /* ============================================================
    HERO
    ============================================================ */
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:120px;padding-bottom:60px}
+/* ヒーローはピン留め。親の高さ分スクロールする間、画面に貼り付いたままになる */
+.hero-pin{position:relative;height:280vh;height:280dvh}
+.hero{
+  position:sticky;top:0;
+  height:100vh;height:100dvh;      /* dvh＝アドレスバーの開閉で跳ねない実寸 */
+  display:flex;align-items:center;padding-top:104px;padding-bottom:52px;
+}
 .hero .wrap{width:100%}
+
+/* 留まったまま、この中だけが入れ替わる
+   （opacity と transform は JS がスクロール量に合わせて毎フレーム書き込む。
+     transition を付けると二重に効いて遅れるので、あえて付けない） */
+.hero-stage{position:relative;min-height:clamp(360px,60vh,545px);min-height:clamp(360px,60dvh,545px)}
+.hero-step{
+  position:absolute;left:0;right:0;top:0;
+  opacity:0;pointer-events:none;
+  will-change:transform,opacity;
+}
+.hero-step.on{opacity:1;pointer-events:auto}   /* JSが動かない場合の保険 */
+
+/* いま何段階目かを示す目印 */
+.hero-dots{display:flex;gap:9px;margin-top:30px}
+.hero-dots span{
+  width:26px;height:3px;border-radius:2px;background:rgba(255,255,255,.3);
+  transition:background .45s var(--ease),width .45s var(--ease);
+}
+.hero-dots span.on{background:#fff;width:46px}
 .hero-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
 
 .hero-eyebrow{margin-bottom:30px}
-.hero h1{
+.hero h1,.hero .hh{
   font-family:var(--serif);font-weight:900;
-  font-size:clamp(2.7rem,8.5vw,7rem);
-  line-height:1.04;letter-spacing:.005em;
+  font-size:clamp(2.4rem,7.4vw,5.9rem);
+  line-height:1.06;letter-spacing:.005em;
   white-space:nowrap;
 }
-.hero h1 .em{color:var(--accent);font-style:normal;position:relative;white-space:nowrap}
-.hero h1 .em::after{
+.hero h1 .em,.hero .hh .em{color:var(--accent);font-style:normal;position:relative;white-space:nowrap}
+.hero h1 .em::after,.hero .hh .em::after{
   content:"";position:absolute;left:0;right:0;bottom:.08em;height:.5em;
-  background:linear-gradient(transparent 60%,rgba(229,68,42,.16) 0);z-index:-1;
+  background:linear-gradient(transparent 60%,rgba(123,108,224,.16) 0);z-index:-1;
 }
 .hero-sub{
-  margin-top:34px;max-width:44ch;font-size:clamp(1rem,1.5vw,1.22rem);
+  margin-top:34px;max-width:660px;font-size:clamp(1rem,1.5vw,1.22rem);
   color:var(--ink-soft);line-height:1.95;
 }
 .hero-actions{margin-top:42px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
@@ -194,8 +258,8 @@ header.nav.scrolled{
   padding:15px 30px;border-radius:46px;
   transition:all .3s var(--ease);
 }
-.btn-primary{background:var(--ink);color:var(--paper)}
-.btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+.btn-primary{background:var(--shu);color:#fff}
+.btn-primary:hover{background:var(--shu-deep);transform:translateY(-2px)}
 .btn-primary .arw{transition:transform .3s var(--ease)}
 .btn-primary:hover .arw{transform:translate(4px,-4px)}
 .btn-ghost{border:1px solid var(--ink);color:var(--ink)}
@@ -217,7 +281,7 @@ header.nav.scrolled{
 .d4{animation-delay:.46s}.d5{animation-delay:.6s}.d6{animation-delay:.74s}
 
 .hero-marquee{
-  margin-top:72px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
   padding:14px 0;overflow:hidden;white-space:nowrap;
 }
 .hero-marquee .track{display:inline-flex;gap:54px;animation:slide 30s linear infinite;font-family:var(--mono);font-size:.82rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
@@ -232,10 +296,314 @@ header.nav.scrolled{
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:64px}
 .sec-head .left{max-width:60ch}
 
-/* reveal on scroll */
-.io{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.io.in{opacity:1;transform:none}
+/* ============================================================
+   REVEAL — スクロールで入ってきた要素の出方
+   動き方は data-in（up / left / right / scale / rise / clip / blur）で指定。
+   同じ並びの要素には JS が少しずつ遅延をつけて、1枚ずつ出るようにする。
+   ============================================================ */
+.io,[data-in]{
+  opacity:0;will-change:transform,opacity;
+  transition:opacity .95s var(--ease),transform .95s var(--ease),
+             clip-path 1.1s var(--ease),filter .95s var(--ease);
+}
+.io               {transform:translateY(34px)}
+[data-in="up"]    {transform:translateY(38px)}
+[data-in="down"]  {transform:translateY(-30px)}
+[data-in="left"]  {transform:translateX(-44px)}
+[data-in="right"] {transform:translateX(44px)}
+[data-in="scale"] {transform:scale(.94)}
+[data-in="rise"]  {transform:translateY(58px) scale(.975)}
+[data-in="clip"]  {clip-path:inset(0 100% 0 0)}
+[data-in="blur"]  {filter:blur(9px);transform:translateY(18px)}
+.io.in,[data-in].in{opacity:1;transform:none;clip-path:inset(0 0 0 0);filter:none}
 .io.s2{transition-delay:.12s}.io.s3{transition-delay:.24s}.io.s4{transition-delay:.36s}
+
+/* 見出しは1文字ずつ立ち上がる */
+h2.title{opacity:1}
+.split-char{
+  display:inline-block;opacity:0;transform:translateY(.5em) rotate(2.5deg);
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+}
+.in .split-char{opacity:1;transform:none}
+
+/* ============================================================
+   PINNED SECTION — 画面に留めたまま中身を切り替える汎用の仕組み
+   .pin に高さを持たせ、中の .pin-stage を画面に貼り付ける。
+   進行度に応じて data-scene を持つ要素を1つずつ表示する。
+   ============================================================ */
+.pin{position:relative;height:360vh;height:360dvh}
+.pin-stage{
+  position:sticky;top:0;overflow:hidden;
+  height:100vh;height:100dvh;      /* dvh＝アドレスバーの開閉で跳ねない実寸 */
+  display:flex;align-items:center;
+}
+.pin-stage .wrap{width:100%}
+.pin-stage .sec-head{margin-bottom:clamp(24px,4vh,44px)}
+.pin-title{opacity:1}
+
+.pin-steps{position:relative;min-height:clamp(270px,38vh,360px);min-height:clamp(270px,38dvh,360px)}
+.pstep{
+  position:absolute;left:0;right:0;top:0;
+  display:grid;grid-template-columns:auto 1fr;align-items:center;
+  gap:clamp(20px,4.5vw,64px);
+  opacity:0;pointer-events:none;
+  will-change:transform,opacity;   /* 値は JS がスクロール量に同期して書き込む */
+}
+.pstep.on{opacity:1;pointer-events:auto}   /* JSが動かない場合の保険 */
+.pstep-num{
+  font-family:var(--mono);font-weight:500;
+  font-size:clamp(72px,15vw,200px);line-height:.78;
+  color:var(--paper-2);user-select:none;
+}
+.pstep-body .step-ic{
+  width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--line);color:var(--accent);
+  display:inline-grid;place-items:center;margin-bottom:14px;
+}
+.pstep-body .num{font-family:var(--mono);font-size:.74rem;letter-spacing:.2em;color:var(--label);margin-bottom:6px}
+.pstep-body h3{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(1.45rem,3.4vw,2.7rem);line-height:1.3;margin-bottom:.4em;
+}
+.pstep-body p{
+  font-size:clamp(.95rem,1.4vw,1.14rem);color:var(--ink-soft);
+  line-height:2;max-width:52ch;
+}
+
+/* 進行の目印 */
+.pin-dots{display:flex;gap:10px;margin-top:clamp(26px,4.5vh,50px)}
+.pin-dots span{
+  width:32px;height:3px;border-radius:2px;background:var(--line);
+  transition:background .45s var(--ease),width .45s var(--ease);
+}
+.pin-dots span.on{background:var(--accent);width:58px}
+
+@media(max-width:760px){
+  .pin{height:340vh;height:340dvh}
+  .pstep{grid-template-columns:1fr;gap:6px}
+  .pstep-num{font-size:clamp(60px,20vw,110px)}
+  .pin-steps{min-height:clamp(300px,46vh,400px);min-height:clamp(300px,46dvh,400px)}
+}
+
+/* ============================================================
+   PINNED SCENES — #about / #record / #services も
+   「画面に固定したまま中身だけ入れ替わる」章として見せる。
+   場面数に応じて .pin-2 / .pin-3 で滞在の長さを変える。
+   ============================================================ */
+.pin-2{height:250vh;height:250dvh}
+.pin-3{height:320vh;height:320dvh}
+.pin-scenes{position:relative}
+.pscene{
+  position:absolute;left:0;right:0;top:0;
+  opacity:0;pointer-events:none;will-change:transform,opacity;
+}
+.pscene.on{opacity:1;pointer-events:auto}   /* JSが動かない場合の保険 */
+
+/* ピン内の見出しを、場面の進行に同期して入れ替える */
+.title-swap{position:relative}
+.title-swap .tswap{
+  display:block;position:absolute;top:0;left:0;right:0;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);
+}
+.title-swap .tswap.on{position:relative;opacity:1;transform:none}
+
+/* 章ラベル（これまで／これから など） */
+.scene-label{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:22px;display:flex;align-items:center;gap:10px;
+}
+.pscene.now .scene-label{color:var(--label)}
+
+/* about: 3枚のカードを横並びで1画面に */
+.about-scenes{min-height:clamp(280px,40vh,430px);min-height:clamp(280px,40dvh,430px)}
+.bcards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+/* record: 写真＋本文の見開き1画面 */
+.rec-scenes{min-height:clamp(320px,46vh,470px);min-height:clamp(320px,46dvh,470px)}
+.rec-sc{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+.rec-sc-photo{
+  aspect-ratio:4/3;border-radius:20px;
+  background:var(--paper-2) center/cover no-repeat;
+  filter:saturate(1.05) brightness(1.08) contrast(1.02);
+  box-shadow:0 34px 70px -44px rgba(26,26,46,.42);
+}
+.rec-sc .no{font-family:var(--mono);font-size:.72rem;color:var(--label);letter-spacing:.16em}
+.rec-sc h3{font-family:var(--serif);font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:700;margin:14px 0 12px;line-height:1.4}
+.rec-sc p{font-size:.95rem;color:var(--ink-soft);max-width:46ch;line-height:2}
+.rec-sc .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.rec-sc .tags span{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:30px}
+
+/* 事例の中身（ご相談 → やったこと → いま の3行構造） */
+.case-rows{display:grid;gap:10px;margin-top:16px}
+.case-rows .cr{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline}
+.case-rows .cr b{
+  font-family:var(--mono);font-weight:500;font-size:.64rem;letter-spacing:.14em;
+  color:var(--label);border:1px solid var(--line);border-radius:30px;padding:3px 12px;white-space:nowrap;
+}
+.case-rows .cr span{font-size:.92rem;line-height:1.85;color:var(--ink-soft)}
+
+/* ご相談の入り口（実際に多い相談テーマ。顧客の声ではない） */
+.voice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.voice{border:1px solid var(--line);border-radius:16px;background:var(--paper);padding:26px 28px;transition:background .4s var(--ease)}
+.voice:hover{background:var(--paper-2)}
+.voice::before{content:"“";font-family:var(--serif);font-size:2.6rem;color:var(--shu);line-height:1;display:block;margin-bottom:6px}
+.voice p{font-size:.98rem;line-height:1.95;color:var(--ink);font-weight:500}
+.voice-note{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--muted);margin-top:22px;line-height:1.8;max-width:70ch}
+.voice-note a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.voice-note a:hover{color:var(--label)}
+
+/* ピン下部（進行ドット＋リンクを1行に） */
+.pin-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:clamp(26px,4.5vh,50px)}
+.pin-foot .pin-dots{margin-top:0}
+
+/* services: 1画面1サービス */
+.svc-scenes{min-height:clamp(230px,32vh,350px);min-height:clamp(230px,32dvh,350px);margin-top:40px;position:relative;z-index:1}
+.svc-scenes .svc{border-bottom:1px solid rgba(239,236,248,.16)}
+.svc-wrap.dark .pin-dots{position:relative;z-index:1}
+
+/* results: 導入効果 — 大きな数字で BEFORE→AFTER を1画面ずつ */
+.res-scenes{min-height:clamp(300px,42vh,440px);min-height:clamp(300px,42dvh,440px)}
+.res-sc{display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,5vw,72px);align-items:center}
+.res-num{
+  font-family:var(--serif);font-weight:900;line-height:.9;
+  font-size:clamp(80px,13vw,190px);color:var(--ink);letter-spacing:-.02em;white-space:nowrap;
+}
+.res-num em{font-style:normal;color:var(--shu)}
+.res-num small{font-size:.32em;font-weight:700;color:var(--muted);letter-spacing:0}
+.res-num .dn{
+  display:inline-block;font-size:.2em;color:var(--shu);
+  transform:translateY(-2.6em);margin-right:.3em;   /* ▲＝マイナスの印。数字の肩に小さく置く */
+}
+.res-body .res-k{font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;color:var(--label);margin-bottom:10px;text-transform:uppercase}
+.res-body h3{font-family:var(--serif);font-size:clamp(1.35rem,2.6vw,2.1rem);font-weight:700;line-height:1.45;margin-bottom:12px}
+.res-body p{font-size:.96rem;color:var(--ink-soft);line-height:2;max-width:52ch}
+.res-body .res-ba{
+  display:none;   /* .ba（触れるBEFORE→AFTER）に置き換え済み */
+}
+.res-body .res-ba b{color:var(--label);font-weight:500}
+.res-note{font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;color:var(--muted);max-width:56ch;line-height:1.8}
+.res-note a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.res-note a:hover{color:var(--label)}
+
+/* showcase: 実物ギャラリー（稼働中ツールと制作物の現物）
+   カードは全幅×横組み。画像は切り抜かず、そのままの縦横比で見せる */
+.show-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.show-card{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--paper);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.show-card:hover{transform:translateY(-4px);box-shadow:0 24px 50px -30px rgba(26,26,46,.35)}
+.show-card.horiz{display:grid;grid-template-columns:1.05fr 1fr;align-items:center}
+.show-card.horiz .show-img{border-right:1px solid var(--line);align-self:stretch;display:flex;align-items:center;background:var(--paper-2)}
+.show-img img{width:100%;height:auto;display:block}
+.show-card figcaption{padding:26px 30px}
+/* 漫画: 3段を縦に積み、読み順どおり全コマ見せる（画像列は細めにして高さを抑える） */
+.show-card.horiz.manga{grid-template-columns:.75fr 1.25fr}
+.manga-stack{flex-direction:column;gap:10px;padding:16px}
+.manga-stack img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px}
+.show-k{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;color:var(--label);text-transform:uppercase;margin-bottom:8px}
+.show-k .live{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--shu);margin-right:7px;vertical-align:1px;animation:live-dot 2s ease-in-out infinite}
+@keyframes live-dot{0%,100%{opacity:1}50%{opacity:.3}}
+.show-card h3,.show-mini h3{font-family:var(--serif);font-size:1.28rem;font-weight:700;margin-bottom:8px}
+.show-card figcaption p,.show-mini p{font-size:.9rem;color:var(--ink-soft);line-height:1.9}
+.show-try{display:inline-flex;align-items:center;gap:.6em;margin-top:14px;font-size:.88rem;font-weight:500;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:color .3s}
+.show-try:hover{color:var(--label)}
+.show-minis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.show-mini{border:1px solid var(--line);border-radius:16px;padding:24px 26px;background:var(--paper);transition:background .4s var(--ease)}
+.show-mini:hover{background:var(--paper-2)}
+
+/* 代表プロフィール（事業者情報の中） */
+.profile{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(22px,3.4vw,44px);align-items:center;
+  border:1px solid var(--line);border-radius:18px;background:var(--paper);
+  padding:clamp(24px,3.4vw,38px);margin-bottom:22px;
+}
+.profile-ph{width:clamp(104px,13vw,160px);height:auto;border-radius:14px;display:block;box-shadow:0 20px 44px -28px rgba(26,26,46,.45)}
+.profile-body .show-k{margin-bottom:10px}
+.profile-body h3{font-family:var(--serif);font-size:clamp(1.4rem,2.4vw,1.8rem);font-weight:700;margin-bottom:4px}
+.profile-body .role{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;color:var(--label);margin-bottom:14px}
+.profile-body p{font-size:.94rem;color:var(--ink-soft);line-height:2;max-width:60ch}
+
+@media(max-width:760px){
+  .voice-grid{grid-template-columns:1fr}
+  .show-card.horiz,.show-card.horiz.manga{grid-template-columns:1fr}
+  .show-card.horiz .show-img{border-right:none;border-bottom:1px solid var(--line)}
+  .show-minis{grid-template-columns:1fr}
+  .profile{grid-template-columns:1fr}
+  .profile-ph{width:120px}
+}
+
+@media(max-width:760px){
+  .res-sc{grid-template-columns:1fr;gap:10px}
+  .res-num{font-size:clamp(70px,22vw,120px)}
+  .res-scenes{min-height:clamp(360px,52vh,520px);min-height:clamp(360px,52dvh,520px)}
+}
+
+/* 高さの低い画面では、リード文をたたんで1画面に収める */
+@media(max-height:780px) and (min-width:761px){
+  .pin-stage .sec-head .lead,.svc-head .lead{display:none}
+  .svc-scenes{min-height:clamp(200px,30vh,300px);min-height:clamp(200px,30dvh,300px)}
+  .rec-scenes{min-height:clamp(280px,42vh,420px);min-height:clamp(280px,42dvh,420px)}
+}
+
+@media(max-width:760px){
+  .pin-2{height:230vh;height:230dvh}
+  .pin-3{height:300vh;height:300dvh}
+  .bcards3{grid-template-columns:1fr;gap:10px}
+  .bcards3 .bcard p{font-size:.82rem}
+  .about-scenes{min-height:clamp(380px,56vh,540px);min-height:clamp(380px,56dvh,540px)}
+  .rec-sc{grid-template-columns:1fr;gap:18px}
+  .rec-sc-photo{aspect-ratio:16/9}
+  .rec-sc p{line-height:1.85}
+  .rec-scenes{min-height:clamp(400px,58vh,560px);min-height:clamp(400px,58dvh,560px)}
+  .pin-foot{flex-direction:column;align-items:flex-start;gap:14px}
+  .svc-scenes{min-height:clamp(300px,44vh,440px);min-height:clamp(300px,44dvh,440px)}
+}
+
+/* 導入ステップをつなぐ線が、スクロールで左から伸びる */
+.steps{position:relative}
+.step-line{
+  position:absolute;left:22px;right:20%;top:55px;height:1px;z-index:0;
+  background:linear-gradient(90deg,var(--accent),rgba(123,108,224,.15));
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform 1.6s var(--ease);
+}
+.step-line.in{transform:scaleX(1)}
+@media(max-width:1000px){.step-line{display:none}}   /* 縦並びになったら線は出さない */
+
+/* 実績カードの写真は、カードが出るのに合わせてゆっくり寄りを戻す */
+.rec{overflow:hidden}
+.rec-photo{transform:scale(1.14);transition:transform 1.8s var(--ease)}
+.rec.in .rec-photo{transform:scale(1)}
+
+/* ============================================================
+   写真は自然な色のまま、少しだけ明るく持ち上げる
+   （青紫へ色相を回すと人物の肌が青白く沈むため、色はいじらない）
+   ============================================================ */
+.rec-photo,.why-band,.svc-bg,.company-card-bg,.cta-bg{
+  filter:saturate(1.05) brightness(1.08) contrast(1.02);
+}
+
+/* 取り扱い領域の帯（スクロールした分だけ流れる） */
+.band{
+  overflow:hidden;white-space:nowrap;
+  padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  margin:clamp(44px,6vw,86px) 0;
+}
+.band-track{
+  display:inline-flex;gap:48px;
+  font-family:var(--mono);font-size:.82rem;letter-spacing:.15em;
+  color:var(--muted);text-transform:uppercase;will-change:transform;
+}
+.band-track span{display:inline-flex;align-items:center;gap:48px}
+.band-track b{color:var(--label);font-weight:500}
+/* スクロール連動ではなく、常に自動で流れ続ける */
+@keyframes band-flow{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+.band-track{animation:band-flow 36s linear infinite}
+
+/* 背景写真をゆっくり流すため、少し外まで広げておく */
+.svc-bg,.company-card-bg,.cta-bg{inset:-14%;will-change:transform}
+
+/* 数字はスクロールでわずかに遅れて動く */
+.step .big{will-change:transform}
 
 /* ============================================================
    OVERVIEW / BRIDGE
@@ -254,7 +622,8 @@ header.nav.scrolled{
 .bcard .k{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.1em}
 .bcard h4{font-family:var(--serif);font-size:1.22rem;font-weight:700;margin:6px 0 6px}
 .bcard p{font-size:.9rem;color:var(--ink-soft)}
-.now .bcard{border-color:rgba(229,68,42,.32);background:linear-gradient(180deg,rgba(229,68,42,.05),transparent)}
+.now .bcard{border-color:rgba(123,108,224,.32);
+  background:linear-gradient(180deg,rgba(123,108,224,.06),transparent),var(--paper)}   /* 下に地色を敷く。背景の漫画が透けるため */
 .now .bcard:hover{border-color:var(--accent)}
 .bridge-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--accent)}
 .bridge-arrow .line{width:1px;flex:1;background:linear-gradient(var(--muted),var(--accent))}
@@ -267,7 +636,7 @@ header.nav.scrolled{
 .rec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .rec{background:var(--paper);padding:clamp(28px,3vw,40px);transition:background .4s var(--ease)}
 .rec:hover{background:var(--paper-2)}
-.rec .no{font-family:var(--mono);font-size:.72rem;color:var(--accent);letter-spacing:.16em}
+.rec .no{font-family:var(--mono);font-size:.72rem;color:var(--label);letter-spacing:.16em}
 .rec h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin:14px 0 12px;line-height:1.4}
 .rec p{font-size:.92rem;color:var(--ink-soft)}
 .rec .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
@@ -277,14 +646,14 @@ header.nav.scrolled{
 .rec-cta{display:flex;justify-content:center;margin-top:clamp(36px,4vw,52px)}
 .rec-cta a{display:inline-flex;align-items:center;gap:.7em;font-size:.95rem;font-weight:500;
   padding:15px 32px;border-radius:46px;background:var(--ink);color:var(--paper);transition:all .3s var(--ease)}
-.rec-cta a:hover{background:var(--accent);transform:translateY(-2px)}
+.rec-cta a:hover{background:var(--shu);transform:translateY(-2px)}
 .rec-cta a .arw{transition:transform .3s var(--ease)}
 .rec-cta a:hover .arw{transform:translate(4px,-4px)}
 
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:60px}
 .stat{text-align:center;padding:24px 10px;border-top:2px solid var(--ink)}
 .stat .n{font-family:var(--serif);font-weight:900;font-size:clamp(2.4rem,5vw,3.6rem);line-height:1;color:var(--ink)}
-.stat .n em{font-style:normal;font-size:.5em;color:var(--accent)}
+.stat .n em{font-style:normal;font-size:.5em;color:var(--shu)}
 .stat .l{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--muted);margin-top:12px;text-transform:uppercase}
 
 /* ============================================================
@@ -296,24 +665,24 @@ header.nav.scrolled{
   background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
   background-size:64px 64px;-webkit-mask-image:radial-gradient(circle at 80% 0,#000,transparent 70%);mask-image:radial-gradient(circle at 80% 0,#000,transparent 70%);
 }
-.svc-wrap.dark .eyebrow{color:#FF7A5C}
-.svc-wrap.dark .eyebrow::before{background:#FF7A5C}
+.svc-wrap.dark .eyebrow{color:#A492FF}
+.svc-wrap.dark .eyebrow::before{background:#A492FF}
 .svc-head h2{color:var(--paper)}
-.svc-head .lead{color:rgba(242,238,229,.72)}
+.svc-head .lead{color:rgba(239,236,248,.72)}
 .svc-list{margin-top:60px;display:grid;gap:1px;position:relative;z-index:1}
 .svc{
   display:grid;grid-template-columns:auto 1fr auto;gap:clamp(20px,4vw,56px);align-items:center;
-  padding:clamp(28px,4vw,46px) 4px;border-top:1px solid rgba(242,238,229,.16);
+  padding:clamp(28px,4vw,46px) 4px;border-top:1px solid rgba(239,236,248,.16);
   transition:padding .4s var(--ease);
 }
-.svc:last-child{border-bottom:1px solid rgba(242,238,229,.16)}
+.svc:last-child{border-bottom:1px solid rgba(239,236,248,.16)}
 .svc:hover{padding-left:18px}
-.svc .idx{font-family:var(--mono);font-size:.86rem;color:#FF7A5C;letter-spacing:.1em}
+.svc .idx{font-family:var(--mono);font-size:.86rem;color:#A492FF;letter-spacing:.1em}
 .svc .body h3{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;line-height:1.3;margin-bottom:14px}
-.svc .body p{color:rgba(242,238,229,.74);max-width:54ch;font-size:.98rem}
+.svc .body p{color:rgba(239,236,248,.74);max-width:54ch;font-size:.98rem}
 .svc .body .chips{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
-.svc .body .chips span{font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;color:rgba(242,238,229,.66);border:1px solid rgba(242,238,229,.22);padding:5px 12px;border-radius:30px}
-.svc .go{width:52px;height:52px;border-radius:50%;border:1px solid rgba(242,238,229,.3);display:grid;place-items:center;font-size:1.2rem;transition:all .3s var(--ease);flex-shrink:0}
+.svc .body .chips span{font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;color:rgba(239,236,248,.66);border:1px solid rgba(239,236,248,.22);padding:5px 12px;border-radius:30px}
+.svc .go{width:52px;height:52px;border-radius:50%;border:1px solid rgba(239,236,248,.3);display:grid;place-items:center;font-size:1.2rem;transition:all .3s var(--ease);flex-shrink:0}
 .svc:hover .go{background:var(--accent);border-color:var(--accent);transform:rotate(-45deg)}
 
 /* ============================================================
@@ -322,7 +691,7 @@ header.nav.scrolled{
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;counter-reset:step;margin-top:20px}
 .step{position:relative;padding-top:30px;border-top:2px solid var(--line);transition:border-color .4s}
 .step:hover{border-color:var(--accent)}
-.step .num{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;color:var(--accent)}
+.step .num{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;color:var(--label)}
 .step h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;margin:16px 0 12px}
 .step p{font-size:.9rem;color:var(--ink-soft)}
 .step .big{position:absolute;top:18px;right:0;font-family:var(--serif);font-weight:900;font-size:3.4rem;color:var(--paper-2);line-height:1;z-index:-1}
@@ -333,7 +702,7 @@ header.nav.scrolled{
 .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden}
 .why{background:var(--paper);padding:clamp(30px,3.4vw,46px);display:flex;gap:24px;align-items:flex-start;transition:background .4s}
 .why:hover{background:var(--paper-2)}
-.why .mk{font-family:var(--serif);font-weight:900;font-size:2rem;color:var(--accent);line-height:1;flex-shrink:0}
+.why .mk{font-family:var(--serif);font-weight:900;font-size:2rem;color:var(--shu);line-height:1;flex-shrink:0}
 .why h3{font-family:var(--serif);font-size:1.4rem;font-weight:700;margin-bottom:10px}
 .why p{font-size:.94rem;color:var(--ink-soft)}
 
@@ -345,12 +714,12 @@ header.nav.scrolled{
   text-align:center;border:1px solid var(--ink);border-radius:30px;
   padding:clamp(48px,8vw,110px) clamp(24px,5vw,60px);
   background:
-    radial-gradient(120% 140% at 50% -20%,rgba(229,68,42,.08),transparent 60%);
+    radial-gradient(120% 140% at 50% -20%,rgba(123,108,224,.08),transparent 60%);
   position:relative;overflow:hidden;
 }
 .cta-box .eyebrow{justify-content:center}
 .cta-box h2{font-family:var(--serif);font-weight:900;font-size:clamp(1.8rem,5.6vw,4.4rem);line-height:1.16;margin:22px 0 18px;white-space:nowrap}
-.cta-box h2 .em{color:var(--accent)}
+.cta-box h2 .em{color:var(--shu)}
 .cta-box p{max-width:50ch;margin:0 auto 40px;color:var(--ink-soft);font-size:1.05rem}
 .cta-actions{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
 .cta-mail{font-family:var(--mono);font-size:.9rem;letter-spacing:.04em;margin-top:30px;color:var(--muted)}
@@ -365,7 +734,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .foot-brand p{font-size:.9rem;color:var(--muted);max-width:38ch}
 .foot-col h4{font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
 .foot-col a{display:block;font-size:.92rem;color:var(--ink-soft);margin-bottom:10px;transition:color .25s,padding .25s}
-.foot-col a:hover{color:var(--accent);padding-left:5px}
+.foot-col a:hover{color:var(--label);padding-left:5px}
 .foot-bottom{margin-top:54px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--muted)}
 
 /* note banner (replaceable placeholders) */
@@ -375,7 +744,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
   padding:14px 16px;border-radius:12px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5);
   letter-spacing:.02em;
 }
-.note b{color:#FF7A5C}
+.note b{color:#A492FF}
 .note button{position:absolute;top:8px;right:10px;background:none;border:0;color:var(--paper);cursor:pointer;font-size:.9rem;opacity:.7}
 .note button:hover{opacity:1}
 
@@ -385,9 +754,9 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:20px}
 .plan{background:var(--paper);padding:clamp(30px,3.2vw,44px);display:flex;flex-direction:column;transition:background .4s var(--ease)}
 .plan:hover{background:var(--paper-2)}
-.plan.feat{background:linear-gradient(180deg,rgba(229,68,42,.06),transparent);position:relative}
-.plan.feat::before{content:"おすすめ";position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:var(--paper);background:var(--accent);padding:4px 11px;border-radius:30px}
-.plan .pk{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--accent)}
+.plan.feat{background:linear-gradient(180deg,rgba(123,108,224,.06),transparent);position:relative}
+.plan.feat::before{content:"おすすめ";position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:#fff;background:var(--shu);padding:4px 11px;border-radius:30px}
+.plan .pk{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--label)}
 .plan h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin:14px 0 8px;line-height:1.35}
 .plan .desc{font-size:.9rem;color:var(--ink-soft);min-height:3.4em}
 .plan .price{font-family:var(--serif);font-weight:900;font-size:2.2rem;line-height:1;margin:22px 0 4px}
@@ -395,7 +764,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .plan .note-s{font-family:var(--mono);font-size:.66rem;color:var(--muted);letter-spacing:.04em;margin-bottom:22px}
 .plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin:0 0 28px}
 .plan li{font-size:.9rem;color:var(--ink-soft);display:flex;gap:10px;align-items:flex-start}
-.plan li::before{content:"+";font-family:var(--mono);color:var(--accent);flex-shrink:0;font-weight:500}
+.plan li::before{content:"+";font-family:var(--mono);color:var(--label);flex-shrink:0;font-weight:500}
 .plan .btn{margin-top:auto;justify-content:center;width:100%;font-size:.9rem;padding:13px 20px}
 .price-foot{margin-top:28px;font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--muted);text-align:center}
 
@@ -411,7 +780,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
   padding:clamp(22px,2.6vw,30px) clamp(22px,3vw,38px);
   font-family:var(--serif);font-weight:700;font-size:clamp(1.04rem,1.6vw,1.22rem);color:var(--ink);line-height:1.5;
 }
-.faq-q .qn{font-family:var(--mono);font-size:.78rem;color:var(--accent);letter-spacing:.06em;flex-shrink:0}
+.faq-q .qn{font-family:var(--mono);font-size:.78rem;color:var(--label);letter-spacing:.06em;flex-shrink:0}
 .faq-q .pm{margin-left:auto;flex-shrink:0;width:22px;height:22px;position:relative;transition:transform .4s var(--ease)}
 .faq-q .pm::before,.faq-q .pm::after{content:"";position:absolute;background:var(--accent);transition:opacity .3s}
 .faq-q .pm::before{top:50%;left:0;right:0;height:2px;transform:translateY(-50%)}
@@ -432,22 +801,22 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .company-card::before{
   content:"架";position:absolute;right:-.1em;bottom:-.22em;
   font-family:var(--serif);font-weight:900;font-size:13rem;line-height:1;
-  color:rgba(242,238,229,.05);pointer-events:none;
+  color:rgba(239,236,248,.05);pointer-events:none;
 }
 .company-card .seal{
   width:54px;height:54px;border-radius:50%;background:var(--paper);color:var(--ink);
   display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:1.5rem;margin-bottom:24px;
 }
 .company-card .cname{font-family:var(--serif);font-weight:700;font-size:1.7rem;line-height:1.3}
-.company-card .cname small{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;color:rgba(242,238,229,.6);text-transform:uppercase;margin-top:8px}
-.company-card p{color:rgba(242,238,229,.74);font-size:.94rem;margin-top:22px;max-width:38ch;position:relative}
+.company-card .cname small{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;color:rgba(239,236,248,.6);text-transform:uppercase;margin-top:8px}
+.company-card p{color:rgba(239,236,248,.74);font-size:.94rem;margin-top:22px;max-width:38ch;position:relative}
 .company-table{display:flex;flex-direction:column}
 .company-table dl{display:grid;grid-template-columns:140px 1fr;gap:8px 24px;padding:20px 0;border-bottom:1px solid var(--line);margin:0}
 .company-table dl:first-child{padding-top:0}
 .company-table dt{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .company-table dd{margin:0;font-size:.96rem;color:var(--ink);line-height:1.7}
 .company-table dd a{border-bottom:1px solid var(--accent);padding-bottom:1px}
-.company-table dd a:hover{color:var(--accent)}
+.company-table dd a:hover{color:var(--label)}
 
 /* ============================================================
    CONTACT FORM
@@ -455,7 +824,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .contact-form{max-width:640px;margin:38px auto 0;text-align:left;display:grid;gap:20px}
 .field{display:flex;flex-direction:column;gap:8px}
 .field label{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;color:var(--ink-soft);text-transform:uppercase}
-.field label .req{color:var(--accent);margin-left:4px}
+.field label .req{color:var(--shu-deep);margin-left:4px}
 .field input,.field textarea,.field select{
   font-family:var(--sans);font-size:.98rem;color:var(--ink);
   background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:12px;
@@ -475,8 +844,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
   display:none;
 }
 .form-status.show{display:block}
-.form-status.ok{background:rgba(36,56,214,.07);border:1px solid rgba(36,56,214,.3);color:var(--ink)}
-.form-status.ng{background:rgba(229,68,42,.07);border:1px solid rgba(229,68,42,.35);color:var(--ink)}
+.form-status.ok{background:rgba(106,92,201,.08);border:1px solid rgba(106,92,201,.3);color:var(--ink)}
+.form-status.ng{background:rgba(123,108,224,.07);border:1px solid rgba(123,108,224,.35);color:var(--ink)}
 .form-status a{border-bottom:1px solid var(--accent);padding-bottom:1px}
 .cta-divider{margin:48px auto 0;max-width:640px;border-top:1px solid var(--line);padding-top:30px}
 
@@ -495,14 +864,14 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
   transition:color .35s var(--ease),border-color .35s var(--ease),background .35s var(--ease);
 }
 .ic-chip .svg-ic{width:21px;height:21px}
-.bcard:hover .ic-chip{color:var(--accent);border-color:rgba(229,68,42,.4)}
-.now .ic-chip{color:var(--accent);border-color:rgba(229,68,42,.3);background:rgba(229,68,42,.05)}
+.bcard:hover .ic-chip{color:var(--accent);border-color:rgba(123,108,224,.4)}
+.now .ic-chip{color:var(--accent);border-color:rgba(123,108,224,.3);background:rgba(123,108,224,.06)}
 
 /* record card visual */
 .rec-ic{
   width:54px;height:54px;border-radius:13px;margin-bottom:20px;
   display:grid;place-items:center;color:var(--accent);
-  border:1px solid rgba(229,68,42,.28);background:rgba(229,68,42,.05);
+  border:1px solid rgba(123,108,224,.28);background:rgba(123,108,224,.06);
 }
 .rec-ic .svg-ic{width:27px;height:27px}
 
@@ -510,8 +879,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .svc-lead{display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .svc .svc-ic{
   width:60px;height:60px;border-radius:14px;flex-shrink:0;
-  display:grid;place-items:center;color:#FF7A5C;
-  border:1px solid rgba(242,238,229,.22);background:rgba(255,122,92,.08);
+  display:grid;place-items:center;color:#A492FF;
+  border:1px solid rgba(239,236,248,.22);background:rgba(164,146,255,.10);
   transition:transform .4s var(--ease);
 }
 .svc:hover .svc-ic{transform:scale(1.06)}
@@ -534,7 +903,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .why .why-ic{
   width:48px;height:48px;border-radius:12px;flex-shrink:0;
   display:grid;place-items:center;color:var(--accent);
-  border:1px solid rgba(229,68,42,.26);background:rgba(229,68,42,.05);
+  border:1px solid rgba(123,108,224,.26);background:rgba(123,108,224,.06);
 }
 .why .why-ic .svg-ic{width:24px;height:24px}
 
@@ -543,45 +912,126 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
    PHOTOS (full color)
    ============================================================ */
 
-/* hero — 全面にうっすら透ける背景写真 */
-.hero{position:relative;overflow:hidden}
+/* hero — 青紫のグラデーション面（写真は使わない） */
+.hero{overflow:hidden;background:var(--grad-hero);color:#fff}
 .hero-grid{grid-template-columns:1fr;gap:0}
-.hero-cover{
+.hero-cover{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.hero-glow{
+  position:absolute;inset:-12%;
+  background:
+    radial-gradient(115% 88% at 10% 18%, #A492FF 0%, rgba(164,146,255,0) 60%),
+    radial-gradient(95% 82% at 82% 6%,  #8877F6 0%, rgba(136,119,246,0) 56%),
+    radial-gradient(135% 120% at 48% 110%, #6E5FD0 0%, rgba(110,95,208,0) 64%);
+  will-change:transform;
+}
+/* 右下の大きな面。ナビと重ならない位置に置き、スクロールで持ち上がる */
+.hero-arc{
+  position:absolute;right:-16%;bottom:-34%;width:64%;height:82%;
+  background:var(--paper);border-radius:50%;
+  will-change:transform;
+}
+.hero-arc2{
+  position:absolute;inset:0;background:var(--paper);opacity:.16;
+  clip-path:ellipse(62% 24% at 44% 106%);
+  will-change:transform;
+}
+.hero-giant{
+  position:absolute;left:-.05em;bottom:.14em;pointer-events:none;user-select:none;
+  font-family:var(--mono);font-weight:500;
+  font-size:clamp(4.2rem,13vw,12.5rem);line-height:.8;letter-spacing:-.02em;
+  color:rgba(255,255,255,.13);white-space:nowrap;   /* 絵の上に乗るので従来より薄く */
+  will-change:transform;
+}
+
+
+/* --- ヒーローの絵（2026-09-10） ---
+   自社の漫画と同じ画風・同じ人物。セリフもコマ枠もない横長の1枚絵。
+   左半分が空の紫グラデーションなので、見出しとCTAはその上にそのまま置ける。
+   左からのワイプで現れるので、絵が引かれていくように見える。
+   白い丸(.hero-arc)と回転シールは人物に重なるため、この構成では出さない。 */
+.hero-art{
+  position:absolute;inset:0;z-index:0;pointer-events:none;will-change:transform,clip-path;
+  background:url("assets/hero-art.webp") right center/cover no-repeat;
+  -webkit-mask-image:linear-gradient(96deg,transparent 3%,rgba(0,0,0,.45) 28%,#000 56%);
+          mask-image:linear-gradient(96deg,transparent 3%,rgba(0,0,0,.45) 28%,#000 56%);
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path 1.6s var(--ease);
+}
+.hero-art.in{clip-path:inset(0 0 0 0)}
+.hero-arc,.hero-arc2,.hero-seal{display:none}
+
+/* 絵の上の薄い幕。上端はナビの白文字用、左は見出し・本文用に紫を残す */
+.hero-scrim{
   position:absolute;inset:0;z-index:0;pointer-events:none;
-  -webkit-mask-image:linear-gradient(to bottom,#000 68%,transparent);
-          mask-image:linear-gradient(to bottom,#000 68%,transparent);
+  background:
+    linear-gradient(to bottom,rgba(26,26,46,.46) 0%,rgba(26,26,46,.12) 12%,transparent 20%),
+    linear-gradient(100deg,rgba(106,92,201,.50) 0%,rgba(106,92,201,.16) 44%,transparent 64%);
 }
-.hero-slide{
-  position:absolute;inset:0;
-  background:center/cover no-repeat;
-  opacity:0;filter:brightness(1.08) saturate(.82);
-  animation:heroFade 21s infinite;
+
+@media(max-width:760px){
+  /* 縦長画面では人物に文字が重なるので、絵は薄く敷いて背景として効かせる */
+  .hero-art{background-position:88% center;opacity:.8}
+  .hero-scrim{background:
+    linear-gradient(to bottom,rgba(26,26,46,.46) 0%,rgba(26,26,46,.10) 11%,transparent 18%),
+    linear-gradient(102deg,rgba(106,92,201,.88) 0%,rgba(106,92,201,.62) 48%,rgba(106,92,201,.22) 100%)}
 }
-.hero-slide:nth-child(2){animation-delay:7s}
-.hero-slide:nth-child(3){animation-delay:14s}
-@keyframes heroFade{
-  0%{opacity:0}
-  4%{opacity:.2}
-  29%{opacity:.2}
-  33%{opacity:0}
-  100%{opacity:0}
+@media(prefers-reduced-motion:reduce){
+  .hero-art{clip-path:none;transition:none}
 }
-/* 回転シール（右下に復活） */
+
+/* ヒーロー内の文字は白基調へ反転 */
+.hero .eyebrow{color:rgba(255,255,255,.92)}
+.hero .eyebrow::before{background:var(--sky)}
+.hero h1,.hero .hh{color:#fff}
+.hero h1 .em,.hero .hh .em{color:#F2EFFF}
+.hero h1 .em::after,.hero .hh .em::after{background:linear-gradient(transparent 60%,rgba(255,255,255,.30) 0)}
+.hero-sub{color:rgba(255,255,255,.95)}
+.hero .btn-primary{background:var(--shu);color:#fff}
+.hero .btn-primary:hover{background:var(--shu-deep);color:#fff;transform:translateY(-2px)}
+.hero .btn-ghost{border-color:rgba(255,255,255,.55);color:#fff}
+.hero .btn-ghost:hover{background:#fff;color:var(--cobalt)}
+.hero-marquee{border-color:rgba(255,255,255,.28)}
+.hero-marquee .track{color:rgba(255,255,255,.82)}
+.hero-marquee .track b{color:#E2DCFF}
+
+/* 回転シール */
+/* ヒーローから次のセクションへ、丸みをつけて滑らかにつなぐ */
+#about{
+  background:var(--paper);
+  border-radius:clamp(28px,4vw,56px) clamp(28px,4vw,56px) 0 0;
+  margin-top:calc(-1 * clamp(28px,4vw,56px));
+  z-index:2;
+}
+
+/* 回転シールは右下の白い面の中に置き、面と一緒に動かす */
 .hero-seal{
   position:absolute;z-index:2;pointer-events:none;
-  right:clamp(20px,5vw,64px);bottom:clamp(78px,12vh,130px);
+  right:clamp(34px,7vw,120px);bottom:clamp(46px,8vh,96px);
   width:118px;height:118px;
+  will-change:transform;
 }
 .hero-seal .spin-seal{width:100%;height:100%}
+.hero-seal svg text{fill:var(--cobalt);opacity:.78}
+.hero-seal .core{color:var(--cobalt);opacity:.85}
+
+/* nav — ヒーローに重なっている間（未スクロール）は白抜き */
+header.nav:not(.scrolled) .brand{color:#fff}
+header.nav:not(.scrolled) .brand .seal{background:#fff;color:var(--cobalt)}
+header.nav:not(.scrolled) .brand small{color:rgba(255,255,255,.72)}
+header.nav:not(.scrolled) .nav-links a{color:rgba(255,255,255,.92)}
+header.nav:not(.scrolled) .nav-links a:hover{color:#fff}
+header.nav:not(.scrolled) .nav-links a::after{background:#fff}
+header.nav:not(.scrolled) .burger span{background:#fff}
 
 /* services（ダーク）背景の回路写真 */
 .svc-bg{
   position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url("assets/services-bg.jpg") center/cover no-repeat;
-  opacity:.42;
-  -webkit-mask-image:linear-gradient(125deg,#000,transparent 72%);
-          mask-image:linear-gradient(125deg,#000,transparent 72%);
+  background:center/cover no-repeat;   /* 画像は data-bg → JS が遅延で入れる */
+  opacity:.62;
+  -webkit-mask-image:linear-gradient(125deg,#000,transparent 90%);
+          mask-image:linear-gradient(125deg,#000,transparent 90%);
 }
+.svc-wrap.dark .svc-bg{filter:saturate(1.2) brightness(1.25) contrast(1.15)}   /* 暗幕の上でも回路がはっきり見えるように */
 .svc-wrap.dark .svc-head{position:relative;z-index:1}
 
 /* record カードの写真バナー（フルカラー） */
@@ -596,14 +1046,14 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .why-band{
   height:clamp(200px,26vw,330px);border-radius:18px;
   background:var(--paper-2) center 32%/cover no-repeat;
-  margin-bottom:22px;box-shadow:0 34px 70px -44px rgba(20,20,27,.45);
+  margin-bottom:22px;box-shadow:0 34px 70px -44px rgba(26,26,46,.42);
 }
 
 /* company — 墨カード背景写真 */
 .company-card{overflow:hidden}
 .company-card-bg{
   position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url("assets/company-bg.jpg") center/cover no-repeat;opacity:.26;
+  background:center/cover no-repeat;opacity:.26;
   -webkit-mask-image:linear-gradient(160deg,transparent 30%,#000);
           mask-image:linear-gradient(160deg,transparent 30%,#000);
 }
@@ -612,12 +1062,187 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 /* CTA 背景写真（淡く） */
 .cta-bg{
   position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:url("assets/cta-bg.jpg") center/cover no-repeat;
+  background:center/cover no-repeat;
   opacity:.14;
   -webkit-mask-image:radial-gradient(110% 110% at 50% 0,#000,transparent 70%);
           mask-image:radial-gradient(110% 110% at 50% 0,#000,transparent 70%);
 }
 .cta-box>*:not(.cta-bg){position:relative;z-index:1}
+
+/* ============================================================
+   TONE DARK — 濃色の面（2026-09-07）
+   淡い紫が15セクション続いて背景が一度も変わらない問題への対処。
+   このブロックの中だけ配色トークンを差し替えるので、
+   子要素のCSSには一切手を入れずに面ごと反転できる。
+   適用先: #results / #services(既存) / #process / .cta-box の4箇所
+   ============================================================ */
+.tone-dark{
+  --paper:    #1A1A2E;
+  --paper-2:  #262641;
+  --paper-rgb: 26,26,46;
+  --ink:      #EFECF8;
+  --ink-soft: #C9C5E4;
+  --muted:    #918DB4;
+  --line:     rgba(239,236,248,.16);
+  --accent:   #A492FF;   /* 地の紫は濃紺の上で沈むのでスカイに差し替え */
+  --label:    #A492FF;   /* 小さいラベルも濃紺の上ではスカイに */
+  --sheen:    rgba(255,255,255,.11);
+  background-color:#1A1A2E;
+  color:#EFECF8;
+}
+/* 朱を「文字」として使う箇所だけ、濃紺の上で読める明るい朱にする */
+.tone-dark .res-num em,.tone-dark .res-num .dn,
+.tone-dark .stat .n em,.tone-dark .why .mk,
+.tone-dark h2 .em{color:var(--shu-lt)}
+
+/* 濃色面の中のフォーム（白地のままだと浮くので暗い面に合わせる） */
+.tone-dark .field input,.tone-dark .field textarea,.tone-dark .field select{
+  background:rgba(255,255,255,.06);color:var(--ink);
+}
+.tone-dark .field input:focus,.tone-dark .field textarea:focus,.tone-dark .field select:focus{
+  background:rgba(255,255,255,.12);
+}
+.tone-dark .field select option{color:#1A1A2E;background:#fff}   /* ネイティブの一覧は白地のまま */
+
+/* 締めのCTAは箱ごと濃色に。背景写真は暗幕の上で見えるよう少し強める */
+.cta-box.tone-dark{background-color:#1A1A2E;border-color:rgba(239,236,248,.34)}
+.cta-box.tone-dark .cta-bg{opacity:.13;filter:saturate(1.05) brightness(1.1);-webkit-mask-image:radial-gradient(96% 76% at 50% 0,#000,transparent 58%);mask-image:radial-gradient(96% 76% at 50% 0,#000,transparent 58%)}
+
+/* #services の写真の明るい部分と本文が重なる件（前回ログ 3.「気になった1点」）。
+   写真の上に左から暗幕を1枚かけて、どの場面でも本文が読めるようにする */
+.svc-wrap.dark::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(100deg,rgba(26,26,46,.74) 0%,rgba(26,26,46,.40) 48%,transparent 78%);
+}
+
+/* ============================================================
+   反応する仕掛け（2026-09-10）
+   ページはすでに約29画面ある。勝手に動くものを足すと体感が重くなるだけなので、
+   増やすのは「触ると返ってくる」もの＝閲覧者の操作に反応するものだけにする。
+   ============================================================ */
+
+/* --- 触れる BEFORE→AFTER（旧 .res-ba の置き換え） --- */
+.ba{margin-top:20px;max-width:400px}
+.ba-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:10px}
+.ba-label{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;color:var(--muted);line-height:1.5}
+.ba-now{font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--ink);white-space:nowrap}
+.ba-now b{font-size:1.6rem;font-weight:900;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+/* バーとつまみは同じものを指す。つまみ＝バーの右端で、左に引くと値が縮む */
+.ba-bar{position:relative;height:10px;border-radius:10px;background:var(--line)}
+.ba-bar i{display:block;height:100%;width:100%;border-radius:10px;transform-origin:left center;
+  background:linear-gradient(90deg,var(--shu),var(--shu-lt))}   /* 追従は1:1。遅らせない */
+/* range は透明にして操作だけ担わせ、見えるつまみは自前で置く。
+   ネイティブのつまみは min〜max の割合で位置が決まり、バーの右端と合わないため。 */
+.ba input[type=range]{-webkit-appearance:none;appearance:none;position:absolute;left:0;top:50%;
+  transform:translateY(-50%);width:100%;height:32px;margin:0;background:transparent;
+  opacity:0;cursor:grab;z-index:2}
+.ba input[type=range]:active{cursor:grabbing}
+.ba-knob{position:absolute;top:50%;left:100%;width:20px;height:20px;margin:-10px 0 0 -10px;
+  border-radius:50%;background:var(--shu);border:2px solid var(--paper);pointer-events:none;
+  box-shadow:0 3px 12px rgba(var(--shu-rgb),.45)}
+.ba input[type=range]:focus-visible ~ .ba-knob{outline:2px solid var(--shu);outline-offset:3px}
+/* バー上の2つの停止位置に目盛りを置く。左＝AI導入後の値、右端＝AI導入前 */
+.ba-ticks{position:relative;height:1.2em;margin-top:9px;font-family:var(--mono);font-size:.62rem;
+  letter-spacing:.06em;color:var(--muted)}
+.ba-ticks span{position:absolute;top:0;white-space:nowrap;transition:color .25s}
+.ba-ticks .t-after{transform:translateX(-50%)}
+.ba-ticks .t-before{right:0}
+.ba-ticks span.on{color:var(--shu-deep)}
+.tone-dark .ba-ticks span.on{color:var(--shu-lt)}
+
+
+/* --- #about の背景に自社の漫画コマを敷く（2026-09-10・代表の要望） ---
+   ここは「これまでは“伝える”力＝AI漫画プロデュース」を語る場所なので、
+   背景そのものが商品サンプルになる。背景専用に描いた4ページ（別キャラ・セリフ入り）から
+   コマを自動で切り出し、20コマを重複なしで敷き詰めたもの。
+   1コマは小さく＝場面の数を多くしている（代表指示）。
+   本文が乗る左側はマスクで消し、空いている右側だけ強く出す。
+   画像は data-bg で遅延読み込み（1280px・グレー・166KB）。 */
+.about-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:center/cover no-repeat;
+  opacity:.30;   /* セリフ入りの漫画に差し替え。漫画だと認識できる濃さにする（代表指示） */
+  -webkit-mask-image:linear-gradient(100deg,transparent 8%,rgba(0,0,0,.18) 38%,#000 72%);
+          mask-image:linear-gradient(100deg,transparent 8%,rgba(0,0,0,.18) 38%,#000 72%);
+}
+#about .pin-stage .wrap{position:relative;z-index:1}
+/* 小さい文字は漫画の濃い部分に直接重なるので、#about の中だけ一段濃くする。
+   いずれも「文字が実際に乗っている画素の地」で実測して決めた値:
+     .sec-num   --muted のままだと 3.85:1
+     .eyebrow   --label(#6A5CC9) のままだと 4.35:1
+     .scene-label --muted(#67638A) のままだと 4.46:1  （基準は 4.5:1） */
+#about .sec-num{color:var(--ink-soft)}
+#about .eyebrow{color:#5A4CB8}
+#about .scene-label{color:#5A5680}
+@media(max-width:760px){
+  /* 縦長では本文の下に広く回り込むので、さらに薄くする */
+  .about-bg{opacity:.20;-webkit-mask-image:none;mask-image:none}
+}
+
+/* --- 試算（診断ツールのミニ版） --- */
+.est{display:grid;grid-template-columns:1fr .92fr;gap:clamp(24px,3.5vw,52px);align-items:stretch;
+  border:1px solid var(--line);border-radius:24px;padding:clamp(26px,3.4vw,44px);
+  background:linear-gradient(180deg,rgba(123,108,224,.05),transparent)}
+.est-form{display:flex;flex-direction:column;justify-content:center;gap:clamp(22px,3vh,34px)}
+.est-f{display:block;cursor:pointer}
+.est-f .est-row{display:flex;align-items:baseline;justify-content:space-between;gap:14px}
+.est-k{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.est-v{font-family:var(--serif);font-weight:700;font-size:.95rem;color:var(--ink);white-space:nowrap}
+.est-v b{font-size:1.5rem;font-weight:900;margin-right:.15em;font-variant-numeric:tabular-nums}
+.est-f input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;
+  margin:8px 0 0;background:transparent;cursor:grab;display:block}
+.est-f input[type=range]:active{cursor:grabbing}
+.est-f input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:var(--line)}
+.est-f input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:var(--line)}
+.est-f input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;
+  border-radius:50%;background:var(--shu);border:2px solid var(--paper);margin-top:-7px;
+  box-shadow:0 2px 10px rgba(var(--shu-rgb),.4)}
+.est-f input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--shu);
+  border:2px solid var(--paper);box-shadow:0 2px 10px rgba(var(--shu-rgb),.4)}
+.est-f input[type=range]:focus-visible{outline:2px solid var(--shu);outline-offset:4px;border-radius:20px}
+
+/* 結果だけ濃色にして、淡い面の中でここが主役だと分かるようにする */
+.est-out{border-radius:18px;padding:clamp(24px,3vw,34px);display:flex;flex-direction:column;
+  justify-content:center;gap:18px}
+.est-cur{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;color:var(--muted)}
+.est-cur b{font-size:1.05rem;color:var(--ink-soft);font-family:var(--serif);font-weight:700;
+  margin:0 .2em;font-variant-numeric:tabular-nums}
+.est-nums{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 26px;margin-top:12px}
+.est-big{display:inline-flex;align-items:baseline;gap:.35em;white-space:nowrap}
+.est-big b{font-family:var(--serif);font-weight:900;font-size:clamp(2.2rem,4.6vw,3.4rem);
+  line-height:1;color:var(--shu-lt);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.est-big small{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted)}
+.est-cta{align-self:flex-start;margin-top:6px}
+.est-note{font-family:var(--mono);font-size:.66rem;letter-spacing:.03em;color:var(--muted);
+  line-height:1.95;margin-top:22px;max-width:78ch}
+.est-note b{color:var(--ink-soft);font-weight:500}
+.est-note a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+.est-note a:hover{color:var(--label)}
+
+@media(max-width:900px){
+  .est{grid-template-columns:1fr;gap:26px}
+  .est-cta{align-self:stretch;justify-content:center}
+}
+
+.ba-cut{font-family:var(--mono);font-style:normal;font-size:.7rem;font-weight:500;margin-left:.7em;
+  color:var(--shu-deep);letter-spacing:.04em}
+.tone-dark .ba-cut{color:var(--shu-lt)}
+.res-body .ba-note{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--muted);
+  line-height:1.6;margin-top:10px;max-width:none}
+.res-num em{font-variant-numeric:tabular-nums}   /* 数えている間に幅が動かないように */
+
+/* --- カードが指のほうへ傾く（ライブラリなしの立体） --- */
+[data-tilt]{position:relative;transform-style:preserve-3d}
+[data-tilt]::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;
+  transition:opacity .35s var(--ease);border-radius:inherit;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),var(--sheen),transparent 62%)}
+[data-tilt].lit::after{opacity:1}
+
+@media(prefers-reduced-motion:reduce){
+  [data-tilt]::after{display:none}
+}
+
+
 
 /* ============================================================
    RESPONSIVE
@@ -639,7 +1264,17 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
     box-shadow:-30px 0 60px -30px rgba(0,0,0,.4);
   }
   .nav-links.open{transform:none}
+  /* スマホのドロワーは紙色の面なので、ヒーロー上でも文字は濃紺に戻す */
+  header.nav:not(.scrolled) .nav-links a{color:var(--ink-soft)}
+  header.nav:not(.scrolled) .nav-links a:hover{color:var(--ink)}
+  header.nav:not(.scrolled) .nav-links a::after{background:var(--accent)}
+  header.nav:not(.scrolled) .nav-links .nav-cta{border-color:var(--ink);color:var(--ink)}
   .burger{display:flex}
+  /* スマホは白い面を右下へ逃がし、本文に重ならないようにする */
+  .hero-arc{right:-42%;bottom:-34%;width:86%;height:56%}
+  .hero-seal{width:92px;height:92px;right:26px;bottom:40px}
+  .hero-arc2{clip-path:ellipse(78% 18% at 40% 106%)}
+  .hero-giant{font-size:clamp(3.6rem,19vw,7rem)}
   .hero-grid{grid-template-columns:1fr}
   .bridge{grid-template-columns:1fr}
   .bridge-arrow{flex-direction:row;height:50px}
@@ -659,12 +1294,99 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
-  .io{opacity:1;transform:none}
+  .io,[data-in],.split-char{opacity:1;transform:none;clip-path:none;filter:none}
+  .step-line{transform:scaleX(1)}
+  /* ピン留めを解除し、重ねてある場面をすべて縦に並べて出す
+     （動きを止めるだけだと、隠れている場面の情報が読めなくなるため） */
+  .hero-pin,.pin{height:auto!important}
+  .hero,.pin-stage{position:static!important;height:auto!important}
+  .hero-stage,.pin-steps,.pin-scenes{min-height:0!important}
+  .hero-step,.pstep,.pscene{
+    position:relative!important;opacity:1!important;transform:none!important;
+    pointer-events:auto!important;margin-bottom:46px;
+  }
+  .title-swap .tswap{position:relative!important;opacity:1!important;transform:none!important}
+  .hero-dots,.pin-dots{display:none}
 }
 </style>
+
+<!-- 構造化データ（検索エンジン向け。表示には影響しない）
+     サイトのURLを変える場合は "url" と "@id" のドメイン部分をまとめて置換する -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://yhara0420-png.github.io/kakehashi/#org",
+      "name": "架け橋（Kakehashi）",
+      "alternateName": "Kakehashi",
+      "url": "https://yhara0420-png.github.io/kakehashi/",
+      "image": "https://yhara0420-png.github.io/kakehashi/assets/ogp.png",
+      "description": "AI漫画プロデュース・電子書籍出版・AI集客の実績を土台に、AIアプリ開発とAI導入サポートで企業のAI活用をゼロから伴走する個人事業。",
+      "email": "kakehashi007@gmail.com",
+      "founder": { "@type": "Person", "name": "原 祐介", "jobTitle": "AI導入プロデューサー" },
+      "areaServed": "JP",
+      "knowsAbout": ["AIアプリ開発", "AI導入支援", "生成AI活用", "AI漫画制作", "電子書籍出版", "AI集客支援"]
+    },
+    {
+      "@type": "Service",
+      "name": "AIアプリ開発・提供",
+      "serviceType": "AIアプリ開発",
+      "description": "業務自動化・生成AI実装の受託開発から自社AIプロダクトの導入サポートまで、ヒアリング・企画・開発・提供を一気通貫で対応。",
+      "provider": { "@id": "https://yhara0420-png.github.io/kakehashi/#org" },
+      "areaServed": "JP"
+    },
+    {
+      "@type": "Service",
+      "name": "AI導入サポート（未導入企業向け）",
+      "serviceType": "AI導入支援",
+      "description": "課題整理から活用領域の設計、ツール選定、運用・社内定着までを伴走。AI未導入の企業がゼロから始めるための支援。",
+      "provider": { "@id": "https://yhara0420-png.github.io/kakehashi/#org" },
+      "areaServed": "JP"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "AIを全く使ったことがなくても相談できますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "もちろんです。むしろ「何から始めればいいか分からない」という段階のご相談こそ得意としています。専門用語をできるだけ使わず、御社の業務に沿って「どこにAIが効くか」を一緒に整理するところからスタートします。" }
+        },
+        {
+          "@type": "Question",
+          "name": "費用はどのくらいかかりますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "ご依頼内容や規模によって異なるため、初回のヒアリングをふまえた個別見積もりとしています。初回のご相談は無料です。ご予算に上限がある場合は、その範囲でできることをご提案しますので、お気軽にお知らせください。" }
+        },
+        {
+          "@type": "Question",
+          "name": "どんな業務がAIで自動化・効率化できますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "文章作成・要約、問い合わせ対応、資料・コンテンツ制作、データ整理、社内ナレッジの検索など、幅広い業務が対象になります。「この作業、AIでなんとかならない？」という素朴な疑問からで大丈夫です。実現できるか含めてご提案します。" }
+        },
+        {
+          "@type": "Question",
+          "name": "開発や導入にはどのくらい期間がかかりますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "内容によりますが、小さく試せるものは数週間から、本格的なアプリ開発は規模に応じてご相談となります。いきなり大きく作らず、まず小さく試して効果を確かめながら進める方針で、リスクを抑えたスタートを大切にしています。" }
+        },
+        {
+          "@type": "Question",
+          "name": "遠方ですが、オンラインでも対応できますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "はい、オンラインでの打ち合わせ・サポートに対応しています。全国どこからでもご相談いただけます。メールやチャットでのやりとりも可能ですので、お忙しい場合もご安心ください。" }
+        },
+        {
+          "@type": "Question",
+          "name": "AI漫画や電子書籍だけの依頼もできますか？",
+          "acceptedAnswer": { "@type": "Answer", "text": "はい、これまで取り組んできたAI漫画プロデュースや電子書籍出版、AI集客支援など、コンテンツ制作単体でのご依頼も承っています。「伝える」部分だけのご相談も歓迎です。" }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
+<div class="progress" id="progress" aria-hidden="true"></div>
 <div class="bg-grid"></div>
 <div class="grain"></div>
 
@@ -676,6 +1398,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
   </a>
   <nav class="nav-links" id="menu">
     <a href="#about">事業の全体像</a>
+    <a href="#results">導入効果</a>
+    <a href="#estimate">試算</a>
     <a href="#services">サービス</a>
     <a href="works.html">実績</a>
     <a href="#pricing">料金</a>
@@ -687,17 +1411,21 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 </header>
 
 <!-- ===== HERO ===== -->
-<section class="hero" id="top">
+<section class="hero-pin" id="top">
+ <div class="hero">
   <div class="hero-cover" aria-hidden="true">
-    <div class="hero-slide" style="background-image:url('assets/hero-main.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('assets/hero2.jpg')"></div>
-    <div class="hero-slide" style="background-image:url('assets/hero3.jpg')"></div>
+    <div class="hero-glow"  data-par="glow"></div>
+    <div class="hero-art"   data-par="art"></div>
+    <div class="hero-scrim"></div>
+    <div class="hero-giant" data-par="giant">Kakehashi</div>
+    <div class="hero-arc2"  data-par="arc2"></div>
+    <div class="hero-arc"   data-par="arc"></div>
   </div>
-  <div class="hero-seal" aria-hidden="true">
+  <div class="hero-seal" data-par="seal" aria-hidden="true">
     <div class="spin-seal">
       <svg viewBox="0 0 120 120">
         <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
-        <text font-family="DM Mono, monospace" font-size="8.4" letter-spacing="3.1" fill="#14141B">
+        <text font-family="DM Mono, monospace" font-size="8.4" letter-spacing="3.1" fill="#1A1A2E">
           <textPath href="#circ" startOffset="0">MANGA × AI ・ DEVELOP ・ SUPPORT ・ GROWTH ・ </textPath>
         </text>
       </svg>
@@ -708,106 +1436,325 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
     <div class="hero-grid">
       <div class="hero-main">
         <div class="eyebrow hero-eyebrow reveal-up d1">AI Introduction &amp; Development</div>
-        <h1>
-          <span class="reveal-up d2" style="display:block">AIを</span>
-          <span class="reveal-up d3" style="display:block"><span class="em">“使える”</span>に</span>
-          <span class="reveal-up d4" style="display:block">変える</span>
-        </h1>
-        <p class="hero-sub reveal-up d5">
-          これまで、漫画とAIで「伝え方」そのものを設計してきました。<br>
-          これからは、AIアプリの開発から導入の伴走まで——<br>
-          企業のAI活用を、ゼロから一緒につくります。
-        </p>
-        <div class="hero-actions reveal-up d6">
-          <a class="btn btn-primary" href="#contact">無料で相談する <span class="arw">↗</span></a>
-          <a class="btn btn-ghost" href="#services">サービスを見る</a>
+
+        <!-- 画面に留まったまま、ここだけが3段階で入れ替わる -->
+        <div class="hero-stage">
+          <div class="hero-step on" data-hs="0">
+            <h1><span style="display:block">AIを</span><span style="display:block"><span class="em">“使える”</span>に</span><span style="display:block">変える</span></h1>
+            <p class="hero-sub">
+              中小企業の「AIを使いたい」を、動く業務ツールに変える。<br>
+              業務の整理からAIアプリ開発・社内定着まで、一緒につくります。
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">無料で相談する <span class="arw">↗</span></a>
+              <a class="btn btn-ghost" href="#services">サービスを見る</a>
+            </div>
+          </div>
+
+          <div class="hero-step" data-hs="1">
+            <p class="hh"><span style="display:block"><span class="em">“何から”</span>が</span><span style="display:block">いちばん難しい</span></p>
+            <p class="hero-sub">
+              「AIを使いたい。でも、どこに効くのか分からない」<br>
+              その整理から、一緒に始めます。専門用語は使いません。
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-ghost" href="#process">導入の流れを見る</a>
+            </div>
+          </div>
+
+          <div class="hero-step" data-hs="2">
+            <p class="hh"><span style="display:block">つくって</span><span style="display:block"><span class="em">終わりに</span>しない</span></p>
+            <p class="hero-sub">
+              御社のチームが自分で回せるところまで。<br>
+              外注し続けなくていい状態を、ゴールに設計します。
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contact">無料で相談する <span class="arw">↗</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      </div>
+    </div>
+
+  </div>
+ </div>
+</section>
+
+<!-- ===== OVERVIEW / BRIDGE ===== -->
+<!-- ピン留め：画面に留めたまま「これまで」→「これから」が入れ替わる -->
+<section class="pin pin-2" id="about">
+ <div class="pin-stage">
+  <div class="about-bg" data-bg="assets/about-manga.webp" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow">What we do</span>
+        <h2 class="title pin-title title-swap">
+          <span class="tswap on" data-for="0">これまでは、<br>“伝える”力</span>
+          <span class="tswap" data-for="1">これからは、<br>“動かす”力へ</span>
+        </h2>
+        <p class="lead">私たちの強みは、コンテンツで人を動かしてきた経験そのもの。その力を、AIの開発・導入という次のステージへ接続します。</p>
+      </div>
+      <span class="sec-num">( 01 / 全体像 )</span>
+    </div>
+
+    <div class="pin-scenes about-scenes">
+      <div class="pscene on" data-scene="0">
+        <h3 class="scene-label">● これまで — 強みになった“伝える力”</h3>
+        <div class="bcards3">
+        <a class="bcard" href="work-manga.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5v9A1.5 1.5 0 0 1 19.5 16H9l-4 4v-4H4.5A1.5 1.5 0 0 1 3 14.5z"/><path d="M7.5 8.5h9M7.5 11.5h5"/></svg></span><div class="k">CONTENT</div><span class="bcard-arw">↗</span></div><h4>AI漫画プロデュース</h4><p>難しいことを、伝わる物語に。人を動かす表現の出発点。</p></a>
+        <a class="bcard" href="work-book.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v18H5.5A1.5 1.5 0 0 1 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H13v18h5.5a1.5 1.5 0 0 0 1.5-1.5z"/><path d="M11 3v18"/></svg></span><div class="k">PUBLISHING</div><span class="bcard-arw">↗</span></div><h4>電子書籍出版</h4><p>知識を一冊に束ね、信頼を積み上げてきた編集の力。</p></a>
+        <a class="bcard" href="work-growth.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h3l5 4V5.5l-5 4H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a4 4 0 0 1 0 7M18.5 6a7 7 0 0 1 0 11"/></svg></span><div class="k">MARKETING</div><span class="bcard-arw">↗</span></div><h4>AI集客支援</h4><p>AIで発信を回し、人と出会い続ける運用の力。</p></a>
+        </div>
+      </div>
+
+      <div class="pscene now" data-scene="1">
+        <h3 class="scene-label">● これから — 主力になる“動かす力”</h3>
+        <div class="bcards3">
+        <a class="bcard" href="work-aidev.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6l-2 12"/></svg></span><div class="k">DEVELOPMENT</div><span class="bcard-arw">↗</span></div><h4>AIアプリ開発・提供</h4><p>その力を、業務そのものを動かすAIアプリへ。</p></a>
+        <a class="bcard" href="work-aisupport.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 3.5 10.9c-.5.4-.7.8-.7 1.3v.3H9.2v-.3c0-.5-.2-.9-.7-1.3A6 6 0 0 1 12 3Z"/><path d="M9.5 19h5M10.5 21.5h3"/></svg></span><div class="k">CONSULTING</div><span class="bcard-arw">↗</span></div><h4>AI導入サポート</h4><p>AIが初めての企業に、最初の一歩から並走する。</p></a>
+        <a class="bcard" href="work-enablement.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6.5 19a5.5 5.5 0 0 1 11 0"/><path d="M19.5 9.2l.9.4M19.5 6.8l.9-.4M22 8h-1M19 5.5l.5.9M19 10.5l.5-.9"/></svg></span><div class="k">ENABLEMENT</div><span class="bcard-arw">↗</span></div><h4>社内活用・内製化</h4><p>外注で終わらせず、自走できる組織まで導く。</p></a>
         </div>
       </div>
     </div>
 
-    <div class="hero-marquee reveal-up d6">
-      <div class="track">
-        <span>AI漫画プロデュース <b>◆</b> 電子書籍出版 <b>◆</b> AI集客支援 <b>◆</b> AIアプリ開発 <b>◆</b> AI導入サポート <b>◆</b> 内製化支援 <b>◆</b></span>
-        <span aria-hidden="true">AI漫画プロデュース <b>◆</b> 電子書籍出版 <b>◆</b> AI集客支援 <b>◆</b> AIアプリ開発 <b>◆</b> AI導入サポート <b>◆</b> 内製化支援 <b>◆</b></span>
-      </div>
-    </div>
+    <div class="pin-dots" aria-hidden="true"><span class="on"></span><span></span></div>
   </div>
+ </div>
 </section>
 
-<!-- ===== OVERVIEW / BRIDGE ===== -->
-<section class="sec" id="about">
+<!-- ===== RESULTS / 導入効果 ===== -->
+<!-- ピン留め：画面に留めたまま、導入効果の数字が1つずつ入れ替わる。
+     数値は国内の公開導入事例に基づく代表値（下の res-note に出典の性格を明記） -->
+<section class="pin pin-3 tone-dark" id="results">
+ <div class="pin-stage">
   <div class="wrap">
     <div class="sec-head">
       <div class="left">
-        <span class="eyebrow io">What we do</span>
-        <h2 class="title io s2">“伝える”から<br>“動かす”へ</h2>
-        <p class="lead io s3">私たちの強みは、コンテンツで人を動かしてきた経験そのもの。その力を、AIの開発・導入という次のステージへ接続します。</p>
+        <span class="eyebrow">Result</span>
+        <h2 class="title pin-title">導入で、<br>ここまで変わる</h2>
+        <p class="lead">生成AIの効果は、もう「未知数」ではありません。国内の導入現場で繰り返し確認されている変化を、御社の業務で再現するのが私たちの仕事です。</p>
       </div>
-      <span class="sec-num io s3">( 01 / 全体像 )</span>
+      <span class="sec-num">( 02 / 導入効果 )</span>
     </div>
 
-    <div class="bridge">
-      <div class="bridge-col io">
-        <h3>● これまで — 伝える力</h3>
-        <a class="bcard" href="work-manga.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5v9A1.5 1.5 0 0 1 19.5 16H9l-4 4v-4H4.5A1.5 1.5 0 0 1 3 14.5z"/><path d="M7.5 8.5h9M7.5 11.5h5"/></svg></span><div class="k">CONTENT</div><span class="bcard-arw">↗</span></div><h4>AI漫画プロデュース</h4><p>難しいことを、伝わる物語に。人を動かす表現の出発点。</p></a>
-        <a class="bcard" href="work-book.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H11v18H5.5A1.5 1.5 0 0 1 4 19.5z"/><path d="M20 4.5A1.5 1.5 0 0 0 18.5 3H13v18h5.5a1.5 1.5 0 0 0 1.5-1.5z"/><path d="M11 3v18"/></svg></span><div class="k">PUBLISHING</div><span class="bcard-arw">↗</span></div><h4>電子書籍出版</h4><p>知識を一冊に束ね、信頼を積み上げてきた編集の力。</p></a>
-        <a class="bcard" href="work-growth.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h3l5 4V5.5l-5 4H4a1 1 0 0 0-1 1z"/><path d="M16 8.5a4 4 0 0 1 0 7M18.5 6a7 7 0 0 1 0 11"/></svg></span><div class="k">MARKETING</div><span class="bcard-arw">↗</span></div><h4>AI集客支援</h4><p>AIで発信を回し、人と出会い続ける運用の力。</p></a>
+    <div class="pin-scenes res-scenes">
+      <div class="pscene on" data-scene="0">
+        <div class="res-sc">
+          <div class="res-num"><span class="dn">▲</span><em data-count="70">70</em><small>%</small></div>
+          <div class="res-body">
+            <div class="res-k">Documents</div>
+            <h3>議事録・報告書づくりが、<br>1時間 → 18分に</h3>
+            <p>会議の録音から下書きまでをAIが担当し、人は最終チェックだけ。メールや文書のドラフトも約6割短くなるのが導入現場の相場です。</p>
+            <div class="ba" data-before="60" data-after="18" data-unit="分">
+              <div class="ba-head"><span class="ba-label">議事録・報告書1件あたり</span><span class="ba-now"><b class="ba-val">60</b>分<em class="ba-cut"></em></span></div>
+              <div class="ba-bar">
+                <i></i>
+                <input type="range" min="0" max="100" value="100" step="1"
+                       data-stop="30"
+                       aria-label="議事録・報告書1件あたり：つまみを左に引くとAI導入後の値になります" />
+                <span class="ba-knob"></span>
+              </div>
+              <div class="ba-ticks"><span class="t-after" style="left:30%">AI導入後</span><span class="t-before">AI導入前</span></div>
+              <p class="ba-note">つまみを左に引くと、AIで削れる分が見られます</p>
+            </div>
+          </div>
+        </div>
       </div>
+      <div class="pscene" data-scene="1">
+        <div class="res-sc">
+          <div class="res-num"><span class="dn">▲</span><em data-count="80">80</em><small>%</small></div>
+          <div class="res-body">
+            <div class="res-k">Contents</div>
+            <h3>SNS投稿・コンテンツ制作の<br>工数が5分の1に</h3>
+            <p>投稿文・記事・販促物の制作をAIで量産体制に。この領域は私たち自身が漫画・書籍・SNS運用で毎日実践している、いちばん得意な変化です。</p>
+            <div class="ba" data-before="100" data-after="20" data-unit="%">
+              <div class="ba-head"><span class="ba-label">制作工数（導入前を100として）</span><span class="ba-now"><b class="ba-val">100</b>%<em class="ba-cut"></em></span></div>
+              <div class="ba-bar">
+                <i></i>
+                <input type="range" min="0" max="100" value="100" step="1"
+                       data-stop="20"
+                       aria-label="制作工数（導入前を100として）：つまみを左に引くとAI導入後の値になります" />
+                <span class="ba-knob"></span>
+              </div>
+              <div class="ba-ticks"><span class="t-after" style="left:20%">AI導入後</span><span class="t-before">AI導入前</span></div>
+              <p class="ba-note">発信の量は落とさないまま、工数だけを下げます</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pscene" data-scene="2">
+        <div class="res-sc">
+          <div class="res-num"><span class="dn">▲</span><em data-count="30">30</em><small>%〜</small></div>
+          <div class="res-body">
+            <div class="res-k">Inquiry</div>
+            <h3>問い合わせ対応を減らし、<br>「探す時間」をほぼゼロに</h3>
+            <p>よくある質問はAIが先に答え、担当者は例外だけに集中。導入3ヶ月で3割の効率化、件数が半減した現場もあります。社内資料を探す1日1時間も取り戻せます。</p>
+            <div class="ba" data-before="100" data-after="70" data-unit="%">
+              <div class="ba-head"><span class="ba-label">問い合わせ件数（導入前を100として）</span><span class="ba-now"><b class="ba-val">100</b>%<em class="ba-cut"></em></span></div>
+              <div class="ba-bar">
+                <i></i>
+                <input type="range" min="0" max="100" value="100" step="1"
+                       data-stop="70"
+                       aria-label="問い合わせ件数（導入前を100として）：つまみを左に引くとAI導入後の値になります" />
+                <span class="ba-knob"></span>
+              </div>
+              <div class="ba-ticks"><span class="t-after" style="left:70%">AI導入後</span><span class="t-before">AI導入前</span></div>
+              <p class="ba-note">3ヶ月での変化。件数半減の事例もあります</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <div class="bridge-arrow io s2">
-        <div class="line"></div>
-        <div class="ic">→</div>
-        <small>BRIDGE</small>
-        <div class="line"></div>
-      </div>
-
-      <div class="bridge-col now io s3">
-        <h3>● これから — 動かす力</h3>
-        <a class="bcard" href="work-aidev.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6l-2 12"/></svg></span><div class="k">DEVELOPMENT</div><span class="bcard-arw">↗</span></div><h4>AIアプリ開発・提供</h4><p>その力を、業務そのものを動かすAIアプリへ。</p></a>
-        <a class="bcard" href="work-aisupport.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 1 3.5 10.9c-.5.4-.7.8-.7 1.3v.3H9.2v-.3c0-.5-.2-.9-.7-1.3A6 6 0 0 1 12 3Z"/><path d="M9.5 19h5M10.5 21.5h3"/></svg></span><div class="k">CONSULTING</div><span class="bcard-arw">↗</span></div><h4>AI導入サポート</h4><p>AIが初めての企業に、最初の一歩から並走する。</p></a>
-        <a class="bcard" href="work-enablement.html"><div class="bcard-top"><span class="ic-chip"><svg class="svg-ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6.5 19a5.5 5.5 0 0 1 11 0"/><path d="M19.5 9.2l.9.4M19.5 6.8l.9-.4M22 8h-1M19 5.5l.5.9M19 10.5l.5-.9"/></svg></span><div class="k">ENABLEMENT</div><span class="bcard-arw">↗</span></div><h4>社内活用・内製化</h4><p>外注で終わらせず、自走できる組織まで導く。</p></a>
-      </div>
+    <div class="pin-foot">
+      <div class="pin-dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      <p class="res-note">※数値は当社の実績ではなく、国内で公開されている導入事例・調査に基づく代表値です（文書70%・制作80%: <a href="https://0120.co.jp/blog/ai-training-36/" target="_blank" rel="noopener">生成AI導入事例集</a>／問い合わせ30%: <a href="https://promo.digital.ricoh.com/chatbot/column/detail24/" target="_blank" rel="noopener">RICOH導入事例</a>／件数半減: <a href="https://officebot.jp/columns/use-cases/case-internal-industry/" target="_blank" rel="noopener">OfficeBot事例</a>）。効果は業務内容・運用体制により変わります。御社の場合の見込みは、無料相談で具体的にお出しします。</p>
     </div>
   </div>
+ </div>
 </section>
+
+<!-- ============================================================
+     試算 — 自社の診断ツールのミニ版。
+     「70%削減」と言い切った直後に、御社ならいくらかを自分で動かして確かめてもらう。
+     計算式と削減率の根拠は 無料AI診断/01_診断ロジック.md と同じ。
+     ============================================================ -->
+<section class="sec" id="estimate">
+ <div class="wrap">
+  <div class="sec-head">
+   <div class="left">
+    <span class="eyebrow">Estimate</span>
+    <h2 class="title">では、御社だと<br>いくらになるか</h2>
+    <p class="lead">いちばんご相談の多い「議事録・報告書づくり」で試算します。3つのつまみを御社の実情に合わせて動かしてください。</p>
+   </div>
+   <span class="sec-num">( 03 / 試算 )</span>
+  </div>
+
+  <div class="est io">
+   <div class="est-form">
+    <label class="est-f">
+     <span class="est-row"><span class="est-k">月につくる議事録・報告書の数</span>
+      <span class="est-v"><b data-out="n">20</b>件</span></span>
+     <input type="range" id="est-n" min="1" max="100" value="20" step="1"
+            aria-label="月につくる議事録・報告書の数（件）" />
+    </label>
+    <label class="est-f">
+     <span class="est-row"><span class="est-k">1件にいまかかっている時間</span>
+      <span class="est-v"><b data-out="m">60</b>分</span></span>
+     <input type="range" id="est-m" min="10" max="180" value="60" step="5"
+            aria-label="議事録・報告書1件にいまかかっている時間（分）" />
+    </label>
+    <label class="est-f">
+     <span class="est-row"><span class="est-k">その作業をする社員の時給</span>
+      <span class="est-v"><b data-out="w">2,500</b>円</span></span>
+     <input type="range" id="est-w" min="1200" max="6000" value="2500" step="100"
+            aria-label="その作業をする社員の想定時給（円）" />
+    </label>
+   </div>
+
+   <div class="est-out tone-dark">
+    <p class="est-cur">この作業に いま使っている時間 <b data-out="cur">240</b> 時間/年</p>
+    <div class="est-main">
+     <span class="est-k">AIで減らせる見込み</span>
+     <div class="est-nums">
+      <span class="est-big"><b data-out="h">168</b><small>時間/年</small></span>
+      <span class="est-big"><b data-out="y">42</b><small>万円/年</small></span>
+     </div>
+    </div>
+    <a class="btn btn-primary est-cta" href="#contact">この試算をもとに相談する <span class="arw">↗</span></a>
+   </div>
+  </div>
+
+  <p class="est-note">
+   ※ 削減率70%で計算した概算です（当サイト「導入効果」と同じ値。
+   <a href="https://0120.co.jp/blog/ai-training-36/" target="_blank" rel="noopener">生成AI導入事例集</a>
+   ほかの公開事例に基づく控えめな値を使っています）。金額は「削減時間 × 想定時給」の理論値で、
+   <b>空いた時間を売上につながる仕事に振り向けて、はじめて効果になります</b>。
+   業務は議事録・報告書づくりだけを対象にした簡易版です。
+   全業務を対象にした<a href="https://ai-shindan-3rs.pages.dev/" target="_blank" rel="noopener">無料のAI業務診断ツール</a>、
+   または無料相談で、御社の実情に合わせた見込みを個別にお出しします。
+  </p>
+ </div>
+</section>
+
+
+<!-- ===== BAND（取り扱い領域・スクロールした分だけ流れる） ===== -->
+<div class="band" aria-hidden="true">
+  <div class="band-track" id="band">
+    <span>AI漫画プロデュース <b>◆</b> 電子書籍出版 <b>◆</b> AI集客支援 <b>◆</b> AIアプリ開発 <b>◆</b> AI導入サポート <b>◆</b> 内製化支援 <b>◆</b></span>
+    <span>AI漫画プロデュース <b>◆</b> 電子書籍出版 <b>◆</b> AI集客支援 <b>◆</b> AIアプリ開発 <b>◆</b> AI導入サポート <b>◆</b> 内製化支援 <b>◆</b></span>
+  </div>
+</div>
 
 <!-- ===== TRACK RECORD ===== -->
-<section class="sec" id="record">
+<!-- ピン留め：画面に留めたまま、実績3件が1件ずつ見開きで入れ替わる -->
+<section class="pin pin-3" id="record">
+ <div class="pin-stage">
   <div class="wrap">
     <div class="sec-head">
       <div class="left">
-        <span class="eyebrow io">Track record</span>
-        <h2 class="title io s2">実績が<br>信頼の土台</h2>
+        <span class="eyebrow">Case studies</span>
+        <h2 class="title pin-title">実際の<br>ご依頼から</h2>
       </div>
-      <p class="lead io s3" style="margin-bottom:6px">新しい挑戦は、ゼロからではありません。これまで積み上げてきた制作と運用の実績が、AI導入支援の確かな裏付けになります。</p>
+      <p class="lead" style="margin-bottom:6px">実在の案件だけをご紹介します。どんな相談から始まり、何をつくり、いまどう動いているか。この形式でお話しできる実績です。</p>
     </div>
 
-    <div class="rec-grid io">
-      <div class="rec">
-        <div class="rec-photo" style="background-image:url('assets/rec-manga.jpg')"></div>
-        <div class="no">A — 01</div>
-        <h3>AI漫画を活用した<br>プロデュース</h3>
-        <p>商品・サービスの魅力を漫画で翻訳し、伝わるコンテンツへ。AIを使い、スピードと量を両立させた制作を実現してきました。</p>
-        <div class="tags"><span>企画</span><span>作画</span><span>シナリオ</span><span>AI活用</span></div>
+    <div class="pin-scenes rec-scenes">
+      <div class="pscene on" data-scene="0">
+        <div class="rec-sc">
+          <div class="rec-sc-photo" data-bg="assets/hero3.webp" role="img" aria-label="開発作業のイメージ"></div>
+          <div class="rec-sc-body">
+            <div class="no">CASE 01 — 業務委託・納品完了</div>
+            <h3>AI診断ツールを、<br>依頼から納品まで一括で</h3>
+            <div class="case-rows">
+              <div class="cr"><b>ご相談</b><span>リード獲得につながるAIツールを、自社でも持ちたい。</span></div>
+              <div class="cr"><b>支援</b><span>AI業務診断ツールの複製を開発。デプロイ・URL納品に加え、テンプレート版・個別予約リンク版の派生も納品。</span></div>
+              <div class="cr"><b>いま</b><span>納品完了。クライアントのリード獲得ツールとして利用可能な状態です。</span></div>
+            </div>
+            <div class="tags"><span>受託開発</span><span>Webアプリ</span><span>デプロイまで</span></div>
+          </div>
+        </div>
       </div>
-      <div class="rec">
-        <div class="rec-photo" style="background-image:url('assets/rec-book.jpg')"></div>
-        <div class="no">A — 02</div>
-        <h3>電子書籍の<br>出版サポート</h3>
-        <p>著者の知見を一冊の本に。企画・構成・原稿チェックまで、出版を一気通貫で支援。ブランド資産としての書籍を生み出します。</p>
-        <div class="tags"><span>企画</span><span>編集</span><span>原稿チェック</span><span>出版</span></div>
+      <div class="pscene" data-scene="1">
+        <div class="rec-sc">
+          <div class="rec-sc-photo" data-bg="assets/rec-growth.webp" role="img" aria-label="SNS運用のイメージ"></div>
+          <div class="rec-sc-body">
+            <div class="no">CASE 02 — 受託・継続稼働中</div>
+            <h3>SNS発信を、<br>止まらない仕組みに</h3>
+            <div class="case-rows">
+              <div class="cr"><b>ご相談</b><span>SNSで発信を続けたいが、日々の業務で手が回らない。</span></div>
+              <div class="cr"><b>支援</b><span>X・Threadsへ自動投稿するWebアプリを構築し、運用まで継続支援。</span></div>
+              <div class="cr"><b>いま</b><span>クライアントの運用で継続稼働中。発信が止まらない状態を維持しています。</span></div>
+            </div>
+            <div class="tags"><span>業務自動化</span><span>SNS運用</span><span>継続支援</span></div>
+          </div>
+        </div>
       </div>
-      <div class="rec">
-        <div class="rec-photo" style="background-image:url('assets/rec-growth.jpg')"></div>
-        <div class="no">A — 03</div>
-        <h3>AIを活用した<br>集客サポート</h3>
-        <p>AIでコンテンツ制作を効率化し、SNS・記事・広告まで一貫運用。継続的に見込み客と出会う仕組みづくりを支援します。</p>
-        <div class="tags"><span>SNS運用</span><span>コンテンツ</span><span>広告</span><span>自動化</span></div>
+      <div class="pscene" data-scene="2">
+        <div class="rec-sc">
+          <div class="rec-sc-photo" data-bg="assets/rec-manga.webp" role="img" aria-label="執筆・コンテンツ制作のイメージ"></div>
+          <div class="rec-sc-body">
+            <div class="no">CASE 03 — コンテンツ制作・進行中</div>
+            <h3>専門知識を、<br>伝わるコンテンツに</h3>
+            <div class="case-rows">
+              <div class="cr"><b>ご相談</b><span>専門知識を、読まれる一冊・伝わる形にしたい。</span></div>
+              <div class="cr"><b>支援</b><span>電子書籍の原稿チェック・修正対応で出版を伴走。AI漫画のプロデュースも自社漫画で実践。</span></div>
+              <div class="cr"><b>いま</b><span>出版へ向けて制作進行中。noteでは自社発信30本超を継続しています。</span></div>
+            </div>
+            <div class="tags"><span>電子書籍</span><span>AI漫画</span><span>編集</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="rec-cta io">
-      <a href="works.html">実績・制作事例をもっと見る <span class="arw">↗</span></a>
+    <div class="pin-foot">
+      <div class="pin-dots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      <div class="rec-cta" style="margin-top:0">
+        <a href="works.html">実績・制作事例をもっと見る <span class="arw">↗</span></a>
+      </div>
     </div>
 
     <!-- 実績数値スタッツ：立ち上げ期のため非表示。実データが貯まったら下記を有効化する
@@ -818,20 +1765,105 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
     </div>
     -->
   </div>
+ </div>
+</section>
+
+<!-- ===== SHOWCASE / 実物 ===== -->
+<!-- クライアント名・未確定の数字は出さない（実績まとめ.mdの確定情報のみ） -->
+<section class="sec tone-dark" id="showcase">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">Showcase</span>
+        <h2 class="title io s2">つくったもの、<br>お見せできます</h2>
+        <p class="lead io s3">実際に稼働しているツールと、実際の制作物。「AIでこんなことができる」を、言葉ではなく現物でご覧ください。</p>
+      </div>
+      <span class="sec-num io s3">( 04 / 実物 )</span>
+    </div>
+
+    <div class="show-grid">
+      <figure class="show-card horiz io" data-tilt>
+        <div class="show-img"><img src="assets/showcase-shindan.webp" alt="無料AI業務診断ツールの実際の画面。業種と業務を選ぶとAIで削減できる時間と金額を診断する" loading="lazy" width="1000" height="625"></div>
+        <figcaption>
+          <div class="show-k"><span class="live"></span>Web app・稼働中</div>
+          <h3>無料AI業務診断ツール</h3>
+          <p>いまの業務を選ぶだけで、AIで削減できる時間とお金を金額で診断。自社で開発し、本番稼働中です。同ツールの複製を業務委託で納品した実績もあります。</p>
+          <a class="show-try" href="https://ai-shindan-3rs.pages.dev/" target="_blank" rel="noopener">実際に触ってみる <span class="arw">↗</span></a>
+        </figcaption>
+      </figure>
+
+      <figure class="show-card horiz manga io s2" data-tilt>
+        <div class="show-img manga-stack">
+          <img src="assets/showcase-manga-1.webp" alt="自社制作AI漫画の1段目。代表がAIアプリ開発を紹介するコマ" loading="lazy" width="800" height="384">
+          <img src="assets/showcase-manga-2.webp" alt="自社制作AI漫画の2段目。AI導入サポートをホワイトボードで説明するコマ" loading="lazy" width="800" height="334">
+          <img src="assets/showcase-manga-3.webp" alt="自社制作AI漫画の3段目。内製化支援と握手のコマ" loading="lazy" width="800" height="448">
+        </div>
+        <figcaption>
+          <div class="show-k">AI Manga・実物</div>
+          <h3>AI漫画（名刺の裏面に採用）</h3>
+          <p>企画・シナリオ・作画までAIとの協働で制作した自社漫画の全編。「難しいサービスを漫画で伝える」の実例です。</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="show-minis">
+      <div class="show-mini io">
+        <div class="show-k"><span class="live"></span>SaaS・稼働中</div>
+        <h3>マガスタ</h3>
+        <p>AIワンクリック漫画生成ツール。Web版が本番稼働中で、ライセンス認証まで自社開発。</p>
+      </div>
+      <div class="show-mini io s2">
+        <div class="show-k"><span class="live"></span>運用中</div>
+        <h3>X・Threads自動投稿ツール</h3>
+        <p>SNS発信を自動で回すWebアプリ。クライアントの運用で継続稼働中です。</p>
+      </div>
+      <div class="show-mini io s3">
+        <div class="show-k">Contents</div>
+        <h3>電子書籍・note発信</h3>
+        <p>出版サポートの進行案件に加え、自社でもnote記事30本超を発信。作り手として毎日AIを使っています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VOICES / ご相談の入り口 ===== -->
+<!-- 顧客の証言ではなく「実際に多い相談テーマ」。架空の声は作らない方針 -->
+<section class="sec" id="voices">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="left">
+        <span class="eyebrow io">First contact</span>
+        <h2 class="title io s2">ご相談は、<br>こんな声から</h2>
+        <p class="lead io s3">きれいな計画は要りません。実際のご相談は、ほとんどがこんな一言から始まっています。</p>
+      </div>
+      <span class="sec-num io s3">( 05 / ご相談 )</span>
+    </div>
+
+    <div class="voice-grid">
+      <div class="voice io" data-tilt><p>どの業務にAIを使えばいいのか、そこから分からない。</p></div>
+      <div class="voice io s2" data-tilt><p>ChatGPTは触ってみたけれど、仕事でどう活かせばいいのか見えない。</p></div>
+      <div class="voice io s3" data-tilt><p>社内にITに詳しい人がいない。それでも導入できますか？</p></div>
+    </div>
+
+    <p class="voice-note io">国内の調査でも、AI導入が進まない理由の第1位は「利用シーンがイメージできない」（41.9%・<a href="https://aidd.jp/blog/knowledge/generative-ai-consultation/" target="_blank" rel="noopener">出典</a>）。だから私たちは、ツールの話ではなく「どの作業がつらいか」のヒアリングから始めます。</p>
+  </div>
 </section>
 
 <!-- ===== NEW SERVICES ===== -->
-<section class="sec" id="services">
+<!-- ピン留め：画面に留めたまま、2つの柱が1つずつ入れ替わる -->
+<section class="pin pin-2" id="services">
+ <div class="pin-stage">
   <div class="wrap">
-    <div class="svc-wrap dark io">
-      <div class="svc-bg"></div>
+    <div class="svc-wrap dark">
+      <div class="svc-bg" data-bg="assets/services-bg.webp"></div>
       <div class="svc-head">
-        <span class="eyebrow">New services</span>
-        <h2 class="title">これからの<br>2つの柱</h2>
-        <p class="lead">「つくる」と「使えるようにする」。AIを事業の力に変えるための、2つのアプローチをご用意しています。</p>
+        <span class="eyebrow">Main services</span>
+        <h2 class="title">主力は、<br>この2つ</h2>
+        <p class="lead">当社の主力は「AIアプリ開発」と「AI導入サポート」。漫画・出版・集客で培った“伝える力”は、この2つを支える強みです。</p>
       </div>
 
-      <div class="svc-list">
+      <div class="pin-scenes svc-scenes">
+        <div class="pscene on" data-scene="0">
         <div class="svc">
           <div class="svc-lead">
             <div class="idx">( 01 )</div>
@@ -844,7 +1876,9 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
           </div>
           <div class="go">↗</div>
         </div>
+        </div>
 
+        <div class="pscene" data-scene="1">
         <div class="svc">
           <div class="svc-lead">
             <div class="idx">( 02 )</div>
@@ -857,9 +1891,13 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
           </div>
           <div class="go">↗</div>
         </div>
+        </div>
       </div>
+
+      <div class="pin-dots" aria-hidden="true"><span class="on"></span><span></span></div>
     </div>
   </div>
+ </div>
 </section>
 
 <!-- ===== PRICING ===== -->
@@ -871,7 +1909,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <h2 class="title io s2">ご予算に合わせて<br>無理なく始める</h2>
         <p class="lead io s3">「まず試したい」から「本格的に開発したい」まで。事業フェーズに合わせた3つの入り口をご用意しています。料金は内容に応じた個別見積もりです。</p>
       </div>
-      <span class="sec-num io s3">( 04 / 料金 )</span>
+      <span class="sec-num io s3">( 06 / 料金 )</span>
     </div>
 
     <div class="price-grid io">
@@ -925,22 +1963,62 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 </section>
 
 <!-- ===== PROCESS ===== -->
-<section class="sec" id="process">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="left">
-        <span class="eyebrow io">How it works</span>
-        <h2 class="title io s2">導入は4ステップ</h2>
-        <p class="lead io s3">専門知識がなくても大丈夫。現状をうかがうところから、運用が回るところまで、一つずつ進めます。</p>
+<!-- ピン留め：画面に留めたまま、STEP 01→04 が1つずつ入れ替わる -->
+<section class="pin tone-dark" id="process">
+  <div class="pin-stage">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="left">
+          <span class="eyebrow">How it works</span>
+          <h2 class="title pin-title">導入は4ステップ</h2>
+          <p class="lead">専門知識がなくても大丈夫。現状をうかがうところから、運用が回るところまで、一つずつ進めます。</p>
+        </div>
+        <span class="sec-num">( 07 / 流れ )</span>
       </div>
-      <span class="sec-num io s3">( 05 / 流れ )</span>
-    </div>
 
-    <div class="steps">
-      <div class="step io"><span class="big">01</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v8a1.5 1.5 0 0 1-1.5 1.5H10l-4 3.5V15H5.5A1.5 1.5 0 0 1 4 13.5z"/><path d="M8 8.5h8M8 11h5"/></svg></span><div class="num">STEP 01</div><h3>ヒアリング</h3><p>事業内容・課題・「やってみたいこと」をお聞きします。AI未経験でも問題ありません。</p></div>
-      <div class="step io s2"><span class="big">02</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M8 4h8a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M10 3.5h4a1 1 0 0 1 1 1V6H9V4.5a1 1 0 0 1 1-1z"/><path d="M9.5 11l1.5 1.5L14 9.5"/></svg></span><div class="num">STEP 02</div><h3>課題設計・ご提案</h3><p>どこにAIを効かせるかを整理し、最適な進め方とプランをご提案します。</p></div>
-      <div class="step io s3"><span class="big">03</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6.5l-2 11"/></svg></span><div class="num">STEP 03</div><h3>開発・導入</h3><p>アプリ開発やツール導入を実行。小さく試し、効果を確かめながら進めます。</p></div>
-      <div class="step io s4"><span class="big">04</span><span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4.5L4 8M4 13a8 8 0 0 0 14 4.5L20 16"/><path d="M4 4v4h4M20 20v-4h-4"/></svg></span><div class="num">STEP 04</div><h3>運用・内製化</h3><p>使いこなせる状態へ。社内で回せるよう、定着までしっかり伴走します。</p></div>
+      <div class="pin-steps">
+        <div class="pstep on" data-scene="0">
+          <span class="pstep-num">01</span>
+          <div class="pstep-body">
+            <span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v8a1.5 1.5 0 0 1-1.5 1.5H10l-4 3.5V15H5.5A1.5 1.5 0 0 1 4 13.5z"/><path d="M8 8.5h8M8 11h5"/></svg></span>
+            <div class="num">STEP 01</div>
+            <h3>ヒアリング</h3>
+            <p>事業内容・課題・「やってみたいこと」をお聞きします。AI未経験でも問題ありません。</p>
+          </div>
+        </div>
+
+        <div class="pstep" data-scene="1">
+          <span class="pstep-num">02</span>
+          <div class="pstep-body">
+            <span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M8 4h8a1 1 0 0 1 1 1v15a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M10 3.5h4a1 1 0 0 1 1 1V6H9V4.5a1 1 0 0 1 1-1z"/><path d="M9.5 11l1.5 1.5L14 9.5"/></svg></span>
+            <div class="num">STEP 02</div>
+            <h3>課題設計・ご提案</h3>
+            <p>どこにAIを効かせるかを整理し、最適な進め方とプランをご提案します。</p>
+          </div>
+        </div>
+
+        <div class="pstep" data-scene="2">
+          <span class="pstep-num">03</span>
+          <div class="pstep-body">
+            <span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M9 8.5 5.5 12 9 15.5M15 8.5 18.5 12 15 15.5M13 6.5l-2 11"/></svg></span>
+            <div class="num">STEP 03</div>
+            <h3>開発・導入</h3>
+            <p>アプリ開発やツール導入を実行。小さく試し、効果を確かめながら進めます。</p>
+          </div>
+        </div>
+
+        <div class="pstep" data-scene="3">
+          <span class="pstep-num">04</span>
+          <div class="pstep-body">
+            <span class="step-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4.5L4 8M4 13a8 8 0 0 0 14 4.5L20 16"/><path d="M4 4v4h4M20 20v-4h-4"/></svg></span>
+            <div class="num">STEP 04</div>
+            <h3>運用・内製化</h3>
+            <p>使いこなせる状態へ。社内で回せるよう、定着までしっかり伴走します。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pin-dots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span></div>
     </div>
   </div>
 </section>
@@ -953,10 +2031,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <span class="eyebrow io">Why us</span>
         <h2 class="title io s2">選ばれる<br>4つの理由</h2>
       </div>
-      <span class="sec-num io s3">( 06 / 強み )</span>
+      <span class="sec-num io s3">( 08 / 強み )</span>
     </div>
 
-    <div class="why-band io" style="background-image:url('assets/why-band.jpg')" role="img" aria-label="明るいオフィスでAI活用を支援する様子"></div>
+    <div class="why-band io" data-bg="assets/why-band.webp" role="img" aria-label="明るいオフィスでAI活用を支援する様子"></div>
 
     <div class="why-grid io">
       <div class="why"><div class="why-head"><span class="why-ic"><svg class="svg-ic" viewBox="0 0 24 24"><path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6z"/><path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8z"/></svg></span><div class="mk">01</div></div><div><h3>“伝える力” × AI技術</h3><p>漫画・出版で培った「人を動かす表現力」と、AIの実装力。両方を持つからこそ、現場で本当に使われるものを作れます。</p></div></div>
@@ -975,7 +2053,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <span class="eyebrow io">FAQ</span>
         <h2 class="title io s2">よくある<br>ご質問</h2>
       </div>
-      <span class="sec-num io s3">( 07 / 疑問 )</span>
+      <span class="sec-num io s3">( 09 / 疑問 )</span>
     </div>
 
     <div class="faq-list io">
@@ -1016,12 +2094,22 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
         <h2 class="title io s2">事業者情報</h2>
         <p class="lead io s3">「架け橋 Kakehashi」は、伝える力とAI技術で企業のAI活用を伴走する個人事業です。</p>
       </div>
-      <span class="sec-num io s3">( 08 / 概要 )</span>
+      <span class="sec-num io s3">( 10 / 概要 )</span>
+    </div>
+
+    <div class="profile io">
+      <img class="profile-ph" src="assets/portrait.webp" alt="代表 原祐介のポートレート" width="236" height="296" loading="lazy">
+      <div class="profile-body">
+        <div class="show-k">Representative</div>
+        <h3>原 祐介</h3>
+        <div class="role">AI導入プロデューサー</div>
+        <p>漫画と出版で「難しいことを、伝わるかたちに変える」仕事を続けてきました。AIアプリの開発も、AIの社内定着も、最後に効くのは技術ではなく"伝わること"。作り手として毎日AIを使っている私が、御社とAIの架け橋になります。</p>
+      </div>
     </div>
 
     <div class="company io">
       <div class="company-card">
-        <div class="company-card-bg" style="background-image:url('assets/company-bg.jpg')"></div>
+        <div class="company-card-bg" data-bg="assets/company-bg.webp"></div>
         <div class="seal">架</div>
         <div class="cname">架け橋 Kakehashi<small>Kakehashi ・ AI dev</small></div>
         <p>コンテンツ制作からAI開発までを一気通貫で。小回りの利く個人事業だからこそ、御社に深く伴走します。</p>
@@ -1029,6 +2117,7 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 
       <div class="company-table">
         <dl><dt>屋号</dt><dd>架け橋（Kakehashi）</dd></dl>
+        <dl><dt>代表</dt><dd>原 祐介</dd></dl>
         <dl><dt>事業形態</dt><dd>個人事業</dd></dl>
         <dl><dt>事業内容</dt><dd>AIアプリ開発・提供／AI導入サポート／AI漫画プロデュース／電子書籍出版／AI集客支援</dd></dl>
         <dl><dt>対応エリア</dt><dd>全国（オンライン対応）</dd></dl>
@@ -1045,8 +2134,8 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 <!-- ===== CTA / CONTACT ===== -->
 <section class="cta" id="contact">
   <div class="wrap">
-    <div class="cta-box io">
-      <div class="cta-bg"></div>
+    <div class="cta-box io tone-dark">
+      <div class="cta-bg" data-bg="assets/cta-bg.webp"></div>
       <span class="eyebrow">Contact</span>
       <h2>AIで何ができるか<br>まず<span class="em">話して</span>みませんか</h2>
       <p>「うちの業務でAIは使えるの？」という段階のご相談も歓迎です。初回のご相談は無料。下記フォームからお気軽にお問い合わせください。</p>
@@ -1132,30 +2221,465 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 </footer>
 
 <script>
-/* nav scroll state */
 const nav=document.getElementById('nav');
-addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ============================================================
+   SCROLL-DRIVEN MOTION
+   スクロール量に応じて、ヒーローの各レイヤーを別々の速さで動かす。
+   触るのは transform / opacity だけ、かつ requestAnimationFrame で
+   1フレーム1回に間引くので、スマホでも滑らかに動く。
+   ============================================================ */
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const pinEl     = document.querySelector('.hero-pin');
+const heroSteps = [...document.querySelectorAll('.hero-step')];
+const heroDots  = [...document.querySelectorAll('.hero-dots span')];
+const bar       = document.getElementById('progress');
+const par       = {};
+document.querySelectorAll('[data-par]').forEach(el=>{par[el.dataset.par]=el});
+
+let ticking=false, lastY=-1;
+function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
+
+function update(){
+  ticking=false;
+  const y=scrollY;
+  if(y===lastY) return;
+  lastY=y;
+
+  nav.classList.toggle('scrolled', y>40);
+
+  /* 読み進み具合のバー */
+  if(bar){
+    const max=document.documentElement.scrollHeight-innerHeight;
+    bar.style.transform='scaleX('+(max>0 ? Math.min(y/max,1) : 0)+')';
+  }
+
+  if(reduceMotion) return;
+
+  /* --- ヒーロー：画面に留めたまま、背景を動かして中身を入れ替える --- */
+  if(pinEl){
+    const range=pinEl.offsetHeight-innerHeight;   /* この距離だけ画面に留まる */
+    if(range>0 && y<=range+innerHeight*0.4){
+      const p=Math.max(0,Math.min(y/range,1));    /* 0 → 1 */
+
+      if(par.glow)  par.glow.style.transform  = 'translate3d(0,'+(p*150).toFixed(1)+'px,0) scale('+(1+p*0.30).toFixed(3)+')';
+      const arcT = 'translate3d('+(p*80).toFixed(1)+'px,'+(p*-170).toFixed(1)+'px,0)';
+      if(par.arc)   par.arc.style.transform   = arcT;
+      if(par.seal)  par.seal.style.transform  = arcT;   /* シールは面と一緒に動く */
+      if(par.arc2)  par.arc2.style.transform  = 'translate3d(0,'+(p*-130).toFixed(1)+'px,0)';
+      if(par.giant) par.giant.style.transform = 'translate3d('+(p*-420).toFixed(1)+'px,'+(p*60).toFixed(1)+'px,0)';
+      /* 絵はゆっくり奥へ引く。scaleを少し大きめに取って、ずらしても端が出ないようにする */
+      if(par.art)   par.art.style.transform   = 'translate3d('+(p*30).toFixed(1)+'px,0,0) scale('+(1+p*0.06).toFixed(3)+')';
+
+      /* 留まったまま、中身をスクロール量に同期させて動かす */
+      applyScenes(heroSteps, heroDots, p);
+    }
+  }
+
+  /* --- ピン留めセクション：留めたまま中身を切り替える --- */
+  updatePins(y);
+
+  /* --- 背景写真と大きな数字を、本文より遅れて動かす --- */
+  slowParallax();
+}
+
+/* ============================================================
+   PINNED SECTIONS
+   .pin ごとに「どこまで進んだか」を出し、data-scene を1つずつ表示する。
+   ヒーローと同じ考え方を、他のセクションでも使い回すための仕組み。
+   ============================================================ */
+const pins=[...document.querySelectorAll('.pin')].map(el=>({
+  el,
+  scenes:[...el.querySelectorAll('[data-scene]')],
+  dots:[...el.querySelectorAll('.pin-dots span')],
+  tswaps:[...el.querySelectorAll('.tswap')]         /* 場面に同期する見出し */
+}));
+
+function updatePins(y){
+  for(const p of pins){
+    if(!p.scenes.length) continue;
+    const top=p.el.offsetTop;
+    const h=p.el.offsetHeight;
+    if(y+innerHeight<top || y>top+h) continue;      /* 画面外は触らない */
+    const range=h-innerHeight;
+    if(range<=0) continue;
+    const prog=Math.max(0,Math.min((y-top)/range,1));
+    applyScenes(p.scenes, p.dots, prog);
+    if(p.tswaps.length){
+      const cur=Math.min(p.scenes.length-1, Math.floor(prog*p.scenes.length*0.9999));
+      p.tswaps.forEach(t=>t.classList.toggle('on', +t.dataset.for===cur));
+    }
+  }
+}
+
+/* ============================================================
+   APPLY SCENES — 重ねた場面を、スクロール量に「連続」で同期させる
+   場面ごとに区間を割り当て、その区間の中での進み具合 t（0→1）から
+   opacity / 縦移動 / 拡大率 を毎フレーム計算して書き込む。
+   段階的に切り替えるのではなく、スクロールに吸い付いて動く。
+   ============================================================ */
+const smooth = x => x<=0 ? 0 : x>=1 ? 1 : x*x*(3-2*x);   /* なめらかな 0→1 */
+
+function applyScenes(scenes, dots, prog){
+  const n=scenes.length;
+  if(!n) return;
+  const current=Math.min(n-1, Math.floor(prog*n*0.9999));
+
+  for(let i=0;i<n;i++){
+    const c=(i+0.5)/n;                 /* この場面が主役になる位置 */
+    let t=(prog-c)*n;                  /* -0.5 〜 +0.5 が自分の持ち場 */
+    if(i===0     && t<0) t=0;          /* 最初の場面は、入る前から見えている */
+    if(i===n-1   && t>0) t=0;          /* 最後の場面は、最後まで残る */
+
+    const a=Math.abs(t);
+    const op = a<=0.28 ? 1 : (a>=0.72 ? 0 : 1-smooth((a-0.28)/0.44));
+    const y  = -t*48;                  /* 進むほど上へ流れる */
+    const sc = 1-a*0.05;
+
+    const s=scenes[i];
+    s.style.opacity=op.toFixed(3);
+    s.style.transform='translate3d(0,'+y.toFixed(1)+'px,0) scale('+sc.toFixed(4)+')';
+    const shown = op>.55;
+    s.style.pointerEvents = shown ? 'auto' : 'none';
+    s.setAttribute('aria-hidden', shown ? 'false' : 'true');   /* 読み上げからも隠す */
+    s.classList.toggle('on', i===current);
+    if(i===current && op>0.9 && prog>0.005) activateScene(s);   /* 主役になった場面だけ動かす */
+  }
+  dots.forEach((d,k)=>d.classList.toggle('on', k===current));
+}
+
+/* 画面内にある要素だけ、中心からのズレに応じてずらす */
+const slowEls=[];
+[['.svc-bg',.10],['.company-card-bg',.08],['.cta-bg',.09],['.step .big',.06]]
+  .forEach(([sel,sp])=>{document.querySelectorAll(sel).forEach(el=>slowEls.push({el,sp}))});
+
+function slowParallax(){
+  const vh=innerHeight;
+  for(const {el,sp} of slowEls){
+    const r=el.getBoundingClientRect();
+    if(r.bottom<-120 || r.top>vh+120) continue;   /* 画面外は触らない */
+    const off=((r.top+r.height/2)-vh/2)*sp;
+    el.style.transform='translate3d(0,'+off.toFixed(1)+'px,0)';
+  }
+}
+
+/* 帯（#band）はCSSアニメーションで自動走行するため、JSでの計測・駆動は不要 */
+
+addEventListener('scroll', onScroll, {passive:true});
+addEventListener('resize', ()=>{lastY=-1; onScroll();}, {passive:true});
+addEventListener('load', ()=>{lastY=-1; onScroll();});
+update();
+
+/* ============================================================
+   SMOOTH SCROLL — ホイールの回転をなめらかに補間する
+   外部ライブラリは使わず、このファイル内で完結させている。
+   タッチ操作の端末と「視差効果を減らす」設定では、標準の動きのままにする。
+   ============================================================ */
+const coarsePointer = matchMedia('(pointer:coarse)').matches;
+if(!reduceMotion && !coarsePointer){
+  document.documentElement.style.scrollBehavior='auto';   /* 二重に効かせない */
+  let goal=scrollY, now=scrollY, gliding=false;
+  const maxScroll=()=>document.documentElement.scrollHeight-innerHeight;
+
+  function glide(){
+    now += (goal-now)*0.15;          /* 小さいほど長く効くが、追従は鈍る */
+    if(Math.abs(goal-now)<0.4){ now=goal; gliding=false; }
+    scrollTo(0,now);
+    if(gliding) requestAnimationFrame(glide);
+  }
+  function glideTo(v){
+    goal=Math.max(0,Math.min(v,maxScroll()));
+    if(!gliding){ gliding=true; requestAnimationFrame(glide); }
+  }
+
+  /* 介入するのは「マウスのホイール」だけに絞る。
+     トラックパッドは元から滑らかで、横スクロールや慣性も持っているため、
+     奪うと重く・遅れて感じられる。以下に当てはまるものは素通しする。 */
+  addEventListener('wheel',e=>{
+    if(e.ctrlKey) return;                       /* ピンチズーム */
+    if(e.deltaX !== 0) return;                  /* 横成分あり ＝ トラックパッド */
+    if(Math.abs(e.deltaY) < 45) return;         /* 刻みが細かい ＝ トラックパッド */
+    const t=e.target;
+    if(t && t.closest && t.closest('[data-native-scroll]')) return;  /* 中でスクロールさせたい箱 */
+    e.preventDefault();
+    glideTo(goal+e.deltaY);
+  },{passive:false});
+
+  /* ページ内リンクも同じ滑らかさでつなぐ */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href');
+      if(id.length<2) return;
+      const t=document.querySelector(id);
+      if(!t) return;
+      e.preventDefault();
+      glideTo(t.getBoundingClientRect().top+scrollY-70);
+    });
+  });
+
+  /* ホイール以外（キーボード・スクロールバー）で動いたら位置を合わせ直す */
+  addEventListener('scroll',()=>{ if(!gliding){ goal=now=scrollY; } },{passive:true});
+}
 
 /* mobile menu */
 const burger=document.getElementById('burger'),menu=document.getElementById('menu');
-burger.addEventListener('click',()=>menu.classList.toggle('open'));
+burger.setAttribute('aria-expanded','false');
+burger.setAttribute('aria-controls','menu');
+burger.addEventListener('click',()=>{
+  const open=menu.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open?'true':'false');
+});
 menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
 
-/* scroll reveal */
-const io=new IntersectionObserver((es)=>{
-  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
-document.querySelectorAll('.io').forEach(el=>io.observe(el));
+/* ============================================================
+   REVEAL — どの要素をどう出すかを、ここで一括して決める
+   [ セレクタ, 動き方, 1枚ずつずらす秒数 ]
+   遅延はセクションごとに数え直すので、下へ行くほど遅くなることはない。
+   ============================================================ */
+const RECIPES=[
+  ['.sec-head .eyebrow','left', 0  ],
+  ['.sec-head .lead',   'up',   .10],
+  ['.sec-num',          'up',   .16],
+  ['.scene-label',      'left', 0  ],
+  ['.bcard',            'rise', .10],
+  ['.rec-cta',          'up',   0  ],
+  ['.show-card',        'rise', .12],
+  ['.show-mini',        'up',   .10],
+  ['.voice',            'rise', .10],
+  ['.profile',          'rise', 0  ],
+  ['.svc-wrap',         'rise', 0  ],
+  ['.svc',              'left', .14],
+  ['.plan',             'rise', .11],
+  ['.step',             'up',   .10],
+  ['.why-band',         'clip', 0  ],
+  ['.why',              'up',   .09],
+  ['.faq-item',         'up',   .07],
+  ['.company-card',     'left', 0  ],
+  ['.company-table dl', 'up',   .06],
+  ['.cta-box',          'rise', 0  ],
+  ['.foot-brand',       'up',   0  ],
+  ['.foot-col',         'up',   .09],
+];
 
-/* FAQ accordion */
-document.querySelectorAll('.faq-item').forEach(item=>{
+/* 見出しを1文字ずつの <span> に分解する（<br> はそのまま残す） */
+function splitChars(el){
+  const walk=node=>{
+    [...node.childNodes].forEach(n=>{
+      if(n.nodeType===3){
+        const frag=document.createDocumentFragment();
+        [...n.textContent].forEach(ch=>{
+          if(ch.trim()===''){frag.appendChild(document.createTextNode(ch));return;}
+          const s=document.createElement('span');
+          s.className='split-char'; s.textContent=ch;
+          frag.appendChild(s);
+        });
+        n.replaceWith(frag);
+      }else if(n.nodeType===1 && n.tagName!=='BR'){
+        walk(n);
+      }
+    });
+  };
+  walk(el);
+  el.querySelectorAll('.split-char').forEach((s,i)=>{
+    s.style.transitionDelay=(i*0.028).toFixed(3)+'s';
+  });
+}
+
+if(!reduceMotion){
+  /* 中身を個別に出す親からは、まとめ出し用の .io を外しておく */
+  ['.price-grid','.why-grid','.faq-list','.company','.foot-grid']
+    .forEach(sel=>document.querySelectorAll(sel)
+      .forEach(el=>el.classList.remove('io','s2','s3','s4')));
+
+  document.querySelectorAll('section,footer').forEach(sec=>{
+    RECIPES.forEach(([sel,kind,step])=>{
+      sec.querySelectorAll(sel).forEach((el,i)=>{
+        el.classList.remove('io','s2','s3','s4');
+        el.dataset.in=kind;
+        if(step) el.style.transitionDelay=(i*step).toFixed(2)+'s';
+      });
+    });
+  });
+
+  document.querySelectorAll('h2.title:not(.title-swap)').forEach(h=>{   /* 入替見出しは1文字分解しない */
+    h.classList.remove('io','s2','s3','s4');
+    splitChars(h);
+  });
+}
+
+const revealIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealIO.unobserve(e.target); } });
+},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.io,[data-in],h2.title,.step-line').forEach(el=>revealIO.observe(el));
+
+/* 背景写真の遅延読み込み（2026-09-10）
+   CSSの background-image は loading="lazy" が効かず、7枚1,126KBが初回に全部落ちていた。
+   しかもその7枚はどれもファーストビューには映らない。
+   data-bg に退避して、画面に近づいてから入れる。600px手前で読み始めるので
+   実際に見えるときには表示が終わっている。 */
+const bgIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting) return;
+    const el=e.target, u=el.dataset.bg;
+    if(u){ el.style.backgroundImage='url("'+u+'")'; el.removeAttribute('data-bg'); }
+    bgIO.unobserve(el);
+  });
+},{rootMargin:'600px 0px'});
+document.querySelectorAll('[data-bg]').forEach(el=>bgIO.observe(el));
+
+/* ヒーローの絵を、読み込み直後に左からのワイプで出す */
+{
+  const art=document.querySelector('.hero-art');
+  if(art) requestAnimationFrame(()=>requestAnimationFrame(()=>art.classList.add('in')));
+}
+
+/* ============================================================
+   反応する仕掛け（2026-09-10）
+   ============================================================ */
+
+/* --- 数字を 0 から数え上げる。場面が主役になった瞬間に1回だけ --- */
+function runCount(scope){
+  scope.querySelectorAll('[data-count]').forEach(el=>{
+    if(el.dataset.done) return;
+    el.dataset.done='1';
+    const to=parseFloat(el.dataset.count);
+    if(reduceMotion){ el.textContent=to; return; }
+    const dur=1100, t0=performance.now();
+    (function step(t){
+      const q=Math.min((t-t0)/dur,1);
+      el.textContent=Math.round(to*(1-Math.pow(1-q,3)));   /* 最後にゆっくり止まる */
+      if(q<1) requestAnimationFrame(step);
+    })(t0);
+  });
+}
+
+/* --- 触れる BEFORE→AFTER --- */
+const BAS=new Map();
+document.querySelectorAll('.ba').forEach(ba=>{
+  const before=+ba.dataset.before, after=+ba.dataset.after;
+  const val=ba.querySelector('.ba-val'), fill=ba.querySelector('.ba-bar i');
+  const rng=ba.querySelector('input[type=range]'), knob=ba.querySelector('.ba-knob');
+  const tAfter=ba.querySelector('.t-after'), tBefore=ba.querySelector('.t-before');
+  const cut=ba.querySelector('.ba-cut'), unit=ba.dataset.unit||'';
+  const minPct=+rng.dataset.stop;      /* AIでもここまで、という下限 */
+  /* pct = 導入前を100としたときの「残っている量」。バーの右端もつまみもこの値に一致する */
+  const draw=pct=>{
+    const v=Math.round(before*pct/100);
+    val.textContent=v;
+    fill.style.transform='scaleX('+(pct/100).toFixed(4)+')';
+    knob.style.left=pct+'%';
+    const diff=before-v;
+    cut.textContent = diff>0 ? ('▲'+diff+unit) : '';
+    tAfter.classList.toggle('on', pct<=minPct+1);
+    tBefore.classList.toggle('on', pct>=99);
+  };
+  rng.addEventListener('input',()=>{
+    if(+rng.value<minPct) rng.value=minPct;    /* 引きすぎは導入後の値で止める */
+    draw(+rng.value);
+  });
+  draw(100);
+  /* 触らない人にも1回は見せる。ただし触られたら以降は本人の操作を優先する */
+  BAS.set(ba,()=>{
+    if(ba.dataset.played) return;
+    ba.dataset.played='1';
+    if(reduceMotion){ rng.value=minPct; draw(minPct); return; }
+    const dur=950, t0=performance.now();
+    let touched=false;
+    const stop=()=>{ touched=true; };
+    rng.addEventListener('pointerdown',stop,{once:true});
+    rng.addEventListener('keydown',stop,{once:true});
+    (function step(t){
+      if(touched) return;
+      const q=Math.min((t-t0)/dur,1);
+      const e=1-Math.pow(1-q,3);
+      const pct=100-(100-minPct)*e;          /* 100（導入前）→ minPct（導入後）へ縮む */
+      rng.value=Math.round(pct); draw(pct);
+      if(q<1) requestAnimationFrame(step);
+    })(t0);
+  });
+});
+
+/* 場面が主役になったときに applyScenes から呼ばれる */
+function activateScene(s){
+  runCount(s);
+  s.querySelectorAll('.ba').forEach(ba=>{ const f=BAS.get(ba); if(f) f(); });
+}
+
+
+/* --- 試算（診断ツールのミニ版） ---
+   式は 無料AI診断/01_診断ロジック.md と同じ:
+     月の工数 = 件数 × 分 / 60 ／ 削減 = 月の工数 × 削減率 ／ 年 = 月 × 12 ／ 金額 = 年 × 時給
+   削減率0.70は当サイト「導入効果」の70%と同じ値。ベンチマークの下限0.80より控えめに取る。 */
+(function(){
+  const est=document.getElementById('estimate');
+  if(!est) return;
+  const RATE=0.70;
+  const N=est.querySelector('#est-n'), M=est.querySelector('#est-m'), W=est.querySelector('#est-w');
+  const out=k=>est.querySelector('[data-out="'+k+'"]');
+  const jp=n=>n.toLocaleString('ja-JP');
+  function calc(){
+    const n=+N.value, m=+M.value, w=+W.value;
+    const curYear=n*m/60*12;                 /* いまかかっている時間（年） */
+    const savedH =curYear*RATE;
+    const savedY =savedH*w;
+    out('n').textContent=jp(n);
+    out('m').textContent=jp(m);
+    out('w').textContent=jp(w);
+    out('cur').textContent=jp(Math.round(curYear));
+    out('h').textContent=jp(Math.round(savedH));
+    const man=savedY/10000;
+    out('y').textContent = man>=10 ? jp(Math.round(man)) : man.toFixed(1);
+  }
+  [N,M,W].forEach(r=>r.addEventListener('input',calc));
+  calc();
+})();
+
+/* --- カードが指のほうへ傾く。マウスがある環境だけ --- */
+if(matchMedia('(pointer:fine)').matches && !reduceMotion){
+  document.querySelectorAll('[data-tilt]').forEach(card=>{
+    let raf=0, rx=0, ry=0;
+    card.addEventListener('pointerenter',()=>{
+      card.classList.add('lit');
+      card.style.transition='transform .14s linear';
+    });
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width, py=(e.clientY-r.top)/r.height;
+      card.style.setProperty('--mx',(px*100).toFixed(1)+'%');
+      card.style.setProperty('--my',(py*100).toFixed(1)+'%');
+      rx=(py-.5)*-4.5; ry=(px-.5)*6.5;        /* 傾きは控えめに。大きいと安っぽくなる */
+      if(raf) return;
+      raf=requestAnimationFrame(()=>{
+        raf=0;
+        card.style.transform='perspective(1100px) rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg) translateY(-4px)';
+      });
+    });
+    card.addEventListener('pointerleave',()=>{
+      card.classList.remove('lit');
+      card.style.transition='transform .5s var(--ease)';
+      card.style.transform='';
+    });
+  });
+}
+
+
+
+/* FAQ accordion（開閉状態は aria にも反映して読み上げ環境に伝える） */
+document.querySelectorAll('.faq-item').forEach((item,i)=>{
   const q=item.querySelector('.faq-q'),a=item.querySelector('.faq-a');
+  a.id='faq-a-'+(i+1);
+  q.setAttribute('aria-controls',a.id);
+  q.setAttribute('aria-expanded','false');
   q.addEventListener('click',()=>{
     const open=item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(o=>{
       o.classList.remove('open');o.querySelector('.faq-a').style.maxHeight=null;
+      o.querySelector('.faq-q').setAttribute('aria-expanded','false');
     });
-    if(!open){item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+    if(!open){
+      item.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';
+      q.setAttribute('aria-expanded','true');
+    }
   });
 });
 
