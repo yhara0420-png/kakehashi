@@ -1176,7 +1176,7 @@ header.nav:not(.scrolled) .burger span{background:#fff}
 #about .scene-label{color:#5A5680}
 @media(max-width:760px){
   /* 縦長では本文の下に広く回り込むので、さらに薄くする */
-  .about-bg{opacity:.20;-webkit-mask-image:none;mask-image:none}
+  .about-bg{opacity:.14;-webkit-mask-image:none;mask-image:none}
 }
 
 /* --- 試算（診断ツールのミニ版） --- */
@@ -1291,6 +1291,63 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   .company-table dl{grid-template-columns:1fr;gap:4px}
   .faq-q{gap:14px}
   .faq-a-inner{padding-left:clamp(22px,3vw,38px)}
+}
+/* ============================================================
+   スマホ最適化 — ピン留めをやめて、素直な縦並びにする
+   ------------------------------------------------------------
+   PCでは「画面に留めたまま場面を入れ替える」演出が成立するが、
+   縦に短いスマホでは場面の中身が1画面に収まらず、切り替えの途中で
+   2つの場面が重なって文字が読めなくなっていた
+   （iPhone実寸 390x664 で、6区間すべてに重なりを実測）。
+   スマホでは場面を縦に並べて全部読めるようにする。PCの演出は変えない。
+
+   高さの条件も入れているのは「横向きスマホ」のため。
+   844x390 のような画面は幅が760pxを超えるのでPC扱いになるが、
+   縦が390pxしかないので同じように場面が重なる（実測で6区間すべて重なり）。
+   ============================================================ */
+@media(max-width:760px),(max-height:560px){
+  /* --- ピン留めの解除 --- */
+  .hero-pin,.pin{height:auto!important}
+  /* static ではなく relative。中の絶対配置（.about-bg など）の基準を保つため */
+  .hero,.pin-stage{
+    position:relative!important;height:auto!important;
+    overflow:visible!important;display:block!important;
+  }
+  /* 画面いっぱいだった時は不要だった余白を、縦並びのぶん足す */
+  .pin-stage{padding:clamp(60px,13vw,92px) 0}
+  .hero-stage,.pin-steps,.pin-scenes{min-height:0!important}
+  /* JSが毎フレーム書き込む opacity / transform を打ち消す（インラインより !important が強い） */
+  .hero-step,.pstep,.pscene{
+    position:relative!important;opacity:1!important;transform:none!important;
+    pointer-events:auto!important;
+  }
+  .pstep+.pstep,.pscene+.pscene{margin-top:clamp(40px,9vw,64px)}
+  .hero-step+.hero-step{margin-top:clamp(34px,8vw,52px)}
+  /* 留まらなくなったので、進行の目印は意味がない */
+  .hero-dots,.pin-dots{display:none}
+  /* 入れ替え見出しは2つとも出す（「これまで」「これから」の対で読める） */
+  .title-swap .tswap{position:relative!important;opacity:1!important;transform:none!important}
+  .title-swap .tswap+.tswap{margin-top:.22em}
+  /* ヒーローは最初の1画面を主役にし、続きの2つは小さめに */
+  .hero{min-height:100vh;min-height:100dvh}
+  .hero-step[data-hs="1"] .hh,.hero-step[data-hs="2"] .hh{
+    font-size:clamp(1.55rem,6.6vw,2.1rem);white-space:normal;
+  }
+
+  /* スマホは漫画背景のマスクを外している（本文が全幅に回り込むため）ので、
+     この英字ラベルだけ濃いコマに直接重なる。実測 4.35:1 → 5.1:1 に上げる */
+  #about .eyebrow{color:#4F42A8}
+
+  /* --- 指で押せる大きさにする（実測で44px未満だったもの） --- */
+  /* 見た目は変えずに当たり判定だけ広げる（実測で44px未満だったもの） */
+  .burger{padding:14px;margin-right:-14px}
+  .nav-links a{padding:10px 0}
+  .foot-col a{padding:9px 0}
+  figcaption a{display:inline-flex;align-items:center;min-height:44px}
+  .est-f input[type=range]{height:44px}
+  .ba input[type=range]{height:44px}
+  /* 文章の中に混ざる出典リンクは行の高さのままにする（伸ばすと本文が崩れる） */
+  .res-note a,.est-note a,.voice-note a{padding:0}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
