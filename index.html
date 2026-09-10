@@ -1322,17 +1322,39 @@ header.nav:not(.scrolled) .burger span{background:#fff}
     pointer-events:auto!important;
   }
   .pstep+.pstep,.pscene+.pscene{margin-top:clamp(40px,9vw,64px)}
-  .hero-step+.hero-step{margin-top:clamp(34px,8vw,52px)}
   /* 留まらなくなったので、進行の目印は意味がない */
   .hero-dots,.pin-dots{display:none}
-  /* 入れ替え見出しは2つとも出す（「これまで」「これから」の対で読める） */
+
+  /* --- 冒頭: 最初のメッセージと相談ボタンだけを1画面に（2026-09-11 Codex指摘②③） ---
+     2つ目・3つ目のメッセージは JS が直後の帯 .hero-more に移す。
+     ヒーローが1画面に戻るので、絵の切り取られ方も PC の意図に近づく。 */
+  .hero{min-height:100vh;min-height:100dvh;display:flex!important;align-items:center}
+  .hero-more{background:#1A1A2E;color:#EFECF8;padding:clamp(40px,9vw,64px) 0}
+  .hero-more .hero-step{position:relative;opacity:1;transform:none}
+  .hero-more .hero-step+.hero-step{margin-top:32px;padding-top:32px;border-top:1px solid rgba(239,236,248,.14)}
+  .hero-more .hh{font-family:var(--serif);font-weight:900;color:#fff;white-space:normal;
+    font-size:clamp(1.35rem,5.8vw,1.7rem);line-height:1.35}
+  .hero-more .hh .em{color:#F2EFFF}
+  .hero-more .hh .em::after{background:linear-gradient(transparent 60%,rgba(255,255,255,.22) 0)}
+  .hero-more .hero-sub{margin-top:12px;font-size:.95rem;line-height:1.85;color:rgba(239,236,248,.86)}
+  .hero-more .hero-sub br{display:none}
+  .hero-more .hero-actions{margin-top:16px}
+  .hero-more .btn-primary{display:none}          /* 相談ボタンは冒頭にある。重ねて出さない */
+  .hero-more .btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;padding:12px 22px;font-size:.9rem}
+
+  /* --- 見出しと説明の対応（Codex指摘④）: 入れ替え見出しは、対応する場面の直前に置く ---
+     1つ目は元の位置のまま。2つ目は JS が場面2の先頭へ移す。 */
   .title-swap .tswap{position:relative!important;opacity:1!important;transform:none!important}
-  .title-swap .tswap+.tswap{margin-top:.22em}
-  /* ヒーローは最初の1画面を主役にし、続きの2つは小さめに */
-  .hero{min-height:100vh;min-height:100dvh}
-  .hero-step[data-hs="1"] .hh,.hero-step[data-hs="2"] .hh{
-    font-size:clamp(1.55rem,6.6vw,2.1rem);white-space:normal;
-  }
+  .title-swap .tswap[data-for="1"]{display:none}   /* JSが動かないときの保険。両方出すより片方 */
+  .pscene>h2.title{margin:0 0 14px}
+  .pscene>h2.title .tswap[data-for="1"]{display:block}
+
+  /* --- 出現アニメーションは短いフェードだけに（Codex指摘⑤） ---
+     指で次々に送る場面では、1秒近い移動・ぼかし・1文字ずつの出現は「表示が追いつかない」原因になる */
+  .io,[data-in]{transition:opacity .3s ease-out!important;transition-delay:0s!important;
+    transform:none!important;clip-path:none!important;filter:none!important}
+  .reveal-up{animation-duration:.45s}
+  .hero-art{transition-duration:.8s}
 
   /* スマホは漫画背景のマスクを外している（本文が全幅に回り込むため）ので、
      この英字ラベルだけ濃いコマに直接重なる。実測 4.35:1 → 5.1:1 に上げる */
@@ -2287,6 +2309,9 @@ const nav=document.getElementById('nav');
    1フレーム1回に間引くので、スマホでも滑らかに動く。
    ============================================================ */
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* CSS の「スマホ最適化」ブロックと同じ条件。縦並びにしたときは、
+   画面に留めて場面を入れ替える計算も止める（表示と処理を一致させる・2026-09-11） */
+const STACKED = matchMedia('(max-width:760px),(max-height:560px)').matches;
 const pinEl     = document.querySelector('.hero-pin');
 const heroSteps = [...document.querySelectorAll('.hero-step')];
 const heroDots  = [...document.querySelectorAll('.hero-dots span')];
@@ -2311,7 +2336,7 @@ function update(){
     bar.style.transform='scaleX('+(max>0 ? Math.min(y/max,1) : 0)+')';
   }
 
-  if(reduceMotion) return;
+  if(reduceMotion || STACKED) return;   /* 縦並びのときは、ここから下の演出は全部使わない */
 
   /* --- ヒーロー：画面に留めたまま、背景を動かして中身を入れ替える --- */
   if(pinEl){
@@ -2553,12 +2578,12 @@ if(!reduceMotion){
       sec.querySelectorAll(sel).forEach((el,i)=>{
         el.classList.remove('io','s2','s3','s4');
         el.dataset.in=kind;
-        if(step) el.style.transitionDelay=(i*step).toFixed(2)+'s';
+        if(step && !STACKED) el.style.transitionDelay=(i*step).toFixed(2)+'s';   /* 縦並びは順送りしない */
       });
     });
   });
 
-  document.querySelectorAll('h2.title:not(.title-swap)').forEach(h=>{   /* 入替見出しは1文字分解しない */
+  if(!STACKED) document.querySelectorAll('h2.title:not(.title-swap)').forEach(h=>{   /* 入替見出しは1文字分解しない。縦並びでも分解しない */
     h.classList.remove('io','s2','s3','s4');
     splitChars(h);
   });
@@ -2662,6 +2687,38 @@ function activateScene(s){
   s.querySelectorAll('.ba').forEach(ba=>{ const f=BAS.get(ba); if(f) f(); });
 }
 
+
+/* ============================================================
+   縦並び（スマホ）のときだけの組み替え（2026-09-11・Codexレビュー対応）
+   表示だけ縦に並べて、裏の切り替え計算を残していたのが違和感の原因だった。
+   ============================================================ */
+if(STACKED){
+  /* ① 場面の切り替え計算は update() で止めた。数字の数え上げや BEFORE/AFTER の動き出しは、
+        画面に入ったことを IntersectionObserver で拾って起動する */
+  const sceneIO=new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ activateScene(e.target); sceneIO.unobserve(e.target); } });
+  },{threshold:.35});
+  document.querySelectorAll('[data-scene]').forEach(s=>sceneIO.observe(s));
+
+  /* ② 冒頭は最初のメッセージと相談ボタンだけ。2つ目・3つ目はヒーロー直後の帯へ移す */
+  const more=heroSteps.slice(1);
+  if(more.length && pinEl){
+    const band=document.createElement('section');
+    band.className='hero-more'; band.setAttribute('aria-label','私たちの考え方');
+    const wrap=document.createElement('div'); wrap.className='wrap';
+    more.forEach(s=>{ s.classList.add('on'); s.removeAttribute('aria-hidden'); wrap.appendChild(s); });
+    band.appendChild(wrap);
+    pinEl.after(band);
+  }
+
+  /* ③ #about の入れ替え見出し: 2つ目「これからは…」を、対応する場面の直前へ */
+  const t1=document.querySelector('#about .title-swap .tswap[data-for="1"]');
+  const sc1=document.querySelector('#about .pscene[data-scene="1"]');
+  if(t1 && sc1){
+    const h=document.createElement('h2'); h.className='title pin-title in';
+    t1.classList.add('on'); h.appendChild(t1); sc1.prepend(h);
+  }
+}
 
 /* --- 試算（診断ツールのミニ版） ---
    式は 無料AI診断/01_診断ロジック.md と同じ:
