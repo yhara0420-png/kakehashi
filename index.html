@@ -1332,11 +1332,11 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   .pin:not(.sp-pin) .pin-stage{padding:clamp(60px,13vw,92px) 0}
   .hero-stage,.pin-steps,.pin-scenes{min-height:0!important}
   /* JSが毎フレーム書き込む opacity / transform を打ち消す（インラインより !important が強い） */
-  .pstep,.pin:not(.sp-pin) .pscene{
+  .pin:not(.sp-pin) .pstep,.pin:not(.sp-pin) .pscene{
     position:relative!important;opacity:1!important;transform:none!important;
     pointer-events:auto!important;
   }
-  .pstep+.pstep,.pin:not(.sp-pin) .pscene+.pscene{margin-top:clamp(40px,9vw,64px)}
+  .pin:not(.sp-pin) .pstep+.pstep,.pin:not(.sp-pin) .pscene+.pscene{margin-top:clamp(40px,9vw,64px)}
   /* 留まらなくなったので、進行の目印は意味がない */
   .pin:not(.sp-pin) .pin-dots{display:none}
 
@@ -1459,17 +1459,62 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   .sp-pin .bcard h4{font-size:1.02rem;margin:4px 0 3px}
   .sp-pin .bcard p{font-size:.8rem;line-height:1.5}
   .sp-pin .pin-dots{display:flex;margin-top:14px}
+
+  /* --- 実績（#record）・サービス（#services）・導入の流れ（#process）も同じ方式に（2026-09-11 代表指示・実機OK後） ---
+     場面数に応じて滞在の長さを変える。#about（2場面）は 200svh */
+  .sp-pin.pin-3{height:260vh;height:260svh}
+  #process.sp-pin{height:300vh;height:300svh}
+  .sp-pin .pin-steps{display:grid}
+  .sp-pin .pstep{grid-area:1/1;position:relative!important;top:auto;will-change:transform,opacity}
+
+  /* 実績: 写真を横長に・説明の行間を詰め・タグを隠して 1画面に */
+  .sp-pin .rec-sc{gap:12px}
+  .sp-pin .rec-sc-photo{aspect-ratio:21/9}
+  .sp-pin .rec-sc h3{font-size:1.25rem;margin:8px 0 6px}
+  .sp-pin .case-rows{gap:6px;margin-top:8px}
+  .sp-pin .case-rows .cr span{font-size:.86rem;line-height:1.6}
+  .sp-pin .rec-sc .tags{display:none}
+  .sp-pin .pin-foot{margin-top:14px;gap:10px}
+  .sp-pin .rec-cta a{padding:12px 22px;font-size:.9rem}
+
+  /* サービス: 黒い面の余白を詰め、説明とチップを小さく */
+  .sp-pin .svc-wrap.dark{padding:28px 20px 24px;border-radius:22px}
+  .sp-pin .svc-scenes{margin-top:18px}
+  .sp-pin .svc{gap:14px;padding:16px 0}
+  .sp-pin .svc .body h3{font-size:1.3rem;margin-bottom:8px}
+  .sp-pin .svc .body p{font-size:.9rem;line-height:1.7}
+  .sp-pin .svc .body .chips{margin-top:12px;gap:6px}
+  .sp-pin .svc .body .chips span{font-size:.62rem;padding:4px 9px}
+
+  /* 導入の流れ: 番号と本文の間を詰める */
+  .sp-pin .pstep{gap:2px}
+  .sp-pin .pstep-body .step-ic{margin-bottom:8px}
+  .sp-pin .pstep-body p{line-height:1.8}
 }
 /* 小さいスマホ（高さ 700px 以下）はカードの説明文を隠して 1画面に収める（390x664 で 630px → 522px） */
 @media(max-width:760px) and (min-height:561px) and (max-height:700px){
   .sp-pin .bcard p{display:none}
+  /* 実績: 写真をさらに低く・見出しを少し小さく・目印とボタンを1行に（390x664 で 607px → 約535px）。
+     サービス: 説明を短めに見せるためチップを隠す */
+  .sp-pin .rec-sc-photo{aspect-ratio:4/1}
+  #record.sp-pin .sec-head .title{font-size:1.7rem}
+  #record.sp-pin .rec-sc h3{font-size:1.15rem;margin:6px 0 4px}
+  #record.sp-pin .case-rows .cr span{line-height:1.5}
+  #record.sp-pin .pin-foot{margin-top:10px}
+  .sp-pin .pin-foot{flex-direction:row;align-items:center;justify-content:space-between;gap:12px}
+  .sp-pin .pin-foot .pin-dots{margin-top:0}
+  .sp-pin .rec-cta a{padding:11px 16px;font-size:.8rem;white-space:nowrap}   /* 2行に折れないように */
+  .sp-pin .pin-foot .pin-dots{gap:8px}
+  .sp-pin .pin-foot .pin-dots span{width:22px}
+  .sp-pin .pin-foot .pin-dots span.on{width:40px}
+  .sp-pin .svc .body .chips{display:none}
 }
 @media(max-height:560px){
   /* 横向きの短い画面は .sp-pin も縦に並べる（上の :not(.sp-pin) の除外を打ち消す） */
   .sp-pin{height:auto!important}
   .sp-pin .pin-stage{position:relative!important;height:auto!important;overflow:visible!important;display:block!important;padding:60px 0}
-  .sp-pin .pscene{position:relative!important;opacity:1!important;transform:none!important;pointer-events:auto!important}
-  .sp-pin .pscene+.pscene{margin-top:40px}
+  .sp-pin .pscene,.sp-pin .pstep{position:relative!important;opacity:1!important;transform:none!important;pointer-events:auto!important}
+  .sp-pin .pscene+.pscene,.sp-pin .pstep+.pstep{margin-top:40px}
   .sp-pin .title-swap .tswap{position:relative!important;opacity:1!important;transform:none!important}
   .sp-pin .title-swap .tswap[data-for="1"]{display:none}
   .sp-pin .pin-dots{display:none}
@@ -1880,7 +1925,7 @@ header.nav:not(.scrolled) .burger span{background:#fff}
 
 <!-- ===== TRACK RECORD ===== -->
 <!-- ピン留め：画面に留めたまま、実績3件が1件ずつ見開きで入れ替わる -->
-<section class="pin pin-3" id="record">
+<section class="pin pin-3 sp-pin" id="record">
  <div class="pin-stage">
   <div class="wrap">
     <div class="sec-head">
@@ -2040,7 +2085,7 @@ header.nav:not(.scrolled) .burger span{background:#fff}
 
 <!-- ===== NEW SERVICES ===== -->
 <!-- ピン留め：画面に留めたまま、2つの柱が1つずつ入れ替わる -->
-<section class="pin pin-2" id="services">
+<section class="pin pin-2 sp-pin" id="services">
  <div class="pin-stage">
   <div class="wrap">
     <div class="svc-wrap dark">
@@ -2153,7 +2198,7 @@ header.nav:not(.scrolled) .burger span{background:#fff}
 
 <!-- ===== PROCESS ===== -->
 <!-- ピン留め：画面に留めたまま、STEP 01→04 が1つずつ入れ替わる -->
-<section class="pin tone-dark" id="process">
+<section class="pin tone-dark sp-pin" id="process">
   <div class="pin-stage">
     <div class="wrap">
       <div class="sec-head">
