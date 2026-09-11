@@ -2,60 +2,63 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8" />
-<!-- OGP画像の元HTML。1200×630でスクリーンショットして assets/ogp.png を生成する。
-     文言・デザインを変えたい場合はここを編集して再撮影する。 -->
+<!-- OGP画像（LINE・X・Facebook でリンクを貼ったときに出る画像）の元HTML。
+     1200×630 を2倍で撮影して assets/ogp-v2.jpg を生成する（2026-09-11 現行の紫デザインに刷新）。
+     文言・デザインを変えたい場合はここを編集して再撮影する。
+     ※ファイル名を変えるのは、LINE などが古い画像を記憶し続けるため（同じ名前だと差し替わらない） -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 :root{
-  --paper:#F2EEE5; --paper-2:#E9E3D6; --ink:#14141B; --ink-soft:#3A3A45;
-  --muted:#6E6A60; --line:#15151c1a; --accent:#E5442A;
+  --paper:#EFECF8; --ink:#1A1A2E; --accent:#7B6CE0; --cobalt:#6A5CC9; --sky:#A492FF; --shu:#D93A1E;
   --serif:"Zen Old Mincho",serif; --sans:"Zen Kaku Gothic New",sans-serif; --mono:"DM Mono",monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#fff}
 .ogp{
   width:1200px;height:630px;position:relative;overflow:hidden;
-  background:var(--paper);color:var(--ink);
+  background:var(--ink) url("hero-art.webp") 78% center/cover no-repeat;
+  color:var(--paper);
   font-family:var(--sans);font-feature-settings:"palt" 1;
-  padding:74px 84px;display:flex;flex-direction:column;
+  padding:58px 76px 52px;display:flex;flex-direction:column;
   -webkit-font-smoothing:antialiased;
 }
-/* blueprint grid */
+/* サイトのヒーローと同じ幕（左を紫で締め、右の人物を見せる） */
 .ogp::before{
   content:"";position:absolute;inset:0;
-  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:80px 80px;
-  -webkit-mask-image:radial-gradient(ellipse 120% 90% at 85% 0%,#000 25%,transparent 75%);
-  opacity:.6;
+  background:
+    linear-gradient(to bottom,rgba(26,26,46,.55) 0%,rgba(26,26,46,.14) 14%,transparent 24%),
+    linear-gradient(100deg,rgba(84,70,190,.92) 0%,rgba(84,70,190,.78) 34%,rgba(84,70,190,.34) 56%,transparent 72%),
+    linear-gradient(to top,rgba(26,26,46,.55) 0%,transparent 30%);
 }
-/* giant watermark */
+/* 英字の透かし（サイトの「Kakehashi」） */
 .ogp::after{
-  content:"架";position:absolute;right:-60px;bottom:-160px;
-  font-family:var(--serif);font-weight:900;font-size:520px;line-height:1;
-  color:rgba(20,20,27,.045);pointer-events:none;
+  content:"Kakehashi";position:absolute;left:60px;bottom:-34px;
+  font-family:var(--serif);font-weight:900;font-size:150px;line-height:1;letter-spacing:.02em;
+  color:rgba(239,236,248,.07);pointer-events:none;white-space:nowrap;
 }
 .row{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between}
 .brand{display:flex;align-items:center;gap:16px}
 .seal{
-  width:60px;height:60px;border-radius:50%;background:var(--ink);color:var(--paper);
-  display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:1.9rem;
+  width:58px;height:58px;border-radius:50%;background:var(--paper);color:var(--ink);
+  display:grid;place-items:center;font-family:var(--serif);font-weight:900;font-size:1.8rem;
 }
-.brand .name{font-family:var(--serif);font-weight:700;font-size:1.7rem;line-height:1.15}
-.brand .name small{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.22em;color:var(--muted);margin-top:4px}
-.est{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;color:var(--muted)}
+.brand .name{font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1.15}
+.brand .name small{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:.22em;color:var(--sky);margin-top:4px}
+.est{font-family:var(--mono);font-size:.78rem;letter-spacing:.18em;color:rgba(239,236,248,.7)}
 
-.main{position:relative;z-index:1;margin-top:auto;margin-bottom:auto}
-.eyebrow{font-family:var(--mono);font-size:.86rem;letter-spacing:.26em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:24px}
-.eyebrow::before{content:"";width:46px;height:2px;background:var(--accent)}
-h1{font-family:var(--serif);font-weight:900;font-size:6.1rem;line-height:1.08;letter-spacing:.01em}
-h1 .em{color:var(--accent);position:relative}
-.lead{margin-top:26px;font-size:1.42rem;color:var(--ink-soft);font-weight:500;letter-spacing:.01em}
+.main{position:relative;z-index:1;margin-top:auto;margin-bottom:auto;max-width:720px}
+.eyebrow{font-family:var(--mono);font-size:.84rem;letter-spacing:.26em;color:var(--sky);text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.eyebrow::before{content:"";width:46px;height:2px;background:var(--sky)}
+h1{font-family:var(--serif);font-weight:900;font-size:5.6rem;line-height:1.12;letter-spacing:.01em;text-shadow:0 2px 24px rgba(26,26,46,.45)}
+h1 .em{color:var(--sky);position:relative;white-space:nowrap}
+h1 .em::after{content:"";position:absolute;left:.06em;right:.06em;bottom:.02em;height:.09em;background:var(--shu);border-radius:2px;opacity:.9}
+.lead{margin-top:24px;font-size:1.36rem;color:rgba(239,236,248,.92);font-weight:500;letter-spacing:.01em;text-shadow:0 1px 14px rgba(26,26,46,.5)}
 
-.foot{position:relative;z-index:1;border-top:1px solid var(--line);padding-top:22px;display:flex;align-items:center;gap:0;flex-wrap:wrap}
-.foot .tag{font-family:var(--mono);font-size:.92rem;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:18px}
-.foot .tag b{color:var(--accent);font-weight:500}
+.foot{position:relative;z-index:1;border-top:1px solid rgba(239,236,248,.28);padding-top:20px;display:flex;align-items:center}
+.foot .tag{font-family:var(--mono);font-size:.9rem;letter-spacing:.1em;color:rgba(239,236,248,.82);display:flex;align-items:center;gap:18px}
+.foot .tag b{color:var(--shu);font-weight:500}
 </style>
 </head>
 <body>
@@ -70,8 +73,8 @@ h1 .em{color:var(--accent);position:relative}
 
   <div class="main">
     <div class="eyebrow">AI Introduction &amp; Development</div>
-    <h1>AIを<span class="em">“使える”</span>に変える</h1>
-    <div class="lead">伝える力 × AI で、企業のAI活用をゼロから伴走する</div>
+    <h1>AIを<span class="em">“使える”</span>に<br>変える</h1>
+    <div class="lead">中小企業の「AIを使いたい」を、動く業務ツールに。</div>
   </div>
 
   <div class="foot">

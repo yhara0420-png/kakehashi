@@ -10,7 +10,8 @@
      SEO / SNS メタ
      ※ 公開ドメインが決まったら、以下の https://yhara0420-png.github.io/kakehashi を実ドメインに一括置換する
         （canonical / og:url / og:image / twitter:image の4箇所）
-     ※ og:image / twitter:image が指す assets/ogp.png は別途用意する（1200×630推奨）
+     ※ og:image / twitter:image が指す assets/ogp-v2.jpg は assets/ogp-source.html を撮影して作る（2400×1260）。
+        差し替えるときはファイル名を変えること（LINE・X は同じ名前だと古い画像を出し続ける）
      ============================================================ -->
 <link rel="canonical" href="https://yhara0420-png.github.io/kakehashi/" />
 <meta name="author" content="架け橋 Kakehashi" />
@@ -23,7 +24,7 @@
 <meta property="og:title" content="架け橋 Kakehashi｜伝える力 × AIで、企業のAI活用を伴走する" />
 <meta property="og:description" content="AI漫画プロデュース・電子書籍出版・AI集客の実績を土台に、AIアプリ開発とAI導入サポートで企業のAI活用をゼロから伴走します。" />
 <meta property="og:url" content="https://yhara0420-png.github.io/kakehashi/" />
-<meta property="og:image" content="https://yhara0420-png.github.io/kakehashi/assets/ogp.png" />
+<meta property="og:image" content="https://yhara0420-png.github.io/kakehashi/assets/ogp-v2.jpg" />
 <meta property="og:image:width" content="2400" />
 <meta property="og:image:height" content="1260" />
 
@@ -31,7 +32,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="架け橋 Kakehashi｜伝える力 × AIで、企業のAI活用を伴走する" />
 <meta name="twitter:description" content="AIアプリ開発とAI導入サポートで、企業のAI活用をゼロから伴走します。" />
-<meta name="twitter:image" content="https://yhara0420-png.github.io/kakehashi/assets/ogp.png" />
+<meta name="twitter:image" content="https://yhara0420-png.github.io/kakehashi/assets/ogp-v2.jpg" />
 
 <!-- Favicon（SVGデータURI・外部ファイル不要。ブランドの「架」マーク） -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%231A1A2E'/%3E%3Ctext%20x='32'%20y='46'%20font-family='serif'%20font-size='40'%20font-weight='900'%20text-anchor='middle'%20fill='%23EFECF8'%3E%E6%9E%B6%3C/text%3E%3C/svg%3E" />
@@ -1371,10 +1372,15 @@ header.nav:not(.scrolled) .burger span{background:#fff}
      背景写真と大きな数字は本文より遅れて動く（JS slowParallax をスマホでも使う） */
   /* [data-in] を付けて、下の .io,[data-in] の一律ルールより後勝ちにする（同じ詳細度だと後に書いた方が勝つため） */
   [data-in].bcard,[data-in].show-card,[data-in].show-mini,[data-in].voice,[data-in].profile,[data-in].svc,[data-in].plan,
-  [data-in].step,[data-in].why,[data-in].faq-item,[data-in].company-card,[data-in].cta-box{
+  [data-in].step,[data-in].why,[data-in].faq-item,[data-in].company-card{
     transform:perspective(700px) rotateX(26deg) translateY(56px) scale(.94);transform-origin:50% 100%;
     transition-duration:.8s;
   }
+  /* 問い合わせの枠は画面より背が高い（フォーム込みで約1,100px）。面ごと倒して起こすと「急にパッと出る」ように見えた
+     （2026-09-11 代表指摘）。枠はゆっくり浮かぶだけにして、中身（見出し・本文・入力欄）は JS が1つずつ上から順に出す */
+  [data-in].cta-box{transform:translateY(24px);transition-duration:.7s}
+  .cta-box .cta-item{transform:translateY(22px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  .cta-box .cta-item.in{transform:none}
 
   /* --- 見出しと説明の対応（Codex指摘④）: 入れ替え見出しは、対応する場面の直前に置く ---
      1つ目は元の位置のまま。2つ目は JS が場面2の先頭へ移す。 */
@@ -2913,6 +2919,11 @@ function activateScene(s){
    表示だけ縦に並べて、裏の切り替え計算を残していたのが違和感の原因だった。
    ============================================================ */
 if(STACKED){
+  /* ⓪ 問い合わせの枠の中身を1つずつ出す（見出し→本文→入力欄の順・画面に入ったものから）。
+        枠全体を1回で出すと、背の高い枠が急に現れて見えたため（2026-09-11 代表指摘） */
+  document.querySelectorAll('.cta-box > .eyebrow, .cta-box > h2, .cta-box > p, .cta-box .field, .cta-box .form-actions, .cta-box .cta-divider')
+    .forEach((el,i)=>{ el.classList.add('cta-item'); el.setAttribute('data-in','up'); el.style.transitionDelay=(Math.min(i,3)*0.08)+'s'; revealIO.observe(el); });
+
   /* ① 場面の切り替え計算は update() で止めた。数字の数え上げや BEFORE/AFTER の動き出しは、
         画面に入ったことを IntersectionObserver で拾って起動する */
   const sceneIO=new IntersectionObserver(es=>{
