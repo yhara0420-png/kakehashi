@@ -971,11 +971,17 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 }
 
 @media(max-width:760px){
-  /* 縦長画面では人物に文字が重なるので、絵は薄く敷いて背景として効かせる */
-  .hero-art{background-position:88% center;opacity:.8}
+  /* 冒頭は PC と同じ「人物が右・PC と同じ濃さ」で見せる（2026-09-11 代表指示）。
+     以前は人物に文字が重なるため薄く敷いていたが、指で送るごとに JS が段階的に薄くする方式に変えた
+     （1段階目 1.0 → 2段階目 約0.65 → 3段階目 約0.3。renderHero 参照）。
+     background-position 74% ＝ 1600x900 の絵の人物の顔が画面右端に収まり、差し出した手が中央左に入る位置
+     （64% だと顔が右で切れ、88% だと人物が中央に来て文字と重なる） */
+  .hero-art{background-position:74% center;opacity:1}
   .hero-scrim{background:
     linear-gradient(to bottom,rgba(26,26,46,.46) 0%,rgba(26,26,46,.10) 11%,transparent 18%),
-    linear-gradient(102deg,rgba(106,92,201,.88) 0%,rgba(106,92,201,.62) 48%,rgba(106,92,201,.22) 100%)}
+    linear-gradient(102deg,rgba(106,92,201,.62) 0%,rgba(106,92,201,.34) 55%,rgba(106,92,201,.12) 80%,transparent 100%)}
+  /* 白いシャツの上に白い文字が乗る行があるので、薄い影で文字の縁を立てる（PC は人物と文字が離れているので不要） */
+  .hero h1,.hero .hh,.hero .hero-sub{text-shadow:0 1px 14px rgba(26,26,46,.45)}
 }
 @media(prefers-reduced-motion:reduce){
   .hero-art{clip-path:none;transition:none}
@@ -1315,24 +1321,24 @@ header.nav:not(.scrolled) .burger span{background:#fff}
    縦が390pxしかないので同じように場面が重なる（実測で6区間すべて重なり）。
    ============================================================ */
 @media(max-width:760px),(max-height:560px){
-  /* --- ピン留めの解除（ヒーロー以外。ヒーローは下の「縦長スマホ」ブロックで PC と同じピン留めに戻す） --- */
-  .pin{height:auto!important}
+  /* --- ピン留めの解除（ヒーローと .sp-pin 以外。それらは下の「縦長スマホ」ブロックで PC と同じピン留めに戻す） --- */
+  .pin:not(.sp-pin){height:auto!important}
   /* static ではなく relative。中の絶対配置（.about-bg など）の基準を保つため */
-  .pin-stage{
+  .pin:not(.sp-pin) .pin-stage{
     position:relative!important;height:auto!important;
     overflow:visible!important;display:block!important;
   }
   /* 画面いっぱいだった時は不要だった余白を、縦並びのぶん足す */
-  .pin-stage{padding:clamp(60px,13vw,92px) 0}
+  .pin:not(.sp-pin) .pin-stage{padding:clamp(60px,13vw,92px) 0}
   .hero-stage,.pin-steps,.pin-scenes{min-height:0!important}
   /* JSが毎フレーム書き込む opacity / transform を打ち消す（インラインより !important が強い） */
-  .pstep,.pscene{
+  .pstep,.pin:not(.sp-pin) .pscene{
     position:relative!important;opacity:1!important;transform:none!important;
     pointer-events:auto!important;
   }
-  .pstep+.pstep,.pscene+.pscene{margin-top:clamp(40px,9vw,64px)}
+  .pstep+.pstep,.pin:not(.sp-pin) .pscene+.pscene{margin-top:clamp(40px,9vw,64px)}
   /* 留まらなくなったので、進行の目印は意味がない */
-  .pin-dots{display:none}
+  .pin:not(.sp-pin) .pin-dots{display:none}
 
   /* --- 冒頭: 3つのメッセージを同じ場所で時間差で入れ替える（2026-09-11 代表指摘） ---
      PC はスクロール量で入れ替わるが、スマホはピン留めをやめたので「時間」で回す（5.6秒ごと・JS）。
@@ -1372,8 +1378,8 @@ header.nav:not(.scrolled) .burger span{background:#fff}
 
   /* --- 見出しと説明の対応（Codex指摘④）: 入れ替え見出しは、対応する場面の直前に置く ---
      1つ目は元の位置のまま。2つ目は JS が場面2の先頭へ移す。 */
-  .title-swap .tswap{position:relative!important;opacity:1!important;transform:none!important}
-  .title-swap .tswap[data-for="1"]{display:none}   /* JSが動かないときの保険。両方出すより片方 */
+  .pin:not(.sp-pin) .title-swap .tswap{position:relative!important;opacity:1!important;transform:none!important}
+  .pin:not(.sp-pin) .title-swap .tswap[data-for="1"]{display:none}   /* JSが動かないときの保険。両方出すより片方 */
   .pscene>h2.title{margin:0 0 14px}
   .pscene>h2.title .tswap[data-for="1"]{display:block}
 
@@ -1432,8 +1438,41 @@ header.nav:not(.scrolled) .burger span{background:#fff}
     padding-top:84px;padding-bottom:calc(100lvh - 100svh + 40px);
   }
   .hero-step{will-change:transform,opacity}
+
+  /* --- 事業の全体像（#about）も PC と同じ「留めたまま切り替え」に（2026-09-11 代表指示） ---
+     縦並びのままだと 見出し248px＋場面660px で1画面に収まらないので、
+     リード文と番号を隠し、カードを詰めて 1画面（390x664 で約500px）に収める */
+  .sp-pin{height:200vh;height:200svh}
+  .sp-pin .pin-stage{
+    position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;
+    display:flex;align-items:flex-start;          /* 中央寄せだと中身が上下にはみ出してナビの帯に隠れる。上寄せで下に逃がす */
+    padding:84px 0 calc(100lvh - 100svh + 24px);
+  }
+  .sp-pin .sec-head{margin-bottom:16px}
+  .sp-pin .lead,.sp-pin .sec-num{display:none}
+  .sp-pin .pin-scenes{display:grid}
+  .sp-pin .pscene{grid-area:1/1;position:relative!important;top:auto;will-change:transform,opacity}
+  .sp-pin .scene-label{margin-bottom:12px}
+  .sp-pin .bcards3{gap:10px}
+  .sp-pin .bcard{padding:12px 14px}
+  .sp-pin .bcard-top{margin-bottom:2px}
+  .sp-pin .bcard h4{font-size:1.02rem;margin:4px 0 3px}
+  .sp-pin .bcard p{font-size:.8rem;line-height:1.5}
+  .sp-pin .pin-dots{display:flex;margin-top:14px}
+}
+/* 小さいスマホ（高さ 700px 以下）はカードの説明文を隠して 1画面に収める（390x664 で 630px → 522px） */
+@media(max-width:760px) and (min-height:561px) and (max-height:700px){
+  .sp-pin .bcard p{display:none}
 }
 @media(max-height:560px){
+  /* 横向きの短い画面は .sp-pin も縦に並べる（上の :not(.sp-pin) の除外を打ち消す） */
+  .sp-pin{height:auto!important}
+  .sp-pin .pin-stage{position:relative!important;height:auto!important;overflow:visible!important;display:block!important;padding:60px 0}
+  .sp-pin .pscene{position:relative!important;opacity:1!important;transform:none!important;pointer-events:auto!important}
+  .sp-pin .pscene+.pscene{margin-top:40px}
+  .sp-pin .title-swap .tswap{position:relative!important;opacity:1!important;transform:none!important}
+  .sp-pin .title-swap .tswap[data-for="1"]{display:none}
+  .sp-pin .pin-dots{display:none}
   .hero-pin{height:auto!important}
   .hero{position:relative!important;height:auto!important;overflow:visible!important;display:block!important;padding:110px 0 40px}
   .hero-stage{display:block}
@@ -1634,7 +1673,7 @@ header.nav:not(.scrolled) .burger span{background:#fff}
 
 <!-- ===== OVERVIEW / BRIDGE ===== -->
 <!-- ピン留め：画面に留めたまま「これまで」→「これから」が入れ替わる -->
-<section class="pin pin-2" id="about">
+<section class="pin pin-2 sp-pin" id="about">
  <div class="pin-stage">
   <div class="about-bg" data-bg="assets/about-manga.webp" aria-hidden="true"></div>
   <div class="wrap">
@@ -2383,6 +2422,8 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* CSS の「スマホ最適化」ブロックと同じ条件。縦並びにしたときは、
    画面に留めて場面を入れ替える計算も止める（表示と処理を一致させる・2026-09-11） */
 const STACKED = matchMedia('(max-width:760px),(max-height:560px)').matches;
+/* 縦長スマホ: ヒーローと .sp-pin の区間だけは PC と同じピン留めにする（CSS の同名メディアクエリと一致させる） */
+const SP_PIN  = matchMedia('(max-width:760px) and (min-height:561px)').matches;
 const pinEl     = document.querySelector('.hero-pin');
 const heroSteps = [...document.querySelectorAll('.hero-step')];
 const heroDots  = [...document.querySelectorAll('.hero-dots span')];
@@ -2431,8 +2472,8 @@ function update(){
     }
   }
 
-  /* 縦並び（スマホ）は、ヒーロー以外のピン留め計算をしない。背景の視差だけは奥行きのために使う */
-  if(STACKED){ slowParallax(); return; }
+  /* 縦並び（スマホ）は、.sp-pin 以外のピン留め計算をしない。背景の視差だけは奥行きのために使う */
+  if(STACKED){ updatePins(y); slowParallax(); return; }
 
   /* --- ピン留めセクション：留めたまま中身を切り替える --- */
   updatePins(y);
@@ -2461,6 +2502,8 @@ function renderHero(p){
         : 'translate3d('+(p*-420).toFixed(1)+'px,'+(p*60).toFixed(1)+'px,0)';
       /* 絵はゆっくり奥へ引く。scaleを少し大きめに取って、ずらしても端が出ないようにする */
       if(par.art)   par.art.style.transform   = 'translate3d('+(p*30).toFixed(1)+'px,0,0) scale('+(1+p*(STACKED?0.12:0.06)).toFixed(3)+')';
+      /* スマホ: 人物は冒頭は PC と同じ濃さ、2段階目・3段階目と進むほど透ける（1.0 → 約0.65 → 約0.3） */
+      if(STACKED && par.art) par.art.style.opacity = (1 - 0.72*p).toFixed(3);
 
       /* 留まったまま、中身をスクロール量に同期させて動かす */
       applyScenes(heroSteps, heroDots, p);
@@ -2475,24 +2518,50 @@ const pins=[...document.querySelectorAll('.pin')].map(el=>({
   el,
   scenes:[...el.querySelectorAll('[data-scene]')],
   dots:[...el.querySelectorAll('.pin-dots span')],
-  tswaps:[...el.querySelectorAll('.tswap')]         /* 場面に同期する見出し */
+  tswaps:[...el.querySelectorAll('.tswap')],        /* 場面に同期する見出し */
+  stage:el.querySelector('.pin-stage')
 }));
 
 function updatePins(y){
   for(const p of pins){
     if(!p.scenes.length) continue;
+    /* スマホは .sp-pin（縦長スマホでピン留めに戻した区間）だけ計算する */
+    if(STACKED && !(SP_PIN && p.el.classList.contains('sp-pin'))) continue;
     const top=p.el.offsetTop;
     const h=p.el.offsetHeight;
     if(y+innerHeight<top || y>top+h) continue;      /* 画面外は触らない */
-    const range=h-innerHeight;
+    /* スマホは innerHeight ではなく留まる面（100lvh 固定）の高さを引く＝アドレスバーの開閉で跳ねない */
+    const range = STACKED ? h-(p.stage ? p.stage.offsetHeight : innerHeight) : h-innerHeight;
     if(range<=0) continue;
     const prog=Math.max(0,Math.min((y-top)/range,1));
-    applyScenes(p.scenes, p.dots, prog);
-    if(p.tswaps.length){
-      const cur=Math.min(p.scenes.length-1, Math.floor(prog*p.scenes.length*0.9999));
-      p.tswaps.forEach(t=>t.classList.toggle('on', +t.dataset.for===cur));
+    if(STACKED){
+      /* 留めた面の中の要素は、画面の下18%より下にあると「入った」判定が永久に来ない
+         （面ごと留まるので位置が変わらない）。区間が動き始めた時点でまとめて出す（時間差は既存の transitionDelay） */
+      if(!p.revealed){ p.revealed=true; p.el.querySelectorAll('.io,[data-in],h2.title,.step-line').forEach(el=>el.classList.add('in')); }
+      p.target=prog; if(!pinRaf) pinRaf=requestAnimationFrame(pinLoop);   /* ヒーローと同じく補間して描く */
     }
+    else renderPin(p, prog);
   }
+}
+function renderPin(p, prog){
+  applyScenes(p.scenes, p.dots, prog);
+  if(p.tswaps.length){
+    const cur=Math.min(p.scenes.length-1, Math.floor(prog*p.scenes.length*0.9999));
+    p.tswaps.forEach(t=>t.classList.toggle('on', +t.dataset.for===cur));
+  }
+}
+/* スマホ: 目標の進み具合へ毎フレーム22%ずつ追いつく（ヒーローの heroLoop と同じ考え方） */
+let pinRaf=0;
+function pinLoop(){
+  let busy=false;
+  for(const p of pins){
+    if(p.target===undefined) continue;
+    if(p.cur===undefined) p.cur=p.target;
+    const d=p.target-p.cur;
+    if(Math.abs(d)<0.0004){ p.cur=p.target; } else { p.cur+=d*0.22; busy=true; }
+    renderPin(p, p.cur);
+  }
+  pinRaf = busy ? requestAnimationFrame(pinLoop) : 0;
 }
 
 /* ============================================================
@@ -2847,8 +2916,9 @@ if(STACKED){
     requestAnimationFrame(()=>requestAnimationFrame(()=>eb.classList.add('in')));
   }
 
-  /* ③ #about の入れ替え見出し: 2つ目「これからは…」を、対応する場面の直前へ */
-  const t1=document.querySelector('#about .title-swap .tswap[data-for="1"]');
+  /* ③ #about の入れ替え見出し: 2つ目「これからは…」を、対応する場面の直前へ
+        （縦長スマホは #about をピン留めに戻したので PC と同じく重ねて切り替える＝移さない） */
+  const t1=SP_PIN ? null : document.querySelector('#about .title-swap .tswap[data-for="1"]');
   const sc1=document.querySelector('#about .pscene[data-scene="1"]');
   if(t1 && sc1){
     const h=document.createElement('h2'); h.className='title pin-title';
