@@ -87,6 +87,7 @@ if(location.hostname.endsWith('github.io')){var p=location.pathname.replace(/^\/
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media(max-width:760px){html{scroll-behavior:auto}}   /* iPhone Safari はバーの出入り時の位置補正まで滑らかに動き「一瞬ずれる」ため、スマホは切る（2026-09-12） */
 html.booting{scroll-behavior:auto}   /* 読み込み直後の位置復元を滑らかに流さない（JS が付け外し） */
 body{
   font-family:var(--sans);
@@ -105,7 +106,8 @@ img{max-width:100%;display:block}
    ATMOSPHERE — blueprint grid + grain
    ============================================================ */
 .bg-grid{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
+  /* 全画面固定を inset:0 にすると iPhone でバーの出入りのたびに高さが変わり、方眼の見え方が一瞬ずれる（2026-09-12 代表指摘）。バーが隠れた実寸で固定 */
+  position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:0;pointer-events:none;
   background-image:
     linear-gradient(var(--line) 1px,transparent 1px),
     linear-gradient(90deg,var(--line) 1px,transparent 1px);
@@ -122,7 +124,7 @@ img{max-width:100%;display:block}
   will-change:transform;pointer-events:none;
 }
 .grain{
-  position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;
+  position:fixed;top:0;left:0;width:100%;height:100vh;height:100lvh;z-index:9999;pointer-events:none;opacity:.04;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -2838,6 +2840,26 @@ document.querySelectorAll('.io,[data-in],h2.title,.step-line').forEach(el=>revea
    復元された位置より上〜画面内にある要素は、動きなしでその場に出しておく。
    復元スクロール自体も html{scroll-behavior:smooth} で滑らかに流れないよう、読み込みが落ち着くまで auto にしておく */
 document.documentElement.classList.add('booting');
+
+/* スマホはページ内リンク（#contact など）を自前で 0.5 秒かけて動かす。html の滑らかスクロールは切った（上の CSS 参照） */
+if(STACKED){
+  let araf=0;
+  const acancel=()=>{ if(araf){ cancelAnimationFrame(araf); araf=0; } };
+  ['touchstart','wheel'].forEach(ev=>addEventListener(ev,acancel,{passive:true}));
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#"]'); if(!a) return;
+    const id=a.getAttribute('href').slice(1); const t=id ? document.getElementById(id) : document.body;
+    if(!t) return;
+    e.preventDefault();
+    menu.classList.remove('open'); burger.setAttribute('aria-expanded','false');   /* メニューから押したときは閉じる */
+    const sm=parseFloat(getComputedStyle(t).scrollMarginTop)||0;   /* 固定ナビの下に見出しが隠れないよう CSS の scroll-margin-top を尊重 */
+    const from=scrollY, to=id ? t.getBoundingClientRect().top+scrollY-sm : 0, d=to-from, t0=performance.now(), dur=520;
+    acancel();
+    const step=now=>{ const k=Math.min(1,(now-t0)/dur), ez=1-Math.pow(1-k,3); scrollTo(0, from+d*ez); araf = k<1 ? requestAnimationFrame(step) : 0; };
+    araf=requestAnimationFrame(step);
+    if(id) history.pushState(null,'','#'+id);
+  });
+}
 function settleRestored(){
   if(scrollY<120) return;
   const vh=VH();
