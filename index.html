@@ -1315,10 +1315,10 @@ header.nav:not(.scrolled) .burger span{background:#fff}
    縦が390pxしかないので同じように場面が重なる（実測で6区間すべて重なり）。
    ============================================================ */
 @media(max-width:760px),(max-height:560px){
-  /* --- ピン留めの解除 --- */
-  .hero-pin,.pin{height:auto!important}
+  /* --- ピン留めの解除（ヒーロー以外。ヒーローは下の「縦長スマホ」ブロックで PC と同じピン留めに戻す） --- */
+  .pin{height:auto!important}
   /* static ではなく relative。中の絶対配置（.about-bg など）の基準を保つため */
-  .hero,.pin-stage{
+  .pin-stage{
     position:relative!important;height:auto!important;
     overflow:visible!important;display:block!important;
   }
@@ -1340,28 +1340,35 @@ header.nav:not(.scrolled) .burger span{background:#fff}
      以前の「2つ目・3つ目を直後の帯へ移す」方式はやめた（冒頭に動きが無さすぎた）。
      高さは svh（アドレスバーが出ている状態の実寸）。dvh だとバーの開閉で高さが変わり、
      スクロールし始めに画面全体が一瞬つっかえる。 */
-  .hero{min-height:100vh;min-height:100svh;display:flex!important;align-items:center}
+  /* 3枚を grid の同じマスに重ね、いちばん高いものに合わせて高さを取る。
+     opacity / transform は PC と同じく JS がスクロール量から毎フレーム書き込む（ここでは触らない） */
   .hero-stage{display:grid}
-  .hero-step{
-    grid-area:1/1;position:relative!important;top:auto;
-    opacity:0;transform:none!important;pointer-events:none;
-    transition:opacity .35s var(--ease);
-  }
-  .hero-step.on{opacity:1;pointer-events:auto}
-  /* 中身は 見出し→本文→ボタン の順に18px浮き上がる。出るときだけ時間差、消えるときは一斉に */
-  .hero-step>*{opacity:0;transform:translateY(18px);transition:opacity .25s var(--ease),transform .25s var(--ease)}
-  .hero-step.on>*{opacity:1;transform:none;transition-duration:.5s}
-  .hero-step.on>:nth-child(1){transition-delay:.1s}
-  .hero-step.on>:nth-child(2){transition-delay:.2s}
-  .hero-step.on>:nth-child(3){transition-delay:.3s}
-  /* 進行の目印は指で押して切り替えられる。見た目3pxのまま当たり判定を上下12pxずつ広げる */
-  .hero-dots{display:flex;margin-top:22px}
+  .hero-step{grid-area:1/1;position:relative!important;top:auto}
+  /* 1画面に収めるための詰め（390x664 で全部入る値） */
+  .hero-eyebrow{margin-bottom:18px}
+  .hero .hero-sub{margin-top:18px;font-size:.98rem;line-height:1.75}
+  .hero .hero-sub br{display:none}
+  .hero .hero-actions{margin-top:20px}
+  /* 最初のメッセージだけ、読み込み直後に 見出し→本文→ボタン の順で浮き上がる（2枚目以降はスクロールで出る） */
+  .hero .hero-step[data-hs="0"]>*{opacity:0;animation:revealUp .5s var(--ease) forwards}
+  .hero .hero-step[data-hs="0"]>:nth-child(1){animation-delay:.1s}
+  .hero .hero-step[data-hs="0"]>:nth-child(2){animation-delay:.2s}
+  .hero .hero-step[data-hs="0"]>:nth-child(3){animation-delay:.3s}
+  /* 進行の目印は指で押すとその場面までスクロールする。見た目3pxのまま当たり判定を上下12pxずつ広げる */
+  .hero-dots{display:flex;margin-top:16px}
   .hero-dots span{height:3px;padding:12px 0;box-sizing:content-box;background-clip:content-box;cursor:pointer}
-  /* 英字「Kakehashi」は PC ではスクロールで左斜め下へ流れる。スマホは時間で同じ向きに流す（往復・2026-09-11 代表指摘で速く）。
-     下端に置くと次のセクションの白い角に半分隠れるので、1.1文字分上げてから左下へ動かす */
-  .hero-giant{bottom:1.1em;animation:giantDrift 9s ease-in-out infinite alternate}
-  /* 絵はワイプで現れたあと、ゆっくり寄っていく（往復） */
-  .hero-art.in{animation:heroKen 8s ease-in-out .9s infinite alternate}
+  /* 英字「Kakehashi」は下端に置くと次のセクションの白い角に半分隠れるので上げる。動きは JS（スクロールで左斜め下へ） */
+  .hero-giant{bottom:1.1em}
+
+  /* --- 奥行き（2026-09-11 代表「PCと同じ3Dのような感じに」） ---
+     カードは奥に倒れた状態から起き上がって現れる（perspective＋rotateX）。
+     背景写真と大きな数字は本文より遅れて動く（JS slowParallax をスマホでも使う） */
+  /* [data-in] を付けて、下の .io,[data-in] の一律ルールより後勝ちにする（同じ詳細度だと後に書いた方が勝つため） */
+  [data-in].bcard,[data-in].show-card,[data-in].show-mini,[data-in].voice,[data-in].profile,[data-in].svc,[data-in].plan,
+  [data-in].step,[data-in].why,[data-in].faq-item,[data-in].company-card,[data-in].cta-box{
+    transform:perspective(900px) rotateX(10deg) translateY(28px);transform-origin:50% 100%;
+    transition-duration:.5s;
+  }
 
   /* --- 見出しと説明の対応（Codex指摘④）: 入れ替え見出しは、対応する場面の直前に置く ---
      1つ目は元の位置のまま。2つ目は JS が場面2の先頭へ移す。 */
@@ -1401,8 +1408,29 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   /* 文章の中に混ざる出典リンクは行の高さのままにする（伸ばすと本文が崩れる） */
   .res-note a,.est-note a,.voice-note a{padding:0}
 }
-@keyframes giantDrift{from{transform:translate3d(5vw,-6px,0)}to{transform:translate3d(-30vw,26px,0)}}
-@keyframes heroKen{from{transform:scale(1)}to{transform:scale(1.07) translate3d(-2%,0,0)}}
+/* ============================================================
+   縦長スマホ: ヒーローだけ PC と同じ「画面に留めたまま場面が入れ替わる」に戻す（2026-09-11 代表指摘）
+   ヒーローの中身は1画面に収まる（実測 454px < 664px）ので、他のピン留め区間で起きた重なりは起きない。
+   高さは lvh（アドレスバーが隠れた実寸）で固定し、中身は svh の範囲に寄せる＝バーの開閉で高さが変わらず、
+   隙間も出ない。横向きの短い画面（max-height:560px）はこのブロックの対象外＝縦に並べる。
+   ============================================================ */
+@media(max-width:760px) and (min-height:561px){
+  .hero-pin{height:230vh;height:230svh}
+  .hero{
+    position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;
+    display:flex;align-items:center;
+    padding-top:84px;padding-bottom:calc(100lvh - 100svh + 40px);
+  }
+  .hero-step{will-change:transform,opacity}
+}
+@media(max-height:560px){
+  .hero-pin{height:auto!important}
+  .hero{position:relative!important;height:auto!important;overflow:visible!important;display:block!important;padding:110px 0 40px}
+  .hero-stage{display:block}
+  .hero-step{position:relative!important;opacity:1!important;transform:none!important;pointer-events:auto!important}
+  .hero-step+.hero-step{margin-top:40px}
+  .hero-dots{display:none}
+}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .io,[data-in],.split-char{opacity:1;transform:none;clip-path:none;filter:none}
@@ -2369,7 +2397,7 @@ function update(){
     bar.style.transform='scaleX('+(max>0 ? Math.min(y/max,1) : 0)+')';
   }
 
-  if(reduceMotion || STACKED) return;   /* 縦並びのときは、ここから下の演出は全部使わない */
+  if(reduceMotion) return;
 
   /* --- ヒーロー：画面に留めたまま、背景を動かして中身を入れ替える --- */
   if(pinEl){
@@ -2382,14 +2410,20 @@ function update(){
       if(par.arc)   par.arc.style.transform   = arcT;
       if(par.seal)  par.seal.style.transform  = arcT;   /* シールは面と一緒に動く */
       if(par.arc2)  par.arc2.style.transform  = 'translate3d(0,'+(p*-130).toFixed(1)+'px,0)';
-      if(par.giant) par.giant.style.transform = 'translate3d('+(p*-420).toFixed(1)+'px,'+(p*60).toFixed(1)+'px,0)';
+      /* スマホは画面が狭いので、英字は画面幅に対する割合で左斜め下へ。絵の寄りも少し強める */
+      if(par.giant) par.giant.style.transform = STACKED
+        ? 'translate3d('+(p*-innerWidth*0.8).toFixed(1)+'px,'+(p*44).toFixed(1)+'px,0)'
+        : 'translate3d('+(p*-420).toFixed(1)+'px,'+(p*60).toFixed(1)+'px,0)';
       /* 絵はゆっくり奥へ引く。scaleを少し大きめに取って、ずらしても端が出ないようにする */
-      if(par.art)   par.art.style.transform   = 'translate3d('+(p*30).toFixed(1)+'px,0,0) scale('+(1+p*0.06).toFixed(3)+')';
+      if(par.art)   par.art.style.transform   = 'translate3d('+(p*30).toFixed(1)+'px,0,0) scale('+(1+p*(STACKED?0.12:0.06)).toFixed(3)+')';
 
       /* 留まったまま、中身をスクロール量に同期させて動かす */
       applyScenes(heroSteps, heroDots, p);
     }
   }
+
+  /* 縦並び（スマホ）は、ヒーロー以外のピン留め計算をしない。背景の視差だけは奥行きのために使う */
+  if(STACKED){ slowParallax(); return; }
 
   /* --- ピン留めセクション：留めたまま中身を切り替える --- */
   updatePins(y);
@@ -2447,8 +2481,10 @@ function applyScenes(scenes, dots, prog){
     if(i===n-1   && t>0) t=0;          /* 最後の場面は、最後まで残る */
 
     const a=Math.abs(t);
-    const op = a<=0.28 ? 1 : (a>=0.72 ? 0 : 1-smooth((a-0.28)/0.44));
-    const y  = -t*48;                  /* 進むほど上へ流れる */
+    /* スマホは文字が大きく画面が狭いので、2場面が半透明で重なる区間を短くする（0.22〜0.50） */
+    const f0 = STACKED ? 0.22 : 0.28, f1 = STACKED ? 0.50 : 0.72;
+    const op = a<=f0 ? 1 : (a>=f1 ? 0 : 1-smooth((a-f0)/(f1-f0)));
+    const y  = -t*(STACKED ? 40 : 48); /* 進むほど上へ流れる */
     const sc = 1-a*0.05;
 
     const s=scenes[i];
@@ -2733,23 +2769,15 @@ if(STACKED){
   },{threshold:.35});
   document.querySelectorAll('[data-scene]').forEach(s=>sceneIO.observe(s));
 
-  /* ② 冒頭の3メッセージは、PCのスクロール同期の代わりに「時間」で入れ替える（2026-09-11 代表指摘）
-        5.6秒ごとに次へ。目印を押せばそこへ飛ぶ。ヒーローが画面外・タブが裏のときは止める */
-  if(heroSteps.length>1 && !reduceMotion){
-    let cur=0, timer=0;
-    const show=i=>{
-      cur=i;
-      heroSteps.forEach((s,k)=>{ s.classList.toggle('on',k===i); s.setAttribute('aria-hidden', k===i ? 'false' : 'true'); });
-      heroDots.forEach((d,k)=>d.classList.toggle('on',k===i));
-    };
-    const stop=()=>{ if(timer){ clearInterval(timer); timer=0; } };
-    const start=()=>{ stop(); timer=setInterval(()=>show((cur+1)%heroSteps.length),3800); };
-    heroDots.forEach((d,k)=>d.addEventListener('click',()=>{ show(k); start(); }));
-    heroSteps.forEach(s=>s.classList.remove('on'));                 /* 読み込み直後に .on を付け直して出現の時間差を効かせる */
-    requestAnimationFrame(()=>requestAnimationFrame(()=>{ show(0); start(); }));
-    const heroEl=document.querySelector('.hero');
-    if(heroEl) new IntersectionObserver(es=>{ es.forEach(e=>{ e.isIntersecting ? start() : stop(); }); },{threshold:.3}).observe(heroEl);
-    document.addEventListener('visibilitychange',()=>{ document.hidden ? stop() : start(); });
+  /* ② 冒頭の3メッセージは PC と同じくスクロール量で入れ替える（縦長スマホ・2026-09-11 代表「PCと同じ動きに」）。
+        いったん「時間で回す」方式にしたが「変わっていない」との評価だったので、PC と同じ仕組みに揃えた。
+        目印を押すと、その場面が主役になるスクロール位置へ移動する */
+  if(pinEl && heroDots.length){
+    heroDots.forEach((d,k)=>d.addEventListener('click',()=>{
+      const range=pinEl.offsetHeight-innerHeight;
+      if(range<=0) return;
+      scrollTo({top: pinEl.offsetTop + range*((k+0.5)/heroDots.length), behavior:'smooth'});
+    }));
   }
 
   /* ②' 英字ラベル「AI Introduction & Development」を1文字ずつ並べて出す（PCの見出し分解と同じ仕組み）
