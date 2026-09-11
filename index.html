@@ -2423,7 +2423,33 @@ function update(){
     const range=heroRange();                      /* この距離だけ画面に留まる */
     if(range>0 && y<=range+innerHeight*0.4){
       const p=Math.max(0,Math.min(y/range,1));    /* 0 → 1 */
+      /* スマホは指の動きが1フレームごとに飛び、上へ戻すとブラウザのバーが再表示されて画面がずれる。
+         進み具合をそのまま反映すると「ガクガク」に見える（2026-09-11 代表指摘）ので、
+         目標の進み具合に数フレームかけて追いつかせる（毎フレーム差の22%ずつ・約0.17秒で9割） */
+      if(STACKED){ heroTarget=p; if(!heroRaf) heroRaf=requestAnimationFrame(heroLoop); }
+      else renderHero(p);
+    }
+  }
 
+  /* 縦並び（スマホ）は、ヒーロー以外のピン留め計算をしない。背景の視差だけは奥行きのために使う */
+  if(STACKED){ slowParallax(); return; }
+
+  /* --- ピン留めセクション：留めたまま中身を切り替える --- */
+  updatePins(y);
+
+  /* --- 背景写真と大きな数字を、本文より遅れて動かす --- */
+  slowParallax();
+}
+
+/* ヒーローの各層を、進み具合 p（0→1）で描く。PC は update() から直接、スマホは heroLoop() から呼ぶ */
+let heroP=0, heroTarget=0, heroRaf=0;
+function heroLoop(){
+  const d=heroTarget-heroP;
+  if(Math.abs(d)<0.0004){ heroP=heroTarget; renderHero(heroP); heroRaf=0; return; }
+  heroP+=d*0.22; renderHero(heroP);
+  heroRaf=requestAnimationFrame(heroLoop);
+}
+function renderHero(p){
       if(par.glow)  par.glow.style.transform  = 'translate3d(0,'+(p*150).toFixed(1)+'px,0) scale('+(1+p*0.30).toFixed(3)+')';
       const arcT = 'translate3d('+(p*80).toFixed(1)+'px,'+(p*-170).toFixed(1)+'px,0)';
       if(par.arc)   par.arc.style.transform   = arcT;
@@ -2438,17 +2464,6 @@ function update(){
 
       /* 留まったまま、中身をスクロール量に同期させて動かす */
       applyScenes(heroSteps, heroDots, p);
-    }
-  }
-
-  /* 縦並び（スマホ）は、ヒーロー以外のピン留め計算をしない。背景の視差だけは奥行きのために使う */
-  if(STACKED){ slowParallax(); return; }
-
-  /* --- ピン留めセクション：留めたまま中身を切り替える --- */
-  updatePins(y);
-
-  /* --- 背景写真と大きな数字を、本文より遅れて動かす --- */
-  slowParallax();
 }
 
 /* ============================================================
@@ -2678,7 +2693,10 @@ if(!reduceMotion){
 }
 
 const revealIO=new IntersectionObserver(es=>{
-  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealIO.unobserve(e.target); } });
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealIO.unobserve(e.target);
+    /* スマホは出現が終わった要素の GPU レイヤーを解放する（will-change を持ち続けると層が増え、戻りスクロールが重くなる） */
+    if(STACKED) setTimeout(()=>{ e.target.style.willChange='auto'; },1100);
+  } });
 },{threshold:.12,rootMargin: STACKED ? '0px 0px -18% 0px' : '0px 0px -6% 0px'});   /* スマホは画面の下18%に入ってから起動＝起き上がりが画面の中で見える */
 document.querySelectorAll('.io,[data-in],h2.title,.step-line').forEach(el=>revealIO.observe(el));
 
