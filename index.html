@@ -1345,22 +1345,23 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   .hero-step{
     grid-area:1/1;position:relative!important;top:auto;
     opacity:0;transform:none!important;pointer-events:none;
-    transition:opacity .55s var(--ease);
+    transition:opacity .35s var(--ease);
   }
   .hero-step.on{opacity:1;pointer-events:auto}
   /* 中身は 見出し→本文→ボタン の順に18px浮き上がる。出るときだけ時間差、消えるときは一斉に */
-  .hero-step>*{opacity:0;transform:translateY(18px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
-  .hero-step.on>*{opacity:1;transform:none;transition-duration:.7s}
-  .hero-step.on>:nth-child(1){transition-delay:.18s}
-  .hero-step.on>:nth-child(2){transition-delay:.34s}
-  .hero-step.on>:nth-child(3){transition-delay:.48s}
+  .hero-step>*{opacity:0;transform:translateY(18px);transition:opacity .25s var(--ease),transform .25s var(--ease)}
+  .hero-step.on>*{opacity:1;transform:none;transition-duration:.5s}
+  .hero-step.on>:nth-child(1){transition-delay:.1s}
+  .hero-step.on>:nth-child(2){transition-delay:.2s}
+  .hero-step.on>:nth-child(3){transition-delay:.3s}
   /* 進行の目印は指で押して切り替えられる。見た目3pxのまま当たり判定を上下12pxずつ広げる */
   .hero-dots{display:flex;margin-top:22px}
   .hero-dots span{height:3px;padding:12px 0;box-sizing:content-box;background-clip:content-box;cursor:pointer}
-  /* 英字「Kakehashi」は PC ではスクロールで横に流れる。スマホは時間でゆっくり流す（往復） */
-  .hero-giant{animation:giantDrift 30s ease-in-out infinite alternate}
+  /* 英字「Kakehashi」は PC ではスクロールで左斜め下へ流れる。スマホは時間で同じ向きに流す（往復・2026-09-11 代表指摘で速く）。
+     下端に置くと次のセクションの白い角に半分隠れるので、1.1文字分上げてから左下へ動かす */
+  .hero-giant{bottom:1.1em;animation:giantDrift 9s ease-in-out infinite alternate}
   /* 絵はワイプで現れたあと、ゆっくり寄っていく（往復） */
-  .hero-art.in{animation:heroKen 18s ease-in-out 1.4s infinite alternate}
+  .hero-art.in{animation:heroKen 8s ease-in-out .9s infinite alternate}
 
   /* --- 見出しと説明の対応（Codex指摘④）: 入れ替え見出しは、対応する場面の直前に置く ---
      1つ目は元の位置のまま。2つ目は JS が場面2の先頭へ移す。 */
@@ -1374,16 +1375,16 @@ header.nav:not(.scrolled) .burger span{background:#fff}
      方針: 移動は上方向 16px だけ・0.5秒。左右移動・ぼかし・クリップ・1文字ずつは使わない。
      指で送る速さに追いつき、かつスクロールのたびに「適度な変化」がある状態を狙う。 */
   .io,[data-in]{transform:translateY(16px);clip-path:none;filter:none;
-    transition:opacity .5s var(--ease),transform .5s var(--ease)}
+    transition:opacity .38s var(--ease),transform .38s var(--ease)}
   .io.in,[data-in].in{transform:none}
   /* 見出しは PC では1文字ずつ出るが、スマホは塊で 14px 上がりながら出す */
-  h2.title{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+  h2.title{opacity:0;transform:translateY(14px);transition:opacity .42s var(--ease),transform .42s var(--ease)}
   h2.title.in{opacity:1;transform:none}
   /* 冒頭: 絵が左からのワイプで現れ、英字ラベルが1文字ずつ並び、キャッチコピー→本文→ボタンの順に浮き上がる
      （最初のメッセージの出方は上の .hero-step.on の時間差と同じ。JS が読み込み直後に .on を付け直す） */
-  .hero-art{transition-duration:1.1s}
-  .hero-eyebrow .split-char{transition-duration:.5s}
-  .reveal-up{animation-duration:.6s}
+  .hero-art{transition-duration:.8s}
+  .hero-eyebrow .split-char{transition-duration:.32s}
+  .reveal-up{animation-duration:.45s}
 
   /* スマホは漫画背景のマスクを外している（本文が全幅に回り込むため）ので、
      この英字ラベルだけ濃いコマに直接重なる。実測 4.35:1 → 5.1:1 に上げる */
@@ -1400,7 +1401,7 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   /* 文章の中に混ざる出典リンクは行の高さのままにする（伸ばすと本文が崩れる） */
   .res-note a,.est-note a,.voice-note a{padding:0}
 }
-@keyframes giantDrift{from{transform:translate3d(4vw,0,0)}to{transform:translate3d(-34vw,0,0)}}
+@keyframes giantDrift{from{transform:translate3d(5vw,-6px,0)}to{transform:translate3d(-30vw,26px,0)}}
 @keyframes heroKen{from{transform:scale(1)}to{transform:scale(1.07) translate3d(-2%,0,0)}}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -2610,7 +2611,7 @@ if(!reduceMotion){
       sec.querySelectorAll(sel).forEach((el,i)=>{
         el.classList.remove('io','s2','s3','s4');
         el.dataset.in=kind;
-        if(step) el.style.transitionDelay=(STACKED ? Math.min(i*step,.18) : i*step).toFixed(2)+'s';   /* 縦並びは最大0.18秒まで */
+        if(step) el.style.transitionDelay=(STACKED ? Math.min(i*step,.12) : i*step).toFixed(2)+'s';   /* 縦並びは最大0.12秒まで */
       });
     });
   });
@@ -2742,7 +2743,7 @@ if(STACKED){
       heroDots.forEach((d,k)=>d.classList.toggle('on',k===i));
     };
     const stop=()=>{ if(timer){ clearInterval(timer); timer=0; } };
-    const start=()=>{ stop(); timer=setInterval(()=>show((cur+1)%heroSteps.length),5600); };
+    const start=()=>{ stop(); timer=setInterval(()=>show((cur+1)%heroSteps.length),3800); };
     heroDots.forEach((d,k)=>d.addEventListener('click',()=>{ show(k); start(); }));
     heroSteps.forEach(s=>s.classList.remove('on'));                 /* 読み込み直後に .on を付け直して出現の時間差を効かせる */
     requestAnimationFrame(()=>requestAnimationFrame(()=>{ show(0); start(); }));
@@ -2758,7 +2759,7 @@ if(STACKED){
     eb.classList.remove('reveal-up','d1');
     const w=document.createElement('span'); w.append(...eb.childNodes); eb.appendChild(w);
     splitChars(w);
-    w.querySelectorAll('.split-char').forEach((c,i)=>{ c.style.transitionDelay=(.2+i*.032).toFixed(3)+'s'; });
+    w.querySelectorAll('.split-char').forEach((c,i)=>{ c.style.transitionDelay=(.1+i*.018).toFixed(3)+'s'; });
     requestAnimationFrame(()=>requestAnimationFrame(()=>eb.classList.add('in')));
   }
 
