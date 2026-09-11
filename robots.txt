@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yhara0420-png.github.io/kakehashi/sitemap.xml
+Sitemap: https://kakehashi-ai.kakehashi-ai.workers.dev/sitemap.xml
