@@ -84,6 +84,7 @@
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html.booting{scroll-behavior:auto}   /* 読み込み直後の位置復元を滑らかに流さない（JS が付け外し） */
 body{
   font-family:var(--sans);
   background:var(--paper);
@@ -2490,6 +2491,10 @@ function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); 
    場面が一瞬つっかえて見えた（2026-09-11 代表指摘）。ヒーローは 100lvh 固定なので、これなら跳ねない */
 const heroEl = document.querySelector('.hero');
 function heroRange(){ return pinEl && heroEl ? pinEl.offsetHeight - heroEl.offsetHeight : 0; }
+/* 画面の高さ。スマホの innerHeight は指を戻した瞬間に上部バーが出て 60〜90px 変わり、
+   それを使う計算（背景の視差など）が一斉にずれて「一瞬飛ぶ」ように見えた（2026-09-11 代表指摘）。
+   ヒーローの面は 100lvh（バーが隠れた実寸）で固定なので、その高さを画面の高さとして使えば変わらない */
+function VH(){ return (STACKED && heroEl && heroEl.offsetHeight>0) ? heroEl.offsetHeight : innerHeight; }
 
 function update(){
   ticking=false;
@@ -2504,7 +2509,7 @@ function update(){
 
   /* 読み進み具合のバー */
   if(bar){
-    const max=document.documentElement.scrollHeight-innerHeight;
+    const max=document.documentElement.scrollHeight-VH();
     bar.style.transform='scaleX('+(max>0 ? Math.min(y/max,1) : 0)+')';
   }
 
@@ -2513,7 +2518,7 @@ function update(){
   /* --- ヒーロー：画面に留めたまま、背景を動かして中身を入れ替える --- */
   if(pinEl){
     const range=heroRange();                      /* この距離だけ画面に留まる */
-    if(range>0 && y<=range+innerHeight*0.4){
+    if(range>0 && y<=range+VH()*0.4){
       const p=Math.max(0,Math.min(y/range,1));    /* 0 → 1 */
       /* スマホは指の動きが1フレームごとに飛び、上へ戻すとブラウザのバーが再表示されて画面がずれる。
          進み具合をそのまま反映すると「ガクガク」に見える（2026-09-11 代表指摘）ので、
@@ -2580,7 +2585,7 @@ function updatePins(y){
     if(STACKED && !(SP_PIN && p.el.classList.contains('sp-pin'))) continue;
     const top=p.el.offsetTop;
     const h=p.el.offsetHeight;
-    if(y+innerHeight<top || y>top+h) continue;      /* 画面外は触らない */
+    if(y+VH()<top || y>top+h) continue;             /* 画面外は触らない */
     /* スマホは innerHeight ではなく留まる面（100lvh 固定）の高さを引く＝アドレスバーの開閉で跳ねない */
     const range = STACKED ? h-(p.stage ? p.stage.offsetHeight : innerHeight) : h-innerHeight;
     if(range<=0) continue;
@@ -2659,7 +2664,7 @@ const slowEls=[];
   .forEach(([sel,sp])=>{document.querySelectorAll(sel).forEach(el=>slowEls.push({el,sp}))});
 
 function slowParallax(){
-  const vh=innerHeight;
+  const vh=VH();
   for(const {el,sp} of slowEls){
     const r=el.getBoundingClientRect();
     if(r.bottom<-120 || r.top>vh+120) continue;   /* 画面外は触らない */
@@ -2671,7 +2676,12 @@ function slowParallax(){
 /* 帯（#band）はCSSアニメーションで自動走行するため、JSでの計測・駆動は不要 */
 
 addEventListener('scroll', onScroll, {passive:true});
-addEventListener('resize', ()=>{lastY=-1; onScroll();}, {passive:true});
+let lastW=innerWidth;
+addEventListener('resize', ()=>{
+  /* スマホの上部バーの出入りは「幅そのまま・高さだけ変わる」resize。位置の計算は VH() で高さに依存しないので、やり直さない */
+  if(STACKED && innerWidth===lastW) return;
+  lastW=innerWidth; lastY=-1; onScroll();
+}, {passive:true});
 addEventListener('load', ()=>{lastY=-1; onScroll();});
 update();
 
@@ -2819,6 +2829,24 @@ const revealIO=new IntersectionObserver(es=>{
   } });
 },{threshold:.12,rootMargin: STACKED ? '0px 0px -18% 0px' : '0px 0px -6% 0px'});   /* スマホは画面の下18%に入ってから起動＝起き上がりが画面の中で見える */
 document.querySelectorAll('.io,[data-in],h2.title,.step-line').forEach(el=>revealIO.observe(el));
+
+/* 「戻る」で戻ってきたとき・途中の位置から開き直したとき（2026-09-11 代表「戻った瞬間だけ一瞬画面が飛ぶ」）
+   ブラウザが前の位置へ復元した直後に、その画面にある要素が出現の動きを始めると、一瞬ちらついて飛んだように見える。
+   復元された位置より上〜画面内にある要素は、動きなしでその場に出しておく。
+   復元スクロール自体も html{scroll-behavior:smooth} で滑らかに流れないよう、読み込みが落ち着くまで auto にしておく */
+document.documentElement.classList.add('booting');
+function settleRestored(){
+  if(scrollY<120) return;
+  const vh=VH();
+  document.querySelectorAll('.io:not(.in),[data-in]:not(.in),h2.title:not(.in),.step-line:not(.in)').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<vh){ el.style.transition='none'; el.classList.add('in'); revealIO.unobserve(el);
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{ el.style.transition=''; })); }
+  });
+}
+settleRestored();
+addEventListener('pageshow', settleRestored);
+addEventListener('load', ()=>{ settleRestored(); setTimeout(()=>document.documentElement.classList.remove('booting'), 800); });
 
 /* 背景写真の遅延読み込み（2026-09-10）
    CSSの background-image は loading="lazy" が効かず、7枚1,126KBが初回に全部落ちていた。
