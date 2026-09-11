@@ -1366,8 +1366,8 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   /* [data-in] を付けて、下の .io,[data-in] の一律ルールより後勝ちにする（同じ詳細度だと後に書いた方が勝つため） */
   [data-in].bcard,[data-in].show-card,[data-in].show-mini,[data-in].voice,[data-in].profile,[data-in].svc,[data-in].plan,
   [data-in].step,[data-in].why,[data-in].faq-item,[data-in].company-card,[data-in].cta-box{
-    transform:perspective(900px) rotateX(10deg) translateY(28px);transform-origin:50% 100%;
-    transition-duration:.5s;
+    transform:perspective(700px) rotateX(26deg) translateY(56px) scale(.94);transform-origin:50% 100%;
+    transition-duration:.8s;
   }
 
   /* --- 見出しと説明の対応（Codex指摘④）: 入れ替え見出しは、対応する場面の直前に置く ---
@@ -1400,7 +1400,17 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   /* --- 指で押せる大きさにする（実測で44px未満だったもの） --- */
   /* 見た目は変えずに当たり判定だけ広げる（実測で44px未満だったもの） */
   .burger{padding:14px;margin-right:-14px}
+  /* メニューを開くと、開いたメニュー（position:fixed）がハンバーガー（static）の上に重なり、
+     閉じるボタンが押せなかった（2026-09-11 検証で発見）。ボタンを前に出し、開いている間は濃紺の×にする */
+  .burger{position:relative;z-index:2}
+  .burger[aria-expanded="true"] span{background:var(--ink)!important}
+  .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   .nav-links a{padding:10px 0}
+  /* ↑の当たり判定ルールが「無料相談」の左右余白まで 0 にしていた（文字が枠ぎりぎり・2026-09-11 代表指摘）。
+     メニュー最下部の塗りボタンは余白を広く取り、文字も少し大きく */
+  .nav-links a.nav-cta{padding:14px 30px;font-size:.92rem;letter-spacing:.08em;margin-top:6px}
   .foot-col a{padding:9px 0}
   figcaption a{display:inline-flex;align-items:center;min-height:44px}
   .est-f input[type=range]{height:44px}
@@ -2383,13 +2393,22 @@ document.querySelectorAll('[data-par]').forEach(el=>{par[el.dataset.par]=el});
 let ticking=false, lastY=-1;
 function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
 
+/* ヒーローが画面に留まる距離。innerHeight ではなくヒーロー自身の高さを引く。
+   スマホはアドレスバーの開閉で innerHeight が 60〜90px 変わり、そのたびに進み具合が跳ねて
+   場面が一瞬つっかえて見えた（2026-09-11 代表指摘）。ヒーローは 100lvh 固定なので、これなら跳ねない */
+const heroEl = document.querySelector('.hero');
+function heroRange(){ return pinEl && heroEl ? pinEl.offsetHeight - heroEl.offsetHeight : 0; }
+
 function update(){
   ticking=false;
   const y=scrollY;
   if(y===lastY) return;
   lastY=y;
 
-  nav.classList.toggle('scrolled', y>40);
+  /* スマホでヒーローが留まっている間は、白い帯を出さない（切り替わりの瞬間が「詰まり」に見えていた・2026-09-11 代表指摘）。
+     PC は従来どおり 40px */
+  const hr = heroRange();
+  nav.classList.toggle('scrolled', y > (STACKED && hr>0 ? hr-24 : 40));
 
   /* 読み進み具合のバー */
   if(bar){
@@ -2401,7 +2420,7 @@ function update(){
 
   /* --- ヒーロー：画面に留めたまま、背景を動かして中身を入れ替える --- */
   if(pinEl){
-    const range=pinEl.offsetHeight-innerHeight;   /* この距離だけ画面に留まる */
+    const range=heroRange();                      /* この距離だけ画面に留まる */
     if(range>0 && y<=range+innerHeight*0.4){
       const p=Math.max(0,Math.min(y/range,1));    /* 0 → 1 */
 
@@ -2660,7 +2679,7 @@ if(!reduceMotion){
 
 const revealIO=new IntersectionObserver(es=>{
   es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revealIO.unobserve(e.target); } });
-},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+},{threshold:.12,rootMargin: STACKED ? '0px 0px -18% 0px' : '0px 0px -6% 0px'});   /* スマホは画面の下18%に入ってから起動＝起き上がりが画面の中で見える */
 document.querySelectorAll('.io,[data-in],h2.title,.step-line').forEach(el=>revealIO.observe(el));
 
 /* 背景写真の遅延読み込み（2026-09-10）
@@ -2773,11 +2792,30 @@ if(STACKED){
         いったん「時間で回す」方式にしたが「変わっていない」との評価だったので、PC と同じ仕組みに揃えた。
         目印を押すと、その場面が主役になるスクロール位置へ移動する */
   if(pinEl && heroDots.length){
-    heroDots.forEach((d,k)=>d.addEventListener('click',()=>{
-      const range=pinEl.offsetHeight-innerHeight;
-      if(range<=0) return;
-      scrollTo({top: pinEl.offsetTop + range*((k+0.5)/heroDots.length), behavior:'smooth'});
-    }));
+    let raf=0;
+    const cancel=()=>{ if(raf){ cancelAnimationFrame(raf); raf=0; } };
+    /* ブラウザ任せの smooth は iOS で指が触れると止まり「戻れない」状態になるので、自前で 0.45 秒かけて動かす。
+       途中で指が触れたら止める（指の操作を優先） */
+    const glide=to=>{
+      cancel();
+      const from=scrollY, d=to-from, t0=performance.now(), dur=450;
+      const step=now=>{
+        const k=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-k,3);
+        scrollTo(0, from+d*e);
+        raf = k<1 ? requestAnimationFrame(step) : 0;
+      };
+      raf=requestAnimationFrame(step);
+    };
+    ['touchstart','wheel'].forEach(ev=>addEventListener(ev,cancel,{passive:true}));
+    heroDots.forEach((d,k)=>{
+      d.setAttribute('role','button');
+      d.addEventListener('click',e=>{
+        e.preventDefault();
+        const range=heroRange();
+        if(range<=0) return;
+        glide(pinEl.offsetTop + range*((k+0.5)/heroDots.length));
+      });
+    });
   }
 
   /* ②' 英字ラベル「AI Introduction & Development」を1文字ずつ並べて出す（PCの見出し分解と同じ仕組み）
