@@ -165,7 +165,7 @@ header.nav.scrolled{
   border-bottom:1px solid var(--line);
   padding:12px clamp(20px,5vw,64px);
 }
-.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:1.18rem;letter-spacing:.02em}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:700;font-size:1.18rem;letter-spacing:.02em;transition:color .3s}
 .brand .seal{
   width:30px;height:30px;border-radius:50%;
   background:var(--ink);color:var(--paper);
@@ -754,8 +754,10 @@ footer{border-top:1px solid var(--line);padding:64px 0 40px;position:relative;z-
 .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:20px}
 .plan{background:var(--paper);padding:clamp(30px,3.2vw,44px);display:flex;flex-direction:column;transition:background .4s var(--ease)}
 .plan:hover{background:var(--paper-2)}
-.plan.feat{background:linear-gradient(180deg,rgba(123,108,224,.06),transparent);position:relative}
-.plan.feat::before{content:"おすすめ";position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:#fff;background:var(--shu);padding:4px 11px;border-radius:30px}
+.plan.feat{background:linear-gradient(180deg,rgba(123,108,224,.06),transparent);position:relative;box-shadow:inset 0 3px 0 var(--cobalt)}
+/* 「おすすめ」は朱にしない。同じ枠の「プランを相談する」ボタンが朱の塗りで、ラベルとボタンの区別がつかなかった（2026-09-11 代表指摘）。
+   ラベルはサイトの地色の深い青（白文字 5.2:1）。朱はこの枠ではボタンだけ */
+.plan.feat::before{content:"おすすめ";position:absolute;top:18px;right:18px;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:#fff;background:var(--cobalt);padding:4px 11px;border-radius:30px}
 .plan .pk{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--label)}
 .plan h3{font-family:var(--serif);font-size:1.5rem;font-weight:700;margin:14px 0 8px;line-height:1.35}
 .plan .desc{font-size:.9rem;color:var(--ink-soft);min-height:3.4em}
@@ -1253,10 +1255,17 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   .why-grid{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr}
   .price-grid{grid-template-columns:1fr}
-  .plan.feat::before{top:auto;bottom:18px;right:18px}
+  /* 「おすすめ」を右下に置くと、幅いっぱいの「プランを相談する」ボタンに重なる（2026-09-11 代表指摘・実機）。
+     スマホはカードが1列で右上が空くので、PCと同じ右上に置く */
+  .plan.feat::before{top:16px;right:16px;bottom:auto}
   .company{grid-template-columns:1fr}
 }
 @media(max-width:760px){
+  /* ナビの切り替え（透明→紙色）で一瞬詰まる（2026-09-11 代表指摘・実機）。
+     原因は2つ: padding が 18→12px に動いて帯の高さが変わる／backdrop-filter のぼかしがスマホでは重い。
+     スマホは高さを固定し、ぼかしをやめて少し不透明な塗りだけで切り替える */
+  header.nav,header.nav.scrolled{padding:14px 20px;transition:background-color .35s var(--ease),border-color .35s}
+  header.nav.scrolled{background:rgba(var(--paper-rgb),.95);backdrop-filter:none;-webkit-backdrop-filter:none}
   .nav-links{
     position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;
     background:var(--paper);flex-direction:column;align-items:flex-start;justify-content:center;
@@ -1317,30 +1326,41 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   .pin-stage{padding:clamp(60px,13vw,92px) 0}
   .hero-stage,.pin-steps,.pin-scenes{min-height:0!important}
   /* JSが毎フレーム書き込む opacity / transform を打ち消す（インラインより !important が強い） */
-  .hero-step,.pstep,.pscene{
+  .pstep,.pscene{
     position:relative!important;opacity:1!important;transform:none!important;
     pointer-events:auto!important;
   }
   .pstep+.pstep,.pscene+.pscene{margin-top:clamp(40px,9vw,64px)}
   /* 留まらなくなったので、進行の目印は意味がない */
-  .hero-dots,.pin-dots{display:none}
+  .pin-dots{display:none}
 
-  /* --- 冒頭: 最初のメッセージと相談ボタンだけを1画面に（2026-09-11 Codex指摘②③） ---
-     2つ目・3つ目のメッセージは JS が直後の帯 .hero-more に移す。
-     ヒーローが1画面に戻るので、絵の切り取られ方も PC の意図に近づく。 */
-  .hero{min-height:100vh;min-height:100dvh;display:flex!important;align-items:center}
-  .hero-more{background:#1A1A2E;color:#EFECF8;padding:clamp(40px,9vw,64px) 0}
-  .hero-more .hero-step{position:relative;opacity:1;transform:none}
-  .hero-more .hero-step+.hero-step{margin-top:32px;padding-top:32px;border-top:1px solid rgba(239,236,248,.14)}
-  .hero-more .hh{font-family:var(--serif);font-weight:900;color:#fff;white-space:normal;
-    font-size:clamp(1.35rem,5.8vw,1.7rem);line-height:1.35}
-  .hero-more .hh .em{color:#F2EFFF}
-  .hero-more .hh .em::after{background:linear-gradient(transparent 60%,rgba(255,255,255,.22) 0)}
-  .hero-more .hero-sub{margin-top:12px;font-size:.95rem;line-height:1.85;color:rgba(239,236,248,.86)}
-  .hero-more .hero-sub br{display:none}
-  .hero-more .hero-actions{margin-top:16px}
-  .hero-more .btn-primary{display:none}          /* 相談ボタンは冒頭にある。重ねて出さない */
-  .hero-more .btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;padding:12px 22px;font-size:.9rem}
+  /* --- 冒頭: 3つのメッセージを同じ場所で時間差で入れ替える（2026-09-11 代表指摘） ---
+     PC はスクロール量で入れ替わるが、スマホはピン留めをやめたので「時間」で回す（5.6秒ごと・JS）。
+     3枚を grid の同じマスに重ね、いちばん高いものに合わせて高さを取る＝重なって読めなくなることはない。
+     以前の「2つ目・3つ目を直後の帯へ移す」方式はやめた（冒頭に動きが無さすぎた）。
+     高さは svh（アドレスバーが出ている状態の実寸）。dvh だとバーの開閉で高さが変わり、
+     スクロールし始めに画面全体が一瞬つっかえる。 */
+  .hero{min-height:100vh;min-height:100svh;display:flex!important;align-items:center}
+  .hero-stage{display:grid}
+  .hero-step{
+    grid-area:1/1;position:relative!important;top:auto;
+    opacity:0;transform:none!important;pointer-events:none;
+    transition:opacity .55s var(--ease);
+  }
+  .hero-step.on{opacity:1;pointer-events:auto}
+  /* 中身は 見出し→本文→ボタン の順に18px浮き上がる。出るときだけ時間差、消えるときは一斉に */
+  .hero-step>*{opacity:0;transform:translateY(18px);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+  .hero-step.on>*{opacity:1;transform:none;transition-duration:.7s}
+  .hero-step.on>:nth-child(1){transition-delay:.18s}
+  .hero-step.on>:nth-child(2){transition-delay:.34s}
+  .hero-step.on>:nth-child(3){transition-delay:.48s}
+  /* 進行の目印は指で押して切り替えられる。見た目3pxのまま当たり判定を上下12pxずつ広げる */
+  .hero-dots{display:flex;margin-top:22px}
+  .hero-dots span{height:3px;padding:12px 0;box-sizing:content-box;background-clip:content-box;cursor:pointer}
+  /* 英字「Kakehashi」は PC ではスクロールで横に流れる。スマホは時間でゆっくり流す（往復） */
+  .hero-giant{animation:giantDrift 30s ease-in-out infinite alternate}
+  /* 絵はワイプで現れたあと、ゆっくり寄っていく（往復） */
+  .hero-art.in{animation:heroKen 18s ease-in-out 1.4s infinite alternate}
 
   /* --- 見出しと説明の対応（Codex指摘④）: 入れ替え見出しは、対応する場面の直前に置く ---
      1つ目は元の位置のまま。2つ目は JS が場面2の先頭へ移す。 */
@@ -1359,14 +1379,10 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   /* 見出しは PC では1文字ずつ出るが、スマホは塊で 14px 上がりながら出す */
   h2.title{opacity:0;transform:translateY(14px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
   h2.title.in{opacity:1;transform:none}
-  /* 冒頭: 絵が左からのワイプで現れ、そのあとキャッチコピー→本文→ボタンの順に浮き上がる（最初の印象をつくる） */
+  /* 冒頭: 絵が左からのワイプで現れ、英字ラベルが1文字ずつ並び、キャッチコピー→本文→ボタンの順に浮き上がる
+     （最初のメッセージの出方は上の .hero-step.on の時間差と同じ。JS が読み込み直後に .on を付け直す） */
   .hero-art{transition-duration:1.1s}
-  .hero .hero-step[data-hs="0"] h1,
-  .hero .hero-step[data-hs="0"] .hero-sub,
-  .hero .hero-step[data-hs="0"] .hero-actions{opacity:0;animation:revealUp .7s var(--ease) forwards}
-  .hero .hero-step[data-hs="0"] h1{animation-delay:.18s}
-  .hero .hero-step[data-hs="0"] .hero-sub{animation-delay:.34s}
-  .hero .hero-step[data-hs="0"] .hero-actions{animation-delay:.48s}
+  .hero-eyebrow .split-char{transition-duration:.5s}
   .reveal-up{animation-duration:.6s}
 
   /* スマホは漫画背景のマスクを外している（本文が全幅に回り込むため）ので、
@@ -1384,9 +1400,12 @@ header.nav:not(.scrolled) .burger span{background:#fff}
   /* 文章の中に混ざる出典リンクは行の高さのままにする（伸ばすと本文が崩れる） */
   .res-note a,.est-note a,.voice-note a{padding:0}
 }
+@keyframes giantDrift{from{transform:translate3d(4vw,0,0)}to{transform:translate3d(-34vw,0,0)}}
+@keyframes heroKen{from{transform:scale(1)}to{transform:scale(1.07) translate3d(-2%,0,0)}}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .io,[data-in],.split-char{opacity:1;transform:none;clip-path:none;filter:none}
+  .hero-step>*{opacity:1;transform:none}
   .step-line{transform:scaleX(1)}
   /* ピン留めを解除し、重ねてある場面をすべて縦に並べて出す
      （動きを止めるだけだと、隠れている場面の情報が読めなくなるため） */
@@ -1933,7 +1952,7 @@ header.nav:not(.scrolled) .burger span{background:#fff}
 
     <div class="voice-grid">
       <div class="voice io" data-tilt><p>どの業務にAIを使えばいいのか、そこから分からない。</p></div>
-      <div class="voice io s2" data-tilt><p>ChatGPTは触ってみたけれど、仕事でどう活かせばいいのか見えない。</p></div>
+      <div class="voice io s2" data-tilt><p>Claude CodeやAIエージェントの話は聞く。でも、うちの仕事でどう活かせばいいのか見えない。</p></div>
       <div class="voice io s3" data-tilt><p>社内にITに詳しい人がいない。それでも導入できますか？</p></div>
     </div>
 
@@ -2713,16 +2732,34 @@ if(STACKED){
   },{threshold:.35});
   document.querySelectorAll('[data-scene]').forEach(s=>sceneIO.observe(s));
 
-  /* ② 冒頭は最初のメッセージと相談ボタンだけ。2つ目・3つ目はヒーロー直後の帯へ移す */
-  const more=heroSteps.slice(1);
-  if(more.length && pinEl){
-    const band=document.createElement('section');
-    band.className='hero-more'; band.setAttribute('aria-label','私たちの考え方');
-    const wrap=document.createElement('div'); wrap.className='wrap';
-    more.forEach((s,i)=>{ s.classList.add('on'); s.removeAttribute('aria-hidden'); wrap.appendChild(s);
-      s.dataset.in='up'; s.style.transitionDelay=(i*.12).toFixed(2)+'s'; revealIO.observe(s); });
-    band.appendChild(wrap);
-    pinEl.after(band);
+  /* ② 冒頭の3メッセージは、PCのスクロール同期の代わりに「時間」で入れ替える（2026-09-11 代表指摘）
+        5.6秒ごとに次へ。目印を押せばそこへ飛ぶ。ヒーローが画面外・タブが裏のときは止める */
+  if(heroSteps.length>1 && !reduceMotion){
+    let cur=0, timer=0;
+    const show=i=>{
+      cur=i;
+      heroSteps.forEach((s,k)=>{ s.classList.toggle('on',k===i); s.setAttribute('aria-hidden', k===i ? 'false' : 'true'); });
+      heroDots.forEach((d,k)=>d.classList.toggle('on',k===i));
+    };
+    const stop=()=>{ if(timer){ clearInterval(timer); timer=0; } };
+    const start=()=>{ stop(); timer=setInterval(()=>show((cur+1)%heroSteps.length),5600); };
+    heroDots.forEach((d,k)=>d.addEventListener('click',()=>{ show(k); start(); }));
+    heroSteps.forEach(s=>s.classList.remove('on'));                 /* 読み込み直後に .on を付け直して出現の時間差を効かせる */
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{ show(0); start(); }));
+    const heroEl=document.querySelector('.hero');
+    if(heroEl) new IntersectionObserver(es=>{ es.forEach(e=>{ e.isIntersecting ? start() : stop(); }); },{threshold:.3}).observe(heroEl);
+    document.addEventListener('visibilitychange',()=>{ document.hidden ? stop() : start(); });
+  }
+
+  /* ②' 英字ラベル「AI Introduction & Development」を1文字ずつ並べて出す（PCの見出し分解と同じ仕組み）
+        .eyebrow は inline-flex＋gap なので、文字を直接ばらすと1文字ごとに隙間が空く。いったん span に包んでから分解する */
+  const eb=document.querySelector('.hero-eyebrow');
+  if(eb && !reduceMotion){
+    eb.classList.remove('reveal-up','d1');
+    const w=document.createElement('span'); w.append(...eb.childNodes); eb.appendChild(w);
+    splitChars(w);
+    w.querySelectorAll('.split-char').forEach((c,i)=>{ c.style.transitionDelay=(.2+i*.032).toFixed(3)+'s'; });
+    requestAnimationFrame(()=>requestAnimationFrame(()=>eb.classList.add('in')));
   }
 
   /* ③ #about の入れ替え見出し: 2つ目「これからは…」を、対応する場面の直前へ */
